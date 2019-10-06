@@ -8,62 +8,59 @@ namespace BusinessLogic
 {
     public class CellPhoneValidator
     {
-        public string CellPhoneNumber { get; set; }
-
         public CellPhoneValidator()
         {
-            CellPhoneNumber = "";
         }
 
-        public bool PhoneNumberNotEmpty()
+        public bool PhoneNumberNotEmpty(string cellPhoneNumber)
         {
-            return (this.CellPhoneNumber.Length == 0) ? false : true;
+            return (cellPhoneNumber.Length == 0) ? false : true;
         }
 
-        public bool PhoneNumberStartWhitZeroNine()
-        {
-            int stringPositionZero = 0;
-            return (this.CellPhoneNumber.ElementAt(stringPositionZero)== '0') ? true : false;
-        }
-
-        public bool PhoneNumberStartWhitNine()
+        public bool PhoneNumberStartWhitZeroNine(string cellPhoneNumber)
         {
             int stringPositionZero = 0;
-            return (this.CellPhoneNumber.ElementAt(stringPositionZero) == '9') ? true : false;
+            return (cellPhoneNumber.ElementAt(stringPositionZero)== '0') ? true : false;
         }
 
-        public bool PhoneNumberLenghtIsCorrect()
+        public bool PhoneNumberStartWhitNine(string cellPhoneNumber)
+        {
+            int stringPositionZero = 0;
+            return (cellPhoneNumber.ElementAt(stringPositionZero) == '9') ? true : false;
+        }
+
+        public bool PhoneNumberLenghtIsCorrect(string cellPhoneNumber)
         {
             bool correctLenght = false;
-            if (PhoneNumberStartWhitZeroNine())
+            if (PhoneNumberStartWhitZeroNine(cellPhoneNumber))
             {
-                if (this.CellPhoneNumber.Length == 9)
+                if (cellPhoneNumber.Length == 9)
                     correctLenght = true;
             }
-            else if (PhoneNumberStartWhitNine())
+            else if (PhoneNumberStartWhitNine(cellPhoneNumber))
             {
-                if (this.CellPhoneNumber.Length == 8)
+                if (cellPhoneNumber.Length == 8)
                     correctLenght = true;
             }
             return correctLenght;
         }
 
-        public void NormalizePhoneNumber()
+        public string NormalizePhoneNumber(string cellPhoneNumber)
         {
-            this.CellPhoneNumber = this.CellPhoneNumber.Replace(" ", "");
+            return cellPhoneNumber.Replace(" ", "");
         }
 
-        public bool PhoneNumberCorrectFormat()
+        public bool PhoneNumberCorrectFormat(string cellPhoneNumber)
         {
-            this.NormalizePhoneNumber();
+            cellPhoneNumber = this.NormalizePhoneNumber(cellPhoneNumber);
             bool correctFormat = false;
-            if (PhoneNumberNotEmpty())
+            if (PhoneNumberNotEmpty(cellPhoneNumber))
             {
-                if (PhoneNumberStartWhitZeroNine() && PhoneNumberLenghtIsCorrect())
+                if (PhoneNumberStartWhitZeroNine(cellPhoneNumber) && PhoneNumberLenghtIsCorrect(cellPhoneNumber))
                 {
                     correctFormat = true;
                 }
-                else if(PhoneNumberStartWhitNine() && PhoneNumberLenghtIsCorrect())
+                else if(PhoneNumberStartWhitNine(cellPhoneNumber) && PhoneNumberLenghtIsCorrect(cellPhoneNumber))
                 { 
                     correctFormat = true;
                 }

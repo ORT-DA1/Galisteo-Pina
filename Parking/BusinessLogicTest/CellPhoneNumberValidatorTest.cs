@@ -11,96 +11,96 @@ namespace BusinessLogicTest
         public void CellPhoneNumberNotEmpty()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "098960505";
-            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberNotEmpty());
+            string cellPhoneNumber = "098960505";
+            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberNotEmpty(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberEmpty()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "";
-            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberNotEmpty());
+            string cellPhoneNumber = "";
+            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberNotEmpty(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberStartsWhitZeroNine()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "098960505";
-            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberStartWhitZeroNine());
+            string cellPhoneNumber = "098960505";
+            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberStartWhitZeroNine(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberNoStartsWithZeroNine()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "98960505";
-            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberStartWhitZeroNine());
+            string cellPhoneNumber = "98960505";
+            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberStartWhitZeroNine(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberStartsWithNine()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "98960505";
-            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberStartWhitNine());
+            string cellPhoneNumber = "98960505";
+            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberStartWhitNine(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberNoStartsWithNine()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "098960505";
-            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberStartWhitNine());
+            string cellPhoneNumber = "098960505";
+            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberStartWhitNine(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberLenghtIsCorrect()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "098960505";
-            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberLenghtIsCorrect());
+            string cellPhoneNumber = "098960505";
+            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberLenghtIsCorrect(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberZeroNineCorrectFormat()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "098960505";
-            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberCorrectFormat());
+            string cellPhoneNumber = "098960505";
+            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberCorrectFormat(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberNineCorrectFormat()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "98960505";
-            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberCorrectFormat());
+            string cellPhoneNumber = "098960505";
+            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberCorrectFormat(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberIncorrectFormat()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "998960505";
-            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberCorrectFormat());
+            string cellPhoneNumber = "8960505";
+            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberCorrectFormat(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberWithSpaceCorrectFormat()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "098 960 505";
-            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberCorrectFormat());
+            string cellPhoneNumber = "098 960 505";
+            Assert.IsTrue(cellPhoneNumberControl.PhoneNumberCorrectFormat(cellPhoneNumber));
         }
 
         [TestMethod]
         public void CellPhoneNumberWithSpaceIncorrectFormat()
         {
             CellPhoneValidator cellPhoneNumberControl = new CellPhoneValidator();
-            cellPhoneNumberControl.CellPhoneNumber = "898 960 505";
-            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberCorrectFormat());
+            string cellPhoneNumber = "998 960 505";
+            Assert.IsFalse(cellPhoneNumberControl.PhoneNumberCorrectFormat(cellPhoneNumber));
         }
  
     }
