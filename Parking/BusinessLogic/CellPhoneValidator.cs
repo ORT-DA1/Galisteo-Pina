@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Account
+    public class CellPhoneValidator
     {
         public string CellPhoneNumber { get; set; }
 
-        public Account()
+        public CellPhoneValidator()
         {
             CellPhoneNumber = "";
         }
@@ -70,7 +70,5 @@ namespace BusinessLogic
             }
             return correctFormat;
         }
-
-        
     }
 }
