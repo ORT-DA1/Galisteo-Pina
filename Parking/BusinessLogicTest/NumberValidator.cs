@@ -10,7 +10,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberNotEmpty()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "098960505";
             Assert.IsTrue(user.PhoneNumberNotEmpty());
         }
@@ -18,7 +18,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberEmpty()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "";
             Assert.IsFalse(user.PhoneNumberNotEmpty());
         }
@@ -26,7 +26,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberStartsWhitZeroNine()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "098960505";
             Assert.IsTrue(user.PhoneNumberStartWhitZeroNine());
         }
@@ -34,7 +34,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberNoStartsWithZeroNine()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "98960505";
             Assert.IsFalse(user.PhoneNumberStartWhitZeroNine());
         }
@@ -42,7 +42,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberStartsWithNine()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "98960505";
             Assert.IsTrue(user.PhoneNumberStartWhitNine());
         }
@@ -50,7 +50,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberNoStartsWithNine()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "098960505";
             Assert.IsFalse(user.PhoneNumberStartWhitNine());
         }
@@ -58,7 +58,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberLenghtIsCorrect()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "098960505";
             Assert.IsTrue(user.PhoneNumberLenghtIsCorrect());
         }
@@ -66,7 +66,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberZeroNineCorrectFormat()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "098960505";
             Assert.IsTrue(user.PhoneNumberCorrectFormat());
         }
@@ -74,7 +74,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberNineCorrectFormat()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "98960505";
             Assert.IsTrue(user.PhoneNumberCorrectFormat());
         }
@@ -82,7 +82,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberIncorrectFormat()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "998960505";
             Assert.IsFalse(user.PhoneNumberCorrectFormat());
         }
@@ -90,7 +90,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberWithSpaceCorrectFormat()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "098 960 505";
             Assert.IsTrue(user.PhoneNumberCorrectFormat());
         }
@@ -98,7 +98,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void CellPhoneNumberWithSpaceIncorrectFormat()
         {
-            Account user = new Account();
+            CellPhoneValidator user = new CellPhoneValidator();
             user.CellPhoneNumber = "898 960 505";
             Assert.IsFalse(user.PhoneNumberCorrectFormat());
         }
