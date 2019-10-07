@@ -20,7 +20,7 @@ namespace BusinessLogicTest
             ParkingSystem system = new ParkingSystem();
             Account userAccount = new Account();
             userAccount.AccountCellPhoneNumber = "098 960 505";
-            system.AddAcount(userAccount);
+            system.AddAccount(userAccount);
             Assert.IsFalse(system.NoAccountInSystem());
         }
 
@@ -30,7 +30,7 @@ namespace BusinessLogicTest
             ParkingSystem system = new ParkingSystem();
             Account userAccount = new Account();
             userAccount.AccountCellPhoneNumber = "098960505";
-            Assert.IsTrue(system.AddAcount(userAccount));
+            Assert.IsTrue(system.AddAccount(userAccount));
         }
 
         [TestMethod]
@@ -38,7 +38,57 @@ namespace BusinessLogicTest
         {
             ParkingSystem system = new ParkingSystem();
             Account userAccount = new Account();
-            Assert.IsFalse(system.AddAcount(userAccount));
+            Assert.IsFalse(system.AddAccount(userAccount));
+        }
+
+        [TestMethod]
+        public void SystemRemoveAccountTest()
+        {
+            ParkingSystem system = new ParkingSystem();
+            Account userAccount = new Account();
+            userAccount.AccountCellPhoneNumber = "098960505";
+            system.AddAccount(userAccount);
+            Assert.IsTrue(system.RemoveAccount(userAccount));
+        }
+
+        [TestMethod]
+        public void SystemRemoveAccountErrorTest()
+        {
+            ParkingSystem system = new ParkingSystem();
+            Account userAccount = new Account();
+            userAccount.AccountCellPhoneNumber = "098960505";
+            Assert.IsFalse(system.RemoveAccount(userAccount));
+        }
+
+        [TestMethod]
+        public void SystemAddBalanceTest()
+        {
+            ParkingSystem system = new ParkingSystem();
+            Account userAccount = new Account();
+            userAccount.AccountCellPhoneNumber = "098960505";
+            system.AddAccount(userAccount);
+            Assert.IsTrue(system.AddBalance(userAccount, 100));
+        }
+
+        [TestMethod]
+        public void SystemAddBalanceErrorTest()
+        {
+            ParkingSystem system = new ParkingSystem();
+            Account userAccount = new Account();
+            userAccount.AccountCellPhoneNumber = "098960505";
+            system.AddAccount(userAccount);
+            Assert.IsFalse(system.AddBalance(userAccount, -100)); 
+        }
+
+        [TestMethod]
+        public void SystemSustractBalanceTest()
+        {
+            ParkingSystem system = new ParkingSystem();
+            Account userAccount = new Account();
+            userAccount.AccountCellPhoneNumber = "098960505";
+            system.AddAccount(userAccount);
+            system.AddBalance(userAccount, 100);
+            Assert.IsTrue(system.SustractBalance(userAccount, -100));
         }
     }
 }

@@ -32,12 +32,54 @@ namespace BusinessLogic
             return (accountBalance.BalanceCorrectFormat(userAccount.AccountBalance));
         }
 
-        public bool AddAcount(Account userAccount)
+        public bool AddAccount(Account userAccount)
         {
             bool success = false;
             if (CorrectAccountCellPhone(userAccount) && (CorrectAccountBalance(userAccount)))
             {
                 AccountList.Add(userAccount);
+                success = true;
+            }
+            return success;
+        }
+
+        public bool RemoveAccount(Account userAccount)
+        {
+            return this.AccountList.Remove(userAccount);
+        }
+
+        public Account SelectAccountFromAccountList(Account userAccount)
+        {
+            Account userAccountInList = null;
+            for (int listPosition = 0; listPosition < this.AccountList.Count; listPosition++)
+            {
+                if (this.AccountList[listPosition] == userAccount)
+                {
+                    userAccountInList = this.AccountList[listPosition];
+                }
+            }
+            return userAccountInList;
+        }
+
+        public bool AddBalance(Account userAccount, int balanceToAdd)
+        {
+            BalanceValidator balanceControl = new BalanceValidator();
+            bool success = false;
+            if (balanceControl.BalanceCorrectFormat(balanceToAdd) && balanceToAdd >= 0)
+            {
+                SelectAccountFromAccountList(userAccount).AccountBalance += balanceToAdd;
+                success = true;
+            }
+            return success;
+        }
+
+        public bool SustractBalance(Account userAccount, int balanceToSustract)
+        {
+            bool success = false;
+            int currentAccountBalance = SelectAccountFromAccountList(userAccount).AccountBalance;
+            if (currentAccountBalance-balanceToSustract >= 0)
+            {
+                SelectAccountFromAccountList(userAccount).AccountBalance -= balanceToSustract;
                 success = true;
             }
             return success;
