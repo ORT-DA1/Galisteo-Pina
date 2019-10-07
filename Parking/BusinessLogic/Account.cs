@@ -45,6 +45,7 @@ namespace BusinessLogic
         }
 
         public void SustractMoneyToBalance(int moneyToSustract)
+
         {
             this.AccountBalance -= moneyToSustract;
         }
