@@ -19,6 +19,7 @@ namespace BusinessLogicTest
         {
             ParkingSystem system = new ParkingSystem();
             Account userAccount = new Account();
+            userAccount.AccountCellPhoneNumber = "098 960 505";
             system.AddAcount(userAccount);
             Assert.IsFalse(system.NoAccountInSystem());
         }
@@ -27,7 +28,17 @@ namespace BusinessLogicTest
         public void SystemAddCorrectAccountTest()
         {
             ParkingSystem system = new ParkingSystem();
-            Assert.IsTrue(system.NoAccountInSystem());
+            Account userAccount = new Account();
+            userAccount.AccountCellPhoneNumber = "098960505";
+            Assert.IsTrue(system.AddAcount(userAccount));
+        }
+
+        [TestMethod]
+        public void SystemAddIncorrectAccountTest()
+        {
+            ParkingSystem system = new ParkingSystem();
+            Account userAccount = new Account();
+            Assert.IsFalse(system.AddAcount(userAccount));
         }
     }
 }

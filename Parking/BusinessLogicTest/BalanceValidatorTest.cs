@@ -47,5 +47,13 @@ namespace BusinessLogicTest
             Assert.IsFalse(phoneBalance.BalanceIsPositiveNumber(balance));
         }
 
+        [TestMethod]
+        public void BalanceIsCorrectTest()
+        {
+            BalanceValidator phoneBalance = new BalanceValidator();
+            string balance = "10";
+            Assert.IsTrue(phoneBalance.BalanceIsCorrect(balance));
+        }
+
     }
 }

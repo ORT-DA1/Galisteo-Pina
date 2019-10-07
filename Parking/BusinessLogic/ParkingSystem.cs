@@ -20,14 +20,27 @@ namespace BusinessLogic
             return AccountList.Count == 0;
         }
 
-        public bool CorrectAccountCellPhone()
+        public bool CorrectAccountCellPhone(Account userAccount)
         {
-            return true;
+            CellPhoneValidator cellPhoneControl = new CellPhoneValidator();
+            return cellPhoneControl.PhoneNumberCorrectFormat(userAccount.AccountCellPhoneNumber);
         }
 
-        public void AddAcount(Account userAccount)
+        public bool CorrectAccountBalance(Account userAccount)
         {
-            AccountList.Add(userAccount);
+            BalanceValidator accountBalance = new BalanceValidator();
+            return (accountBalance.BalanceCorrectFormat(userAccount.AccountBalance));
+        }
+
+        public bool AddAcount(Account userAccount)
+        {
+            bool success = false;
+            if (CorrectAccountCellPhone(userAccount) && (CorrectAccountBalance(userAccount)))
+            {
+                AccountList.Add(userAccount);
+                success = true;
+            }
+            return success;
         }
     }
 }
