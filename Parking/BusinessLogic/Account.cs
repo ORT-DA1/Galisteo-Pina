@@ -44,14 +44,16 @@ namespace BusinessLogic
             this.AccountBalance += moneyToAdd;
         }
 
-        public void SustractMoneyToBalance(int moneyToSustract)
+        public bool SustractMoneyToBalance(int moneyToSustract)
         {
-            this.AccountBalance -= moneyToSustract;
+            bool success = false;
+            if(this.AccountBalance - moneyToSustract >= 0)
+            {
+                this.AccountBalance -= moneyToSustract;
+                success = true;
+            }
+            return success;
         }
 
-        public bool OperationBalanceSucces(int moneyToSustract)
-        {
-            return (this.AccountBalance >= moneyToSustract) ? true : false;
-        }
     }
 }

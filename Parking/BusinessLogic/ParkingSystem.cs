@@ -67,7 +67,7 @@ namespace BusinessLogic
             bool success = false;
             if (balanceControl.BalanceCorrectFormat(balanceToAdd) && balanceToAdd >= 0)
             {
-                SelectAccountFromAccountList(userAccount).AccountBalance += balanceToAdd;
+                SelectAccountFromAccountList(userAccount).AddMoneyToBalance(balanceToAdd);
                 success = true;
             }
             return success;
@@ -75,14 +75,7 @@ namespace BusinessLogic
 
         public bool SustractBalance(Account userAccount, int balanceToSustract)
         {
-            bool success = false;
-            int currentAccountBalance = SelectAccountFromAccountList(userAccount).AccountBalance;
-            if (currentAccountBalance-balanceToSustract >= 0)
-            {
-                SelectAccountFromAccountList(userAccount).AccountBalance -= balanceToSustract;
-                success = true;
-            }
-            return success;
+            return SelectAccountFromAccountList(userAccount).SustractMoneyToBalance(balanceToSustract);
         }
     }
 }
