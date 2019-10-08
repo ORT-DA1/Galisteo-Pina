@@ -8,7 +8,6 @@ namespace BusinessLogicTest
     public class SystemParkingTest
     {
         [TestMethod]
-<<<<<<< HEAD
         public void AddAccountTest()
         {
             SystemParking system = new SystemParking();
@@ -16,7 +15,7 @@ namespace BusinessLogicTest
             userAccount.AccountCellPhoneNumber = "098960505";
             bool success = system.addAccount(userAccount);
             Assert.IsTrue(success);
-=======
+         }
         public void SystemWithNoAccountTest()
         {
             ParkingSystem system = new ParkingSystem();
@@ -98,7 +97,6 @@ namespace BusinessLogicTest
             system.AddAccount(userAccount);
             system.AddBalance(userAccount, 100);
             Assert.IsTrue(system.SustractBalance(userAccount, -100));
->>>>>>> feature_SystemParking
         }
     }
 }

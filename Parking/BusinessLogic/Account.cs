@@ -45,12 +45,7 @@ namespace BusinessLogic
             this.AccountBalance += moneyToAdd;
         }
 
-<<<<<<< HEAD
-        public void SustractMoneyToBalance(int moneyToSustract)
-
-=======
         public bool SustractMoneyToBalance(int moneyToSustract)
->>>>>>> feature_SystemParking
         {
             bool success = false;
             if(this.AccountBalance - moneyToSustract >= 0)
