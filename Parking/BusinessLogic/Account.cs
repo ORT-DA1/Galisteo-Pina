@@ -25,7 +25,8 @@ namespace BusinessLogic
 
         public bool AccountCellPhoneNumberIsEmpty()
         {
-            return this.AccountCellPhoneNumber.Length == 0;
+            CellPhoneValidator phoneValidator = new CellPhoneValidator();
+            return phoneValidator.PhoneNumberNotEmpty(this.AccountCellPhoneNumber);
         }
 
         public bool AccountCellPhoneNumberFormatIsCorrect()

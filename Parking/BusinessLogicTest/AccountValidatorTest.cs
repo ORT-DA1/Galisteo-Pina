@@ -8,18 +8,17 @@ namespace BusinessLogicTest
     public class AccountValidatorTest
     {
         [TestMethod]
-        public void AccountCellPhoneNumberIsEmptyTest()
-        {
-            Account userAccount = new Account();
-            userAccount.AccountCellPhoneNumber = "";
-            Assert.IsTrue(userAccount.AccountCellPhoneNumberIsEmpty());
-        }
-
-        [TestMethod]
         public void AccountCellPhoneNumberIsNotEmptyTest()
         {
             Account userAccount = new Account();
             userAccount.AccountCellPhoneNumber = "098960505";
+            Assert.IsTrue(userAccount.AccountCellPhoneNumberIsEmpty());
+        }
+
+        [TestMethod]
+        public void AccountCellPhoneNumberIsEmptyTest()
+        {
+            Account userAccount = new Account();
             Assert.IsFalse(userAccount.AccountCellPhoneNumberIsEmpty());
         }
 
