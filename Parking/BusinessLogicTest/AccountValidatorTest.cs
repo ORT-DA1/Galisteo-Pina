@@ -8,18 +8,17 @@ namespace BusinessLogicTest
     public class AccountValidatorTest
     {
         [TestMethod]
-        public void AccountCellPhoneNumberIsEmptyTest()
-        {
-            Account userAccount = new Account();
-            userAccount.AccountCellPhoneNumber = "";
-            Assert.IsTrue(userAccount.AccountCellPhoneNumberIsEmpty());
-        }
-
-        [TestMethod]
         public void AccountCellPhoneNumberIsNotEmptyTest()
         {
             Account userAccount = new Account();
             userAccount.AccountCellPhoneNumber = "098960505";
+            Assert.IsTrue(userAccount.AccountCellPhoneNumberIsEmpty());
+        }
+
+        [TestMethod]
+        public void AccountCellPhoneNumberIsEmptyTest()
+        {
+            Account userAccount = new Account();
             Assert.IsFalse(userAccount.AccountCellPhoneNumberIsEmpty());
         }
 
@@ -63,18 +62,8 @@ namespace BusinessLogicTest
             int moneyToSustract = 10;
             Account userAccount = new Account();
             userAccount.AccountBalance = 10;
-            userAccount.SustractMoneyToBalance(moneyToSustract);
+            Assert.IsTrue(userAccount.SustractMoneyToBalance(moneyToSustract));
             Assert.AreEqual(0, userAccount.AccountBalance);
-        }
-
-        [TestMethod]
-        public void AccountBalanceSustractMoneySuccessControlTest()
-        {
-            int moneyToSustract = 10;
-            Account userAccount = new Account();
-            userAccount.AccountBalance = 10;
-            bool success = userAccount.OperationBalanceSucces(moneyToSustract);
-            Assert.IsTrue(success);
         }
     }
 }

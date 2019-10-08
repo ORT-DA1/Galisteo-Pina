@@ -29,5 +29,15 @@ namespace BusinessLogic
             int normalizedBalance = this.NormalizedBalance(balance);
             return (normalizedBalance >= 0) ? true : false;
         }
+
+        public bool BalanceIsCorrect(string balance)
+        {
+            return BalanceIsIntegerNumber(balance) || BalanceIsPositiveNumber(balance);
+        }
+
+        public bool BalanceCorrectFormat(int balance)
+        {
+            return(balance >= 0) ? true : false;
+        }
     }
 }

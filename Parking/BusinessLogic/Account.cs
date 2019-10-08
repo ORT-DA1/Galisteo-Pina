@@ -25,7 +25,8 @@ namespace BusinessLogic
 
         public bool AccountCellPhoneNumberIsEmpty()
         {
-            return this.AccountCellPhoneNumber.Length == 0;
+            CellPhoneValidator phoneValidator = new CellPhoneValidator();
+            return phoneValidator.PhoneNumberNotEmpty(this.AccountCellPhoneNumber);
         }
 
         public bool AccountCellPhoneNumberFormatIsCorrect()
@@ -44,15 +45,21 @@ namespace BusinessLogic
             this.AccountBalance += moneyToAdd;
         }
 
+<<<<<<< HEAD
         public void SustractMoneyToBalance(int moneyToSustract)
 
+=======
+        public bool SustractMoneyToBalance(int moneyToSustract)
+>>>>>>> feature_SystemParking
         {
-            this.AccountBalance -= moneyToSustract;
+            bool success = false;
+            if(this.AccountBalance - moneyToSustract >= 0)
+            {
+                this.AccountBalance -= moneyToSustract;
+                success = true;
+            }
+            return success;
         }
 
-        public bool OperationBalanceSucces(int moneyToSustract)
-        {
-            return (this.AccountBalance >= moneyToSustract) ? true : false;
-        }
     }
 }
