@@ -31,7 +31,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AccountCellPhoneNumberFormatIsIncorrectTest()
         {
-            Account userAccount = new Account("098960505", 0);
+            Account userAccount = new Account("0928960505", 0);
             Assert.IsFalse(userAccount.AccountCellPhoneNumberFormatIsCorrect());
         }
 

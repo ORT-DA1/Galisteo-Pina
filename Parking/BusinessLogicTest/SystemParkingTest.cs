@@ -42,7 +42,7 @@ namespace BusinessLogicTest
         public void SystemAddIncorrectAccountTest()
         {
             ParkingSystem system = new ParkingSystem();
-            Account userAccount = new Account("098960505", 0);
+            Account userAccount = new Account("", 0);
             Assert.IsFalse(system.AddAccount(userAccount));
         }
 
