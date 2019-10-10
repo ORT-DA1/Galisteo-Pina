@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Sms:IMessageInput
+    public class Sms:IRequestDevice
     {
 
         public string Plates { get; set; }
