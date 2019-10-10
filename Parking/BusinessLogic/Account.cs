@@ -11,8 +11,10 @@ namespace BusinessLogic
         public string AccountCellPhoneNumber { get; set; }
         public int AccountBalance { get; set; }
 
-        public Account()
+        public Account(string mobileNumber, int balance)
         {
+            this.AccountCellPhoneNumber = mobileNumber;
+            this.AccountBalance = balance;
         }
 
         public bool AccountCellPhoneNumberIsEmpty()
