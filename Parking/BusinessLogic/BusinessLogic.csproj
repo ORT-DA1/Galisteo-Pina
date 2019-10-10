@@ -45,6 +45,11 @@
     <Compile Include="Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sms.cs" />
+    <Compile Include="BalanceValidator.cs" />
+    <Compile Include="CellPhoneValidator.cs" />
+    <Compile Include="ParkingSystem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemParking.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

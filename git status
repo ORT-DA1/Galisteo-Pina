@@ -1,0 +1,46 @@
+[1mdiff --cc Parking/BusinessLogic/BusinessLogic.csproj[m
+[1mindex 2e8c7d7,81a74d1..0000000[m
+[1m--- a/Parking/BusinessLogic/BusinessLogic.csproj[m
+[1m+++ b/Parking/BusinessLogic/BusinessLogic.csproj[m
+[36m@@@ -42,9 -42,11 +42,17 @@@[m
+    </ItemGroup>[m
+    <ItemGroup>[m
+      <Compile Include="Account.cs" />[m
+[32m++<<<<<<< HEAD[m
+[32m +    <Compile Include="Notification.cs" />[m
+[32m +    <Compile Include="Properties\AssemblyInfo.cs" />[m
+[32m +    <Compile Include="Sms.cs" />[m
+[32m++=======[m
+[32m+     <Compile Include="BalanceValidator.cs" />[m
+[32m+     <Compile Include="CellPhoneValidator.cs" />[m
+[32m+     <Compile Include="ParkingSystem.cs" />[m
+[32m+     <Compile Include="Properties\AssemblyInfo.cs" />[m
+[32m+     <Compile Include="SystemParking.cs" />[m
+[32m++>>>>>>> d42f5d559926a11877a12bb7194443eb59ccfae1[m
+    </ItemGroup>[m
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />[m
+  </Project>[m
+[1mdiff --cc Parking/BusinessLogicTest/BusinessLogicTest.csproj[m
+[1mindex 6cc91d6,a2720e0..0000000[m
+[1m--- a/Parking/BusinessLogicTest/BusinessLogicTest.csproj[m
+[1m+++ b/Parking/BusinessLogicTest/BusinessLogicTest.csproj[m
+[36m@@@ -50,11 -49,11 +50,19 @@@[m
+      <Reference Include="System.Core" />[m
+    </ItemGroup>[m
+    <ItemGroup>[m
+[32m++<<<<<<< HEAD[m
+[32m +    <Compile Include="MinutesValidatorTest.cs" />[m
+[32m +    <Compile Include="NotificationTest.cs" />[m
+[32m +    <Compile Include="NumberValidator.cs" />[m
+[32m +    <Compile Include="Properties\AssemblyInfo.cs" />[m
+[32m +    <Compile Include="SmsTest.cs" />[m
+[32m++=======[m
+[32m+     <Compile Include="CellPhoneNumberValidatorTest.cs" />[m
+[32m+     <Compile Include="Properties\AssemblyInfo.cs" />[m
+[32m+     <Compile Include="BalanceValidatorTest.cs" />[m
+[32m+     <Compile Include="AccountValidatorTest.cs" />[m
+[32m+     <Compile Include="SystemParkingTest.cs" />[m
+[32m++>>>>>>> d42f5d559926a11877a12bb7194443eb59ccfae1[m
+    </ItemGroup>[m
+    <ItemGroup>[m
+      <None Include="packages.config" />[m

@@ -8,69 +8,53 @@ namespace BusinessLogic
 {
     public class Account
     {
-        public string CellPhoneNumber { get; set; }
+        public string AccountCellPhoneNumber { get; set; }
+        public int AccountBalance { get; set; }
 
         public Account()
         {
-            CellPhoneNumber = "";
+            this.AccountCellPhoneNumber = "";
+            this.AccountBalance = 0;
         }
 
-        public bool PhoneNumberNotEmpty()
+        public Account(string cellPhoneNumber, int balance)
         {
-            return (this.CellPhoneNumber.Length == 0) ? false : true;
+            this.AccountCellPhoneNumber = cellPhoneNumber;
+            this.AccountBalance = balance;
         }
 
-        public bool PhoneNumberStartWhitZeroNine()
+        public bool AccountCellPhoneNumberIsEmpty()
         {
-            int stringPositionZero = 0;
-            return (this.CellPhoneNumber.ElementAt(stringPositionZero)== '0') ? true : false;
+            CellPhoneValidator phoneValidator = new CellPhoneValidator();
+            return phoneValidator.PhoneNumberNotEmpty(this.AccountCellPhoneNumber);
         }
 
-        public bool PhoneNumberStartWhitNine()
+        public bool AccountCellPhoneNumberFormatIsCorrect()
         {
-            int stringPositionZero = 0;
-            return (this.CellPhoneNumber.ElementAt(stringPositionZero) == '9') ? true : false;
+            CellPhoneValidator phoneNumberValidator = new CellPhoneValidator();
+            return phoneNumberValidator.PhoneNumberCorrectFormat(this.AccountCellPhoneNumber);
         }
 
-        public bool PhoneNumberLenghtIsCorrect()
+        public bool AccountBalanceIsPositive()
         {
-            bool correctLenght = false;
-            if (PhoneNumberStartWhitZeroNine())
+            return this.AccountBalance >= 0;
+        }
+
+        public void AddMoneyToBalance(int moneyToAdd)
+        {
+            this.AccountBalance += moneyToAdd;
+        }
+
+        public bool SustractMoneyToBalance(int moneyToSustract)
+        {
+            bool success = false;
+            if(this.AccountBalance - moneyToSustract >= 0)
             {
-                if (this.CellPhoneNumber.Length == 9)
-                    correctLenght = true;
+                this.AccountBalance -= moneyToSustract;
+                success = true;
             }
-            else if (PhoneNumberStartWhitNine())
-            {
-                if (this.CellPhoneNumber.Length == 8)
-                    correctLenght = true;
-            }
-            return correctLenght;
+            return success;
         }
 
-        public void NormalizePhoneNumber()
-        {
-            this.CellPhoneNumber = this.CellPhoneNumber.Replace(" ", "");
-        }
-
-        public bool PhoneNumberCorrectFormat()
-        {
-            this.NormalizePhoneNumber();
-            bool correctFormat = false;
-            if (PhoneNumberNotEmpty())
-            {
-                if (PhoneNumberStartWhitZeroNine() && PhoneNumberLenghtIsCorrect())
-                {
-                    correctFormat = true;
-                }
-                else if(PhoneNumberStartWhitNine() && PhoneNumberLenghtIsCorrect())
-                { 
-                    correctFormat = true;
-                }
-            }
-            return correctFormat;
-        }
-
-        
     }
 }
