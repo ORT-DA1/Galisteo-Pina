@@ -14,7 +14,7 @@ namespace BusinessLogic
 
         public bool PhoneNumberNotEmpty(string cellPhoneNumber)
         {
-            return (cellPhoneNumber.Length == 0) ? false : true;
+            return cellPhoneNumber.Length != 0;
         }
 
         public bool PhoneNumberStartWhitZeroNine(string cellPhoneNumber)

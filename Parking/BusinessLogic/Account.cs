@@ -11,10 +11,10 @@ namespace BusinessLogic
         public string AccountCellPhoneNumber { get; set; }
         public int AccountBalance { get; set; }
 
-        public Account()
+        public Account(string mobileNumber, int balance)
         {
-            this.AccountCellPhoneNumber = "";
-            this.AccountBalance = 0;
+            this.AccountCellPhoneNumber = mobileNumber;
+            this.AccountBalance = balance;
         }
 
         public Account(string cellPhoneNumber, int balance)
