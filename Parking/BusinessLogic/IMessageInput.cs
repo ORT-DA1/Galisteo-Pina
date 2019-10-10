@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    interface IInputMessage
+    interface IMessageInput
     {
+        string InputPlate();
+        string InputMinutes();
+        string InputSartingHour();
 
     }
 }

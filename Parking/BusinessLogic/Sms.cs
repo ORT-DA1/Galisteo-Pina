@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Sms
+    public class Sms:IMessageInput
     {
 
         public string Plates { get; set; }
@@ -130,6 +130,20 @@ namespace BusinessLogic
             return DateTime.Compare(DateTime.Parse(this.StartingHour), toCompare) >= 0;
         }
 
+        public string InputPlate()
+        {
+            return this.Plates;
+        }
+
+        public string InputMinutes()
+        {
+            return this.Minutes;
+        }
+
+        public string InputSartingHour()
+        {
+            return this.StartingHour;
+        }
     }
 }
 
