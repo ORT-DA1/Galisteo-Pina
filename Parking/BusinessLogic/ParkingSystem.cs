@@ -9,9 +9,11 @@ namespace BusinessLogic
     public class ParkingSystem
     {
         public List<Account> AccountList { get; set; }
+        public IPurchaseRepository PurchaseRepository { get; set; }
 
         public ParkingSystem()
         {
+            PurchaseRepository = new InMemoryPurchaseRepository();
             AccountList = new List<Account>();
         }
 

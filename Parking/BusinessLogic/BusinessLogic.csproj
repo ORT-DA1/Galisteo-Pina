@@ -43,8 +43,11 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="IRequestDevice.cs" />
+    <Compile Include="IPurchaseRepository.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase.cs" />
+    <Compile Include="InMemoryPurchaseRepository.cs" />
     <Compile Include="Sms.cs" />
     <Compile Include="BalanceValidator.cs" />
     <Compile Include="CellPhoneValidator.cs" />

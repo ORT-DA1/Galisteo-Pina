@@ -14,13 +14,32 @@ namespace BusinessLogic
 
         public string Minutes { get; set; }
 
-        public string StartingHour { get; set; }
+        public DateTime StartingHour { get; set; }
+
+        public DateTime EndingHour { get; set; }
+
+        public DateTime LowerHourLimit { get; set; }
+
+        public DateTime UpperHourLimit { get; set; }
 
         public Sms()
         {
             this.Plates = "";
             this.Minutes = "";
-            this.StartingHour = DateTime.Now.ToString("HH:mm");
+            this.StartingHour = DateTime.MinValue;
+            this.EndingHour = DateTime.MinValue;
+            this.LowerHourLimit = DateTime.Parse("10:00");
+            this.UpperHourLimit = DateTime.Parse("18:00");
+        }
+
+        public Sms(DateTime LowerHourLimit, DateTime UpperHourLimit) 
+        {
+            this.Plates = "";
+            this.Minutes = "";
+            this.StartingHour =  DateTime.MinValue;
+            this.EndingHour = DateTime.MinValue;
+            this.LowerHourLimit = LowerHourLimit;
+            this.UpperHourLimit = UpperHourLimit;
         }
 
 
@@ -30,9 +49,10 @@ namespace BusinessLogic
             string[] splitSmsMessage = TrimAndSplitMessage(smsMessageTextNormalized);
             this.Plates = ExtractPlates(splitSmsMessage);
             this.Minutes = ExtractMinutes(splitSmsMessage);
-            if (SmsHasStartingHour(splitSmsMessage)) this.StartingHour = ExtractStartingHour(splitSmsMessage);
-
+            this.StartingHour = SetStartingHour(splitSmsMessage);
+            this.EndingHour = SetEndingHour();
         }
+
 
         public string NormalizeMessagePlate(string messageWithPlateToNormalize)
         {
@@ -66,12 +86,21 @@ namespace BusinessLogic
             return Extract(splitMessage, @"^(\d{3}|\d{2})$");
         }
 
-        public string ExtractStartingHour(string[] splitMessage)
+        public DateTime SetStartingHour(string[] splitSmsMessage)
         {
-            return Extract(splitMessage, "[:]");
+            if (SmsHasStartingHour(splitSmsMessage))
+                return ExtractStartingHour(splitSmsMessage);
+            return DateTime.Now;
         }
 
-        public Notification Validate()
+        public DateTime ExtractStartingHour(string[] splitMessage)
+        {
+            DateTime parseResult;
+             DateTime.TryParse(Extract(splitMessage, "[:]"), out parseResult);
+            return parseResult;
+        }
+
+        public Notification Validate(DateTime timeOfValidation)
         {
             Notification notification = new Notification();
 
@@ -85,7 +114,7 @@ namespace BusinessLogic
                 notification.AddError("Invalid date format. Should be: HH:mm");
             if (!IsWithinRangeOfHours())
                 notification.AddError("Invalid range of hours. Should be between 10:00 and 18:00");
-            if (!IsHourForToday(DateTime.Now))
+            if (!IsHourForToday(timeOfValidation))
                 notification.AddError("It is only possible to buy parking hours for the current day");
             return notification;
         }
@@ -117,18 +146,29 @@ namespace BusinessLogic
 
         public bool IsValidHourFormat()
         {
-            return Regex.IsMatch(this.StartingHour, "^([0-9]{2}[:][0-9]{2})$");
+            return !CouldNotParseDate() && Regex.IsMatch(this.StartingHour.ToString("HH:mm"), "^([0-9]{2}[:][0-9]{2})$");
         }
 
+        public bool CouldNotParseDate()
+        {
+            return this.StartingHour.Equals(DateTime.MinValue);
+        }
         public bool IsWithinRangeOfHours()
         {
-            return Regex.IsMatch(this.StartingHour, "[1][0-8][:][0-5][0-9]");
+            return this.StartingHour >= this.LowerHourLimit && this.StartingHour <= this.UpperHourLimit;
         }
 
         public bool IsHourForToday(DateTime toCompare)
         {
-            return DateTime.Compare(DateTime.Parse(this.StartingHour), toCompare) >= 0;
+            DateTime toCompareAccountForTransactionTime = AdjustTimeToAccountForTransactionTime(toCompare);
+            return toCompare <= this.StartingHour;
         }
+
+        public DateTime AdjustTimeToAccountForTransactionTime(DateTime toAdjust)
+        {
+            return toAdjust.AddSeconds(-10);
+        }
+
 
         public string InputPlate()
         {
@@ -144,6 +184,19 @@ namespace BusinessLogic
         {
             return this.StartingHour;
         }
+
+        public DateTime SetEndingHour()
+        {
+            var startingHourPlusMinutes = this.StartingHour.AddMinutes(Double.Parse(this.Minutes));
+            var maxEndingHour = this.UpperHourLimit;
+            var endingHour = startingHourPlusMinutes > maxEndingHour ? maxEndingHour : startingHourPlusMinutes;
+            return endingHour;
+        }
+
+
+
     }
 }
+
+
 

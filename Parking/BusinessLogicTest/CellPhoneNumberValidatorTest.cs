@@ -102,6 +102,6 @@ namespace BusinessLogicTest
             string cellPhoneNumber = "998 960 505";
             Assert.IsFalse(cellPhoneNumberControl.PhoneNumberCorrectFormat(cellPhoneNumber));
         }
- 
+
     }
 }

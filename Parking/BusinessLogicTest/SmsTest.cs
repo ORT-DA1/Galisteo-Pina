@@ -11,10 +11,21 @@ namespace BusinessLogicTest
     public class SmsTest
     {
 
+        Sms sms;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            DateTime lowerLimit = DateTime.Parse("10:00");
+            DateTime upperLimit = DateTime.Parse("18:00");
+            sms = new Sms(lowerLimit, upperLimit);
+       
+        }
+
+
         [TestMethod]
         public void NormalizeMessagePlateTest()
         {
-            Sms sms = new Sms();
             string smsMessage = "XXX 1234 120";
             Assert.AreEqual(sms.NormalizeMessagePlate(smsMessage), "XXX1234 120");
         }
@@ -22,7 +33,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void NormalizeMessagePlateTestNoSpaceTest()
         {
-            Sms sms = new Sms();
+
             string smsMessage = "XXX1234 120";
             Assert.AreEqual(sms.NormalizeMessagePlate(smsMessage), "XXX1234 120");
         }
@@ -30,7 +41,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void SplitMessageTest()
         {
-            Sms sms = new Sms();
             string smsMessagePreSplit = "XXX1234 120";
             string[] smsMessageAfterSplit = { "XXX1234", "120" };
             CollectionAssert.AreEqual(sms.TrimAndSplitMessage(smsMessagePreSplit), smsMessageAfterSplit);
@@ -39,7 +49,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void SplitMessageMoreThanOneSpaceTest()
         {
-            Sms sms = new Sms();
             string smsMessagePreSplit = "XXX1234    120  ";
             string[] smsMessageAfterSplit = { "XXX1234", "120" };
             CollectionAssert.AreEqual(sms.TrimAndSplitMessage(smsMessagePreSplit), smsMessageAfterSplit);
@@ -48,7 +57,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void SmsHasStartingHourTrueTest()
         {
-            Sms sms = new Sms();
             string[] splitMessage = { "XXX1234", "120", "16:10" };
             Assert.IsTrue(sms.SmsHasStartingHour(splitMessage));
         }
@@ -56,7 +64,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void SmsHasStartingHourFalseTest()
         {
-            Sms sms = new Sms();
             string[] splitMessage = { "XXX1234", "120" };
             Assert.IsFalse(sms.SmsHasStartingHour(splitMessage));
         }
@@ -64,7 +71,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ExtractFromSplitMessageTest()
         {
-            Sms sms = new Sms();
             string regexPattern = "ABC";
             string[] splitMessage = { "ABC", "CBD" };
             Assert.AreEqual(sms.Extract(splitMessage, regexPattern), "ABC");
@@ -74,7 +80,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ExtractPlatesFromSplitMessageTest()
         {
-            Sms sms = new Sms();
             string[] splitMessage = { "XXX1234", "120" };
             Assert.AreEqual(sms.ExtractPlates(splitMessage), "XXX1234");
         }
@@ -82,7 +87,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ExtractMinutesFromSplitMessageTest()
         {
-            Sms sms = new Sms();
             string[] splitMessage = { "XXX1234", "120" };
             Assert.AreEqual(sms.ExtractMinutes(splitMessage), "120");
         }
@@ -90,15 +94,48 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ExtractStartingHourFromSplitMessageTest()
         {
-            Sms sms = new Sms();
             string[] splitMessage = { "XXX1234", "120", "16:20" };
-            Assert.AreEqual(sms.ExtractStartingHour(splitMessage), "16:20");
+            Assert.AreEqual(sms.ExtractStartingHour(splitMessage), DateTime.Parse("16:20"));
+        }
+
+        [TestMethod]
+        public void Initialize()
+        {
+            string message = "ABC 1234 120 16:00";
+            sms.Initialize(message);
+            Assert.IsTrue(sms.Plates == "ABC1234" && sms.Minutes == "120"
+                && sms.StartingHour == DateTime.Parse("16:00")
+                && sms.EndingHour == DateTime.Parse("18:00"));
+        }
+
+
+        [TestMethod]
+        public void ValidateCorrectTest()
+        {
+            Notification notification;
+            string message = $"ABC 1234 120 16:00";
+            sms.Initialize(message);
+            notification = sms.Validate(DateTime.Parse("14:00"));
+            Assert.IsFalse(notification.HasErrors());
+        }
+
+        [TestMethod]
+        public void ValidateCorrectNoHourTest()
+        {
+            Notification notification;
+            string message = $"ABC 1234 60";
+            double minutes = 120;
+            DateTime lowerLimitForTest = DateTime.Parse("10:00");
+            DateTime upperLimitForTest = DateTime.Now.AddMinutes(minutes);
+            Sms sms = new Sms(lowerLimitForTest, upperLimitForTest);
+            sms.Initialize(message);
+            notification = sms.Validate(DateTime.Now);
+            Assert.IsFalse(notification.HasErrors());
         }
 
         [TestMethod]
         public void MissingInputTest()
         {
-            Sms sms = new Sms();
             string input = "";
             Assert.IsTrue(sms.MissingInput(input));
         }
@@ -106,7 +143,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ValidateMinutesNotMultipleOf30Test()
         {
-            Sms sms = new Sms();
             string minutes = "70";
             sms.Minutes = minutes;
             Assert.IsFalse(sms.ValidateMinutes());
@@ -115,7 +151,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ValidateMinutesIsMultipleOf30Test()
         {
-            Sms sms = new Sms();
             string minutes = "60";
             sms.Minutes = minutes;
             Assert.IsTrue(sms.ValidateMinutes());
@@ -124,7 +159,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ValidateMinutesIsNotIntegerTest()
         {
-            Sms sms = new Sms();
             string minutes = "60.1";
             sms.Minutes = minutes;
             Assert.IsFalse(sms.ValidateMinutes());
@@ -133,7 +167,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ValidateMinutesIsNotNegativeTest()
         {
-            Sms sms = new Sms();
             string minutes = "-60";
             sms.Minutes = minutes;
             Assert.IsFalse(sms.ValidateMinutes());
@@ -142,45 +175,41 @@ namespace BusinessLogicTest
         [TestMethod]
         public void IsValidateStartingHourFormatTrueTest()
         {
-            Sms sms = new Sms();
-            string startingHour = "12:15";
-            sms.StartingHour = startingHour;
+            string[] startingHour = { "12:15" };
+            sms.StartingHour = sms.ExtractStartingHour(startingHour);
             Assert.IsTrue(sms.IsValidHourFormat());
         }
 
         [TestMethod]
         public void IsValidateStartingHourFormatFalseTest()
         {
-            Sms sms = new Sms();
-            string startingHour = "120:15";
-            sms.StartingHour = startingHour;
+            string [] startingHour = { "120:15" };
+            sms.StartingHour = sms.ExtractStartingHour(startingHour);
             Assert.IsFalse(sms.IsValidHourFormat());
         }
 
         [TestMethod]
         public void IsWithinRangeOfHoursTrueTest()
         {
-            Sms sms = new Sms();
             string startingHour = "10:30";
-            sms.StartingHour = startingHour;
+            sms.StartingHour = DateTime.Parse(startingHour);
             Assert.IsTrue(sms.IsWithinRangeOfHours());
         }
 
         [TestMethod]
         public void IsWithinRangeOfHoursFalseTest()
         {
-            Sms sms = new Sms();
             string startingHour = "09:30";
-            sms.StartingHour = startingHour;
+            sms.StartingHour = DateTime.Parse(startingHour);
             Assert.IsFalse(sms.IsWithinRangeOfHours());
         }
 
         [TestMethod]
         public void StartingHourIsForTodayTrueTest()
         {
-            Sms sms = new Sms();
+
             string startingHour = "12:00";
-            sms.StartingHour = startingHour;
+            sms.StartingHour = DateTime.Parse(startingHour);
             Assert.IsTrue(sms.IsHourForToday(DateTime.Parse("11:00")));
 
         }
@@ -188,10 +217,30 @@ namespace BusinessLogicTest
         [TestMethod]
         public void StartingHourIsForTodayFalseTest()
         {
-            Sms sms = new Sms();
             string startingHour = "10:30";
-            sms.StartingHour = startingHour;
+            sms.StartingHour = DateTime.Parse(startingHour);
+            DateTime dt = DateTime.Parse("11:00");
             Assert.IsFalse(sms.IsHourForToday(DateTime.Parse("11:00")));
+        }
+
+        [TestMethod]
+        public void SetEndingHourTest()
+        {
+            sms.Minutes = "60";
+            sms.StartingHour = DateTime.Parse("10:00");
+            sms.EndingHour = sms.SetEndingHour();
+
+            Assert.AreEqual(sms.EndingHour, DateTime.Parse("11:00"));
+        }
+
+        [TestMethod]
+        public void SetEndingHourEndsLaterThanMaxEndingHourTest()
+        { 
+            sms.Minutes = "60";
+            sms.StartingHour = DateTime.Parse("17:30");
+            sms.EndingHour = sms.SetEndingHour();
+        
+            Assert.AreEqual(sms.EndingHour, DateTime.Parse("18:00"));
         }
 
 

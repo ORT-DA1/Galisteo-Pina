@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NotificationTest.cs" />
+    <Compile Include="InMemoryPurchaseRepositoryTest.cs.cs" />
     <Compile Include="SmsTest.cs" />
     <Compile Include="CellPhoneNumberValidatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
