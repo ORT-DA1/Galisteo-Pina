@@ -28,7 +28,7 @@ namespace BusinessLogicTest
         {
             BalanceValidator phoneBalance = new BalanceValidator();
             string balance = "10";
-            Assert.AreEqual(10 ,phoneBalance.NormalizedBalance(balance));
+            Assert.AreEqual(10, phoneBalance.NormalizedBalance(balance));
         }
 
         [TestMethod]
