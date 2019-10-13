@@ -6,14 +6,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BusinessLogicTest
 {
     [TestClass]
-    public class SystemParkingTest
+    public class ParkingSystemTest
     {
         [TestMethod]
         public void AddAccountTest()
         {
-            SystemParking system = new SystemParking();
+            ParkingSystem system = new ParkingSystem();
             Account userAccount = new Account("098960505", 0);
-            bool success = system.addAccount(userAccount);
+            bool success = system.AddAccount(userAccount);
             Assert.IsTrue(success);
          }
         public void SystemWithNoAccountTest()
@@ -90,6 +90,23 @@ namespace BusinessLogicTest
             system.AddAccount(userAccount);
             system.AddBalance(userAccount, 100);
             Assert.IsTrue(system.SustractBalance(userAccount, -100));
+        }
+
+        [TestMethod]
+        public void AccountAlreadyExistTest()
+        {
+            ParkingSystem system = new ParkingSystem();
+            Account userAccount = new Account("098960505", 0);
+            system.AddAccount(userAccount);
+            Assert.IsTrue(system.AccountAlreadyExist(userAccount));
+        }
+
+        [TestMethod]
+        public void AccountNotExistTest()
+        {
+            ParkingSystem system = new ParkingSystem();
+            Account userAccount = new Account("098960505", 0);
+            Assert.IsFalse(system.AccountAlreadyExist(userAccount));
         }
     }
 }

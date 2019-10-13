@@ -13,12 +13,12 @@ namespace GUI
 {
     public partial class Parking : Form
     {
-        SystemParking parking;
+        ParkingSystem parking;
 
         public Parking()
         {
             InitializeComponent();
-            parking = new SystemParking();
+            parking = new ParkingSystem();
             AddAccountPanel.Visible = false;
             AddBalancePanel.Visible = false;
             CheckPurchasePanel.Visible = false;
@@ -70,8 +70,15 @@ namespace GUI
             if (mobileValidator.PhoneNumberCorrectFormat(phoneNumber))
             {
                 Account userAccount = new Account(phoneNumber, balance);
-                parking.addAccount(userAccount);
-                MessageBox.Show("Cuenta ingresada correctamente", "Parking", MessageBoxButtons.OK);
+                if (!parking.AccountAlreadyExist(userAccount))
+                {
+                    parking.AddAccount(userAccount);
+                    MessageBox.Show("Cuenta ingresada correctamente", "Parking", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show("La cuenta ya existe", "Error", MessageBoxButtons.OK);
+                }
             }
             else
             {
