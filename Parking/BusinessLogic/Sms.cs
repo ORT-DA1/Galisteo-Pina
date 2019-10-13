@@ -180,7 +180,7 @@ namespace BusinessLogic
             return this.Minutes;
         }
 
-        public string InputSartingHour()
+        public DateTime InputSartingHour()
         {
             return this.StartingHour;
         }

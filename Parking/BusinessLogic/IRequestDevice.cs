@@ -10,6 +10,6 @@ namespace BusinessLogic
     {
         string InputPlate();
         string InputMinutes();
-        string InputSartingHour();
+        DateTime InputSartingHour();
     }
 }
