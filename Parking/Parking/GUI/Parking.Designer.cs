@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class Form1
+    partial class Parking
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -29,31 +29,31 @@
         private void InitializeComponent()
         {
             this.MenuPanel = new System.Windows.Forms.Panel();
-            this.AddUserBtn = new System.Windows.Forms.Button();
-            this.AddBalanceBtn = new System.Windows.Forms.Button();
-            this.PurchaseMethodBtn = new System.Windows.Forms.Button();
             this.CheckPurchaseBtn = new System.Windows.Forms.Button();
+            this.PurchaseMethodBtn = new System.Windows.Forms.Button();
+            this.AddBalanceBtn = new System.Windows.Forms.Button();
+            this.AddUserBtn = new System.Windows.Forms.Button();
             this.AddAccountPanel = new System.Windows.Forms.Panel();
-            this.RegistrarCuentaLabel = new System.Windows.Forms.Label();
-            this.AccountNumberTxtBox = new System.Windows.Forms.TextBox();
-            this.AccountNumberPhoneLbl = new System.Windows.Forms.Label();
-            this.AddUserProcessBtn = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.InputBalanceBtn = new System.Windows.Forms.Button();
-            this.InputAccountLbl = new System.Windows.Forms.Label();
-            this.InputAccountTxtBox = new System.Windows.Forms.TextBox();
-            this.AddBalanceLbl = new System.Windows.Forms.Label();
-            this.InputBalanceLbl = new System.Windows.Forms.Label();
-            this.InputBalanceTxtBox = new System.Windows.Forms.TextBox();
+            this.AddBalancePanel = new System.Windows.Forms.Panel();
             this.PurchaseMethodPanel = new System.Windows.Forms.Panel();
+            this.OutputErrorLbl = new System.Windows.Forms.Label();
             this.InputSmsBtn = new System.Windows.Forms.TextBox();
             this.InputSmsLbl = new System.Windows.Forms.Label();
             this.AddSmsMethodBtn = new System.Windows.Forms.Button();
             this.InputAccountPurchaseLbl = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.OutputErrorLbl = new System.Windows.Forms.Label();
-            this.checkPurchasePanel = new System.Windows.Forms.Panel();
+            this.InputBalanceTxtBox = new System.Windows.Forms.TextBox();
+            this.InputBalanceLbl = new System.Windows.Forms.Label();
+            this.InputBalanceBtn = new System.Windows.Forms.Button();
+            this.InputAccountLbl = new System.Windows.Forms.Label();
+            this.InputAccountTxtBox = new System.Windows.Forms.TextBox();
+            this.AddBalanceLbl = new System.Windows.Forms.Label();
+            this.AddUserProcessBtn = new System.Windows.Forms.Button();
+            this.AccountNumberPhoneLbl = new System.Windows.Forms.Label();
+            this.AccountNumberTxtBox = new System.Windows.Forms.TextBox();
+            this.RegistrarCuentaLabel = new System.Windows.Forms.Label();
+            this.CheckPurchasePanel = new System.Windows.Forms.Panel();
             this.checkResultLbl = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.DataTimeLbl = new System.Windows.Forms.Label();
@@ -63,9 +63,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.MenuPanel.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.AddBalancePanel.SuspendLayout();
             this.PurchaseMethodPanel.SuspendLayout();
-            this.checkPurchasePanel.SuspendLayout();
+            this.CheckPurchasePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuPanel
@@ -76,41 +76,8 @@
             this.MenuPanel.Controls.Add(this.AddUserBtn);
             this.MenuPanel.Location = new System.Drawing.Point(12, 12);
             this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(526, 926);
+            this.MenuPanel.Size = new System.Drawing.Size(526, 520);
             this.MenuPanel.TabIndex = 0;
-            // 
-            // AddUserBtn
-            // 
-            this.AddUserBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddUserBtn.Location = new System.Drawing.Point(0, 0);
-            this.AddUserBtn.Name = "AddUserBtn";
-            this.AddUserBtn.Size = new System.Drawing.Size(526, 109);
-            this.AddUserBtn.TabIndex = 0;
-            this.AddUserBtn.Text = "Registrar Cuenta";
-            this.AddUserBtn.UseCompatibleTextRendering = true;
-            this.AddUserBtn.UseVisualStyleBackColor = true;
-            // 
-            // AddBalanceBtn
-            // 
-            this.AddBalanceBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddBalanceBtn.Location = new System.Drawing.Point(0, 115);
-            this.AddBalanceBtn.Name = "AddBalanceBtn";
-            this.AddBalanceBtn.Size = new System.Drawing.Size(526, 109);
-            this.AddBalanceBtn.TabIndex = 1;
-            this.AddBalanceBtn.Text = "Agregar Saldo";
-            this.AddBalanceBtn.UseCompatibleTextRendering = true;
-            this.AddBalanceBtn.UseVisualStyleBackColor = true;
-            // 
-            // PurchaseMethodBtn
-            // 
-            this.PurchaseMethodBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PurchaseMethodBtn.Location = new System.Drawing.Point(0, 230);
-            this.PurchaseMethodBtn.Name = "PurchaseMethodBtn";
-            this.PurchaseMethodBtn.Size = new System.Drawing.Size(526, 109);
-            this.PurchaseMethodBtn.TabIndex = 2;
-            this.PurchaseMethodBtn.Text = "Procesar Compra";
-            this.PurchaseMethodBtn.UseCompatibleTextRendering = true;
-            this.PurchaseMethodBtn.UseVisualStyleBackColor = true;
             // 
             // CheckPurchaseBtn
             // 
@@ -122,134 +89,73 @@
             this.CheckPurchaseBtn.Text = "Consultar Compra";
             this.CheckPurchaseBtn.UseCompatibleTextRendering = true;
             this.CheckPurchaseBtn.UseVisualStyleBackColor = true;
+            this.CheckPurchaseBtn.Click += new System.EventHandler(this.CheckPurchaseBtn_Click);
+            // 
+            // PurchaseMethodBtn
+            // 
+            this.PurchaseMethodBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PurchaseMethodBtn.Location = new System.Drawing.Point(0, 230);
+            this.PurchaseMethodBtn.Name = "PurchaseMethodBtn";
+            this.PurchaseMethodBtn.Size = new System.Drawing.Size(526, 109);
+            this.PurchaseMethodBtn.TabIndex = 2;
+            this.PurchaseMethodBtn.Text = "Procesar Compra";
+            this.PurchaseMethodBtn.UseCompatibleTextRendering = true;
+            this.PurchaseMethodBtn.UseVisualStyleBackColor = true;
+            this.PurchaseMethodBtn.Click += new System.EventHandler(this.PurchaseMethodBtn_Click);
+            // 
+            // AddBalanceBtn
+            // 
+            this.AddBalanceBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddBalanceBtn.Location = new System.Drawing.Point(0, 115);
+            this.AddBalanceBtn.Name = "AddBalanceBtn";
+            this.AddBalanceBtn.Size = new System.Drawing.Size(526, 109);
+            this.AddBalanceBtn.TabIndex = 1;
+            this.AddBalanceBtn.Text = "Agregar Saldo";
+            this.AddBalanceBtn.UseCompatibleTextRendering = true;
+            this.AddBalanceBtn.UseVisualStyleBackColor = true;
+            this.AddBalanceBtn.Click += new System.EventHandler(this.AddBalanceBtn_Click);
+            // 
+            // AddUserBtn
+            // 
+            this.AddUserBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddUserBtn.Location = new System.Drawing.Point(0, 0);
+            this.AddUserBtn.Name = "AddUserBtn";
+            this.AddUserBtn.Size = new System.Drawing.Size(526, 109);
+            this.AddUserBtn.TabIndex = 0;
+            this.AddUserBtn.Text = "Registrar Cuenta";
+            this.AddUserBtn.UseCompatibleTextRendering = true;
+            this.AddUserBtn.UseVisualStyleBackColor = true;
+            this.AddUserBtn.Click += new System.EventHandler(this.AddUserBtn_Click);
             // 
             // AddAccountPanel
             // 
-            this.AddAccountPanel.Controls.Add(this.panel3);
+            this.AddAccountPanel.Controls.Add(this.AddBalancePanel);
             this.AddAccountPanel.Controls.Add(this.AddUserProcessBtn);
             this.AddAccountPanel.Controls.Add(this.AccountNumberPhoneLbl);
             this.AddAccountPanel.Controls.Add(this.AccountNumberTxtBox);
             this.AddAccountPanel.Controls.Add(this.RegistrarCuentaLabel);
             this.AddAccountPanel.Location = new System.Drawing.Point(544, 12);
             this.AddAccountPanel.Name = "AddAccountPanel";
-            this.AddAccountPanel.Size = new System.Drawing.Size(1157, 926);
+            this.AddAccountPanel.Size = new System.Drawing.Size(1157, 521);
             this.AddAccountPanel.TabIndex = 1;
             // 
-            // RegistrarCuentaLabel
+            // AddBalancePanel
             // 
-            this.RegistrarCuentaLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RegistrarCuentaLabel.AutoSize = true;
-            this.RegistrarCuentaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RegistrarCuentaLabel.Location = new System.Drawing.Point(405, 27);
-            this.RegistrarCuentaLabel.Name = "RegistrarCuentaLabel";
-            this.RegistrarCuentaLabel.Size = new System.Drawing.Size(359, 42);
-            this.RegistrarCuentaLabel.TabIndex = 0;
-            this.RegistrarCuentaLabel.Text = "Registro de Cuentas\r\n";
-            this.RegistrarCuentaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // AccountNumberTxtBox
-            // 
-            this.AccountNumberTxtBox.Location = new System.Drawing.Point(530, 154);
-            this.AccountNumberTxtBox.Name = "AccountNumberTxtBox";
-            this.AccountNumberTxtBox.Size = new System.Drawing.Size(352, 31);
-            this.AccountNumberTxtBox.TabIndex = 1;
-            // 
-            // AccountNumberPhoneLbl
-            // 
-            this.AccountNumberPhoneLbl.AutoSize = true;
-            this.AccountNumberPhoneLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AccountNumberPhoneLbl.Location = new System.Drawing.Point(281, 154);
-            this.AccountNumberPhoneLbl.Name = "AccountNumberPhoneLbl";
-            this.AccountNumberPhoneLbl.Size = new System.Drawing.Size(206, 31);
-            this.AccountNumberPhoneLbl.TabIndex = 2;
-            this.AccountNumberPhoneLbl.Text = "Ingrese Celular:";
-            this.AccountNumberPhoneLbl.Click += new System.EventHandler(this.Label1_Click);
-            // 
-            // AddUserProcessBtn
-            // 
-            this.AddUserProcessBtn.Location = new System.Drawing.Point(508, 257);
-            this.AddUserProcessBtn.Name = "AddUserProcessBtn";
-            this.AddUserProcessBtn.Size = new System.Drawing.Size(180, 60);
-            this.AddUserProcessBtn.TabIndex = 3;
-            this.AddUserProcessBtn.Text = "Ingresar Cuenta";
-            this.AddUserProcessBtn.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.PurchaseMethodPanel);
-            this.panel3.Controls.Add(this.InputBalanceTxtBox);
-            this.panel3.Controls.Add(this.InputBalanceLbl);
-            this.panel3.Controls.Add(this.InputBalanceBtn);
-            this.panel3.Controls.Add(this.InputAccountLbl);
-            this.panel3.Controls.Add(this.InputAccountTxtBox);
-            this.panel3.Controls.Add(this.AddBalanceLbl);
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1157, 926);
-            this.panel3.TabIndex = 4;
-            // 
-            // InputBalanceBtn
-            // 
-            this.InputBalanceBtn.Location = new System.Drawing.Point(496, 309);
-            this.InputBalanceBtn.Name = "InputBalanceBtn";
-            this.InputBalanceBtn.Size = new System.Drawing.Size(180, 60);
-            this.InputBalanceBtn.TabIndex = 3;
-            this.InputBalanceBtn.Text = "Ingresar Saldo";
-            this.InputBalanceBtn.UseVisualStyleBackColor = true;
-            // 
-            // InputAccountLbl
-            // 
-            this.InputAccountLbl.AutoSize = true;
-            this.InputAccountLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InputAccountLbl.Location = new System.Drawing.Point(281, 154);
-            this.InputAccountLbl.Name = "InputAccountLbl";
-            this.InputAccountLbl.Size = new System.Drawing.Size(206, 31);
-            this.InputAccountLbl.TabIndex = 2;
-            this.InputAccountLbl.Text = "Ingrese Celular:";
-            // 
-            // InputAccountTxtBox
-            // 
-            this.InputAccountTxtBox.Location = new System.Drawing.Point(530, 154);
-            this.InputAccountTxtBox.Name = "InputAccountTxtBox";
-            this.InputAccountTxtBox.Size = new System.Drawing.Size(352, 31);
-            this.InputAccountTxtBox.TabIndex = 1;
-            // 
-            // AddBalanceLbl
-            // 
-            this.AddBalanceLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddBalanceLbl.AutoSize = true;
-            this.AddBalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddBalanceLbl.Location = new System.Drawing.Point(457, 27);
-            this.AddBalanceLbl.Name = "AddBalanceLbl";
-            this.AddBalanceLbl.Size = new System.Drawing.Size(257, 42);
-            this.AddBalanceLbl.TabIndex = 0;
-            this.AddBalanceLbl.Text = "Agregar Saldo";
-            this.AddBalanceLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // InputBalanceLbl
-            // 
-            this.InputBalanceLbl.AutoSize = true;
-            this.InputBalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InputBalanceLbl.Location = new System.Drawing.Point(281, 218);
-            this.InputBalanceLbl.Name = "InputBalanceLbl";
-            this.InputBalanceLbl.Size = new System.Drawing.Size(195, 31);
-            this.InputBalanceLbl.TabIndex = 4;
-            this.InputBalanceLbl.Text = "Ingrese Monto:";
-            // 
-            // InputBalanceTxtBox
-            // 
-            this.InputBalanceTxtBox.Location = new System.Drawing.Point(530, 221);
-            this.InputBalanceTxtBox.Name = "InputBalanceTxtBox";
-            this.InputBalanceTxtBox.Size = new System.Drawing.Size(352, 31);
-            this.InputBalanceTxtBox.TabIndex = 5;
+            this.AddBalancePanel.Controls.Add(this.PurchaseMethodPanel);
+            this.AddBalancePanel.Controls.Add(this.InputBalanceTxtBox);
+            this.AddBalancePanel.Controls.Add(this.InputBalanceLbl);
+            this.AddBalancePanel.Controls.Add(this.InputBalanceBtn);
+            this.AddBalancePanel.Controls.Add(this.InputAccountLbl);
+            this.AddBalancePanel.Controls.Add(this.InputAccountTxtBox);
+            this.AddBalancePanel.Controls.Add(this.AddBalanceLbl);
+            this.AddBalancePanel.Location = new System.Drawing.Point(871, 412);
+            this.AddBalancePanel.Name = "AddBalancePanel";
+            this.AddBalancePanel.Size = new System.Drawing.Size(1157, 526);
+            this.AddBalancePanel.TabIndex = 4;
             // 
             // PurchaseMethodPanel
             // 
-            this.PurchaseMethodPanel.Controls.Add(this.checkPurchasePanel);
+            this.PurchaseMethodPanel.Controls.Add(this.CheckPurchasePanel);
             this.PurchaseMethodPanel.Controls.Add(this.OutputErrorLbl);
             this.PurchaseMethodPanel.Controls.Add(this.InputSmsBtn);
             this.PurchaseMethodPanel.Controls.Add(this.InputSmsLbl);
@@ -258,10 +164,20 @@
             this.PurchaseMethodPanel.Controls.Add(this.textBox2);
             this.PurchaseMethodPanel.Controls.Add(this.label3);
             this.PurchaseMethodPanel.ForeColor = System.Drawing.Color.Black;
-            this.PurchaseMethodPanel.Location = new System.Drawing.Point(0, 0);
+            this.PurchaseMethodPanel.Location = new System.Drawing.Point(887, 386);
             this.PurchaseMethodPanel.Name = "PurchaseMethodPanel";
-            this.PurchaseMethodPanel.Size = new System.Drawing.Size(1157, 926);
+            this.PurchaseMethodPanel.Size = new System.Drawing.Size(1157, 524);
             this.PurchaseMethodPanel.TabIndex = 6;
+            // 
+            // OutputErrorLbl
+            // 
+            this.OutputErrorLbl.AutoSize = true;
+            this.OutputErrorLbl.ForeColor = System.Drawing.Color.Red;
+            this.OutputErrorLbl.Location = new System.Drawing.Point(282, 429);
+            this.OutputErrorLbl.Name = "OutputErrorLbl";
+            this.OutputErrorLbl.Size = new System.Drawing.Size(140, 25);
+            this.OutputErrorLbl.TabIndex = 6;
+            this.OutputErrorLbl.Text = "Output Errors";
             // 
             // InputSmsBtn
             // 
@@ -320,30 +236,119 @@
             this.label3.Text = "Procesar Compra";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // OutputErrorLbl
+            // InputBalanceTxtBox
             // 
-            this.OutputErrorLbl.AutoSize = true;
-            this.OutputErrorLbl.ForeColor = System.Drawing.Color.Red;
-            this.OutputErrorLbl.Location = new System.Drawing.Point(282, 429);
-            this.OutputErrorLbl.Name = "OutputErrorLbl";
-            this.OutputErrorLbl.Size = new System.Drawing.Size(140, 25);
-            this.OutputErrorLbl.TabIndex = 6;
-            this.OutputErrorLbl.Text = "Output Errors";
+            this.InputBalanceTxtBox.Location = new System.Drawing.Point(530, 221);
+            this.InputBalanceTxtBox.Name = "InputBalanceTxtBox";
+            this.InputBalanceTxtBox.Size = new System.Drawing.Size(352, 31);
+            this.InputBalanceTxtBox.TabIndex = 5;
             // 
-            // checkPurchasePanel
+            // InputBalanceLbl
             // 
-            this.checkPurchasePanel.Controls.Add(this.checkResultLbl);
-            this.checkPurchasePanel.Controls.Add(this.textBox1);
-            this.checkPurchasePanel.Controls.Add(this.DataTimeLbl);
-            this.checkPurchasePanel.Controls.Add(this.checkBtn);
-            this.checkPurchasePanel.Controls.Add(this.label4);
-            this.checkPurchasePanel.Controls.Add(this.textBox3);
-            this.checkPurchasePanel.Controls.Add(this.label5);
-            this.checkPurchasePanel.ForeColor = System.Drawing.Color.Black;
-            this.checkPurchasePanel.Location = new System.Drawing.Point(0, 0);
-            this.checkPurchasePanel.Name = "checkPurchasePanel";
-            this.checkPurchasePanel.Size = new System.Drawing.Size(1157, 926);
-            this.checkPurchasePanel.TabIndex = 7;
+            this.InputBalanceLbl.AutoSize = true;
+            this.InputBalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InputBalanceLbl.Location = new System.Drawing.Point(281, 218);
+            this.InputBalanceLbl.Name = "InputBalanceLbl";
+            this.InputBalanceLbl.Size = new System.Drawing.Size(195, 31);
+            this.InputBalanceLbl.TabIndex = 4;
+            this.InputBalanceLbl.Text = "Ingrese Monto:";
+            // 
+            // InputBalanceBtn
+            // 
+            this.InputBalanceBtn.Location = new System.Drawing.Point(496, 309);
+            this.InputBalanceBtn.Name = "InputBalanceBtn";
+            this.InputBalanceBtn.Size = new System.Drawing.Size(180, 60);
+            this.InputBalanceBtn.TabIndex = 3;
+            this.InputBalanceBtn.Text = "Ingresar Saldo";
+            this.InputBalanceBtn.UseVisualStyleBackColor = true;
+            // 
+            // InputAccountLbl
+            // 
+            this.InputAccountLbl.AutoSize = true;
+            this.InputAccountLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InputAccountLbl.Location = new System.Drawing.Point(281, 154);
+            this.InputAccountLbl.Name = "InputAccountLbl";
+            this.InputAccountLbl.Size = new System.Drawing.Size(206, 31);
+            this.InputAccountLbl.TabIndex = 2;
+            this.InputAccountLbl.Text = "Ingrese Celular:";
+            // 
+            // InputAccountTxtBox
+            // 
+            this.InputAccountTxtBox.Location = new System.Drawing.Point(530, 154);
+            this.InputAccountTxtBox.Name = "InputAccountTxtBox";
+            this.InputAccountTxtBox.Size = new System.Drawing.Size(352, 31);
+            this.InputAccountTxtBox.TabIndex = 1;
+            // 
+            // AddBalanceLbl
+            // 
+            this.AddBalanceLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddBalanceLbl.AutoSize = true;
+            this.AddBalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddBalanceLbl.Location = new System.Drawing.Point(457, 27);
+            this.AddBalanceLbl.Name = "AddBalanceLbl";
+            this.AddBalanceLbl.Size = new System.Drawing.Size(257, 42);
+            this.AddBalanceLbl.TabIndex = 0;
+            this.AddBalanceLbl.Text = "Agregar Saldo";
+            this.AddBalanceLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AddUserProcessBtn
+            // 
+            this.AddUserProcessBtn.Location = new System.Drawing.Point(508, 257);
+            this.AddUserProcessBtn.Name = "AddUserProcessBtn";
+            this.AddUserProcessBtn.Size = new System.Drawing.Size(180, 60);
+            this.AddUserProcessBtn.TabIndex = 3;
+            this.AddUserProcessBtn.Text = "Ingresar Cuenta";
+            this.AddUserProcessBtn.UseVisualStyleBackColor = true;
+            this.AddUserProcessBtn.Click += new System.EventHandler(this.AddUserProcessBtn_Click);
+            // 
+            // AccountNumberPhoneLbl
+            // 
+            this.AccountNumberPhoneLbl.AutoSize = true;
+            this.AccountNumberPhoneLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountNumberPhoneLbl.Location = new System.Drawing.Point(281, 154);
+            this.AccountNumberPhoneLbl.Name = "AccountNumberPhoneLbl";
+            this.AccountNumberPhoneLbl.Size = new System.Drawing.Size(206, 31);
+            this.AccountNumberPhoneLbl.TabIndex = 2;
+            this.AccountNumberPhoneLbl.Text = "Ingrese Celular:";
+            this.AccountNumberPhoneLbl.Click += new System.EventHandler(this.Label1_Click);
+            // 
+            // AccountNumberTxtBox
+            // 
+            this.AccountNumberTxtBox.Location = new System.Drawing.Point(530, 154);
+            this.AccountNumberTxtBox.Name = "AccountNumberTxtBox";
+            this.AccountNumberTxtBox.Size = new System.Drawing.Size(352, 31);
+            this.AccountNumberTxtBox.TabIndex = 1;
+            // 
+            // RegistrarCuentaLabel
+            // 
+            this.RegistrarCuentaLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RegistrarCuentaLabel.AutoSize = true;
+            this.RegistrarCuentaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegistrarCuentaLabel.Location = new System.Drawing.Point(405, 27);
+            this.RegistrarCuentaLabel.Name = "RegistrarCuentaLabel";
+            this.RegistrarCuentaLabel.Size = new System.Drawing.Size(359, 42);
+            this.RegistrarCuentaLabel.TabIndex = 0;
+            this.RegistrarCuentaLabel.Text = "Registro de Cuentas\r\n";
+            this.RegistrarCuentaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // CheckPurchasePanel
+            // 
+            this.CheckPurchasePanel.Controls.Add(this.checkResultLbl);
+            this.CheckPurchasePanel.Controls.Add(this.textBox1);
+            this.CheckPurchasePanel.Controls.Add(this.DataTimeLbl);
+            this.CheckPurchasePanel.Controls.Add(this.checkBtn);
+            this.CheckPurchasePanel.Controls.Add(this.label4);
+            this.CheckPurchasePanel.Controls.Add(this.textBox3);
+            this.CheckPurchasePanel.Controls.Add(this.label5);
+            this.CheckPurchasePanel.ForeColor = System.Drawing.Color.Black;
+            this.CheckPurchasePanel.Location = new System.Drawing.Point(1059, 420);
+            this.CheckPurchasePanel.Name = "CheckPurchasePanel";
+            this.CheckPurchasePanel.Size = new System.Drawing.Size(1157, 520);
+            this.CheckPurchasePanel.TabIndex = 7;
             // 
             // checkResultLbl
             // 
@@ -413,24 +418,24 @@
             this.label5.Text = "Consultar Compra";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Form1
+            // Parking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1710, 950);
+            this.ClientSize = new System.Drawing.Size(1710, 544);
             this.Controls.Add(this.AddAccountPanel);
             this.Controls.Add(this.MenuPanel);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Parking";
+            this.Text = "Parking";
             this.MenuPanel.ResumeLayout(false);
             this.AddAccountPanel.ResumeLayout(false);
             this.AddAccountPanel.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.AddBalancePanel.ResumeLayout(false);
+            this.AddBalancePanel.PerformLayout();
             this.PurchaseMethodPanel.ResumeLayout(false);
             this.PurchaseMethodPanel.PerformLayout();
-            this.checkPurchasePanel.ResumeLayout(false);
-            this.checkPurchasePanel.PerformLayout();
+            this.CheckPurchasePanel.ResumeLayout(false);
+            this.CheckPurchasePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -446,7 +451,7 @@
         private System.Windows.Forms.Label AccountNumberPhoneLbl;
         private System.Windows.Forms.TextBox AccountNumberTxtBox;
         private System.Windows.Forms.Label RegistrarCuentaLabel;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel AddBalancePanel;
         private System.Windows.Forms.Button InputBalanceBtn;
         private System.Windows.Forms.Label InputAccountLbl;
         private System.Windows.Forms.TextBox InputAccountTxtBox;
@@ -455,7 +460,7 @@
         private System.Windows.Forms.TextBox InputBalanceTxtBox;
         private System.Windows.Forms.Label InputBalanceLbl;
         private System.Windows.Forms.Panel PurchaseMethodPanel;
-        private System.Windows.Forms.Panel checkPurchasePanel;
+        private System.Windows.Forms.Panel CheckPurchasePanel;
         private System.Windows.Forms.Label checkResultLbl;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label DataTimeLbl;
