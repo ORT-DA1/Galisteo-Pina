@@ -73,7 +73,7 @@ namespace BusinessLogic
 
         public string Extract(string[] splitMessage, string regexPattern)
         {
-            return splitMessage.First(s => Regex.IsMatch(s, regexPattern));
+            return splitMessage.FirstOrDefault(s => Regex.IsMatch(s, regexPattern));
         }
 
         public string ExtractPlates(string[] splitMessage)
@@ -102,9 +102,13 @@ namespace BusinessLogic
 
         public DateTime SetEndingHour()
         {
-            var startingHourPlusMinutes = this.StartingHour.AddMinutes(Double.Parse(this.Minutes));
-            var maxEndingHour = this.UpperHourLimit;
-            var endingHour = startingHourPlusMinutes > maxEndingHour ? maxEndingHour : startingHourPlusMinutes;
+            DateTime endingHour = DateTime.MinValue;
+            if(this.Minutes != null)
+            {
+                var startingHourPlusMinutes = this.StartingHour.AddMinutes(Double.Parse(this.Minutes));
+                var maxEndingHour = this.UpperHourLimit;
+                endingHour = startingHourPlusMinutes > maxEndingHour ? maxEndingHour : startingHourPlusMinutes;
+            }
             return endingHour;
         }
 
