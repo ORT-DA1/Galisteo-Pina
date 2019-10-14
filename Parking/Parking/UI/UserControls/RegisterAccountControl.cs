@@ -25,7 +25,7 @@ namespace UI.UserControls
 
         private void AddAccountBtn_Click(object sender, EventArgs e)
         {
-            Notification status = new Notification();
+            Notification status;
             string cellPhoneNumber = this.userAccountTxtBox.Text;
             status = this.systemParking.AddAccount(cellPhoneNumber);
             if (status.HasErrors())
