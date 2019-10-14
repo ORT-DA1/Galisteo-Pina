@@ -11,22 +11,10 @@ namespace BusinessLogic
         public string AccountCellPhoneNumber { get; set; }
         public int AccountBalance { get; set; }
 
-        public Account(string mobileNumber, int balance)
+        public Account(string mobileNumber, int balance = 0)
         {
             this.AccountCellPhoneNumber = mobileNumber;
             this.AccountBalance = balance;
-        }
-
-        public bool AccountCellPhoneNumberIsEmpty()
-        {
-            CellPhoneValidator phoneValidator = new CellPhoneValidator();
-            return phoneValidator.PhoneNumberNotEmpty(this.AccountCellPhoneNumber);
-        }
-
-        public bool AccountCellPhoneNumberFormatIsCorrect()
-        {
-            CellPhoneValidator phoneNumberValidator = new CellPhoneValidator();
-            return phoneNumberValidator.PhoneNumberCorrectFormat(this.AccountCellPhoneNumber);
         }
 
         public bool AccountBalanceIsPositive()
@@ -34,10 +22,11 @@ namespace BusinessLogic
             return this.AccountBalance >= 0;
         }
 
-        public void AddMoneyToBalance(int moneyToAdd)
+        public void AddMoneyToBalance(string moneyToAdd)
         {
-            this.AccountBalance += moneyToAdd;
+            this.AccountBalance += Convert.ToInt32(moneyToAdd);
         }
+
 
         public bool SustractMoneyToBalance(int moneyToSustract)
         {

@@ -100,75 +100,13 @@ namespace BusinessLogic
             return parseResult;
         }
 
-        public Notification Validate(DateTime timeOfValidation)
+        public DateTime SetEndingHour()
         {
-            Notification notification = new Notification();
-
-            if (MissingInput(this.Plates))
-                notification.AddError("Number Plate is missing");
-            if (MissingInput(this.Minutes))
-                notification.AddError("Ammount of minutes is missing");
-            if (!ValidateMinutes())
-                notification.AddError("Ammount of minutes has to be a positive number and a multiple of 30");
-            if (!IsValidHourFormat())
-                notification.AddError("Invalid date format. Should be: HH:mm");
-            if (!IsWithinRangeOfHours())
-                notification.AddError("Invalid range of hours. Should be between 10:00 and 18:00");
-            if (!IsHourForToday(timeOfValidation))
-                notification.AddError("It is only possible to buy parking hours for the current day");
-            return notification;
+            var startingHourPlusMinutes = this.StartingHour.AddMinutes(Double.Parse(this.Minutes));
+            var maxEndingHour = this.UpperHourLimit;
+            var endingHour = startingHourPlusMinutes > maxEndingHour ? maxEndingHour : startingHourPlusMinutes;
+            return endingHour;
         }
-
-        public bool MissingInput(string input)
-        {
-            return input == string.Empty;
-        }
-
-        public bool ValidateMinutes()
-        {
-            return IsAnInteger() && IsPositive() && IsMultipleOf30();
-        }
-
-        public bool IsMultipleOf30()
-        {
-            return (Convert.ToInt32(this.Minutes) % 30 == 0);
-        }
-
-        public bool IsAnInteger()
-        {
-            return !(this.Minutes.Contains("."));
-        }
-
-        public bool IsPositive()
-        {
-            return (Convert.ToInt32(this.Minutes) > 0);
-        }
-
-        public bool IsValidHourFormat()
-        {
-            return !CouldNotParseDate() && Regex.IsMatch(this.StartingHour.ToString("HH:mm"), "^([0-9]{2}[:][0-9]{2})$");
-        }
-
-        public bool CouldNotParseDate()
-        {
-            return this.StartingHour.Equals(DateTime.MinValue);
-        }
-        public bool IsWithinRangeOfHours()
-        {
-            return this.StartingHour >= this.LowerHourLimit && this.StartingHour <= this.UpperHourLimit;
-        }
-
-        public bool IsHourForToday(DateTime toCompare)
-        {
-            DateTime toCompareAccountForTransactionTime = AdjustTimeToAccountForTransactionTime(toCompare);
-            return toCompare <= this.StartingHour;
-        }
-
-        public DateTime AdjustTimeToAccountForTransactionTime(DateTime toAdjust)
-        {
-            return toAdjust.AddSeconds(-10);
-        }
-
 
         public string InputPlate()
         {
@@ -185,13 +123,7 @@ namespace BusinessLogic
             return this.StartingHour;
         }
 
-        public DateTime SetEndingHour()
-        {
-            var startingHourPlusMinutes = this.StartingHour.AddMinutes(Double.Parse(this.Minutes));
-            var maxEndingHour = this.UpperHourLimit;
-            var endingHour = startingHourPlusMinutes > maxEndingHour ? maxEndingHour : startingHourPlusMinutes;
-            return endingHour;
-        }
+
 
 
 

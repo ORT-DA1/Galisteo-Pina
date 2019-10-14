@@ -15,9 +15,24 @@ namespace BusinessLogic
             PurchasesRecord = new List<Purchase>();
         }
 
-        public void AddPurchase(Purchase purchase)
+        public Notification AddPurchase(Account purchaseAccount, string sms)
         {
-            this.PurchasesRecord.Add(purchase);
+            Sms purchaseSms = new Sms();
+            purchaseSms.Initialize(sms);
+            SmsValidator smsValidator = new SmsValidator(purchaseSms);
+            Notification notification = smsValidator.Validate();
+            Purchase purchase = new Purchase(purchaseSms, purchaseAccount);
+            int costOfMinutesUsed = purchase.CalculateCostForMinutesUsed();
+            AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(purchaseAccount, costOfMinutesUsed);
+            notification.AppendNotificationErrors(accountTransactionValidator.Validate());
+
+            if (!notification.HasErrors())
+            {
+                PurchasesRecord.Add(purchase);
+                purchaseAccount.SustractMoneyToBalance(costOfMinutesUsed);
+                notification.AddSuccess("Purchase was successfull");
+            }
+            return notification;
         }
 
         public bool ThereAreRecordedPurchases()
@@ -28,13 +43,7 @@ namespace BusinessLogic
         public bool AnyPurchaseMatchesPlateAndDateTime(string plates, string dateToCompare)
         {
             DateTime date = DateTime.Parse(dateToCompare);
-            Purchase purchase = PurchasesRecord[0];
-            bool asd1 = purchase.Sms.Plates == plates;
-            bool asd2 = purchase.Sms.StartingHour <= date;
-            bool asd3 = purchase.Sms.EndingHour >= date;
-            bool asd4 = purchase.Sms.StartingHour <= date && purchase.Sms.EndingHour >= date;
-            bool asd5 = PurchasesRecord.Any(purchasex => purchase.Sms.Plates == plates && purchase.Sms.StartingHour <= date && purchase.Sms.EndingHour >= date);
-            return PurchasesRecord.Any(purchasex => purchase.Sms.Plates == plates && (purchase.Sms.StartingHour <= date && purchase.Sms.EndingHour >= date));
+            return PurchasesRecord.Any(purchase => purchase.Sms.Plates == plates && (purchase.Sms.StartingHour <= date && purchase.Sms.EndingHour >= date));
         }
 
 
