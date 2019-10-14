@@ -30,9 +30,9 @@
         {
             this.processPurchaseLbl = new System.Windows.Forms.Label();
             this.userAccountLbl = new System.Windows.Forms.Label();
-            this.userBalanceLbl = new System.Windows.Forms.Label();
+            this.purchaseMessageLbl = new System.Windows.Forms.Label();
             this.userAccountTxtBox = new System.Windows.Forms.TextBox();
-            this.userBalanceTxtBox = new System.Windows.Forms.TextBox();
+            this.messagePurchaseTxt = new System.Windows.Forms.TextBox();
             this.processPurchaseBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -56,15 +56,15 @@
             this.userAccountLbl.TabIndex = 3;
             this.userAccountLbl.Text = "Ingrese numero de telefono:";
             // 
-            // userBalanceLbl
+            // purchaseMessageLbl
             // 
-            this.userBalanceLbl.AutoSize = true;
-            this.userBalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userBalanceLbl.Location = new System.Drawing.Point(180, 267);
-            this.userBalanceLbl.Name = "userBalanceLbl";
-            this.userBalanceLbl.Size = new System.Drawing.Size(352, 31);
-            this.userBalanceLbl.TabIndex = 5;
-            this.userBalanceLbl.Text = "Ingrese numero de telefono:";
+            this.purchaseMessageLbl.AutoSize = true;
+            this.purchaseMessageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.purchaseMessageLbl.Location = new System.Drawing.Point(180, 267);
+            this.purchaseMessageLbl.Name = "purchaseMessageLbl";
+            this.purchaseMessageLbl.Size = new System.Drawing.Size(356, 31);
+            this.purchaseMessageLbl.TabIndex = 5;
+            this.purchaseMessageLbl.Text = "Ingrese mensaje de compra:";
             // 
             // userAccountTxtBox
             // 
@@ -74,13 +74,13 @@
             this.userAccountTxtBox.Size = new System.Drawing.Size(534, 38);
             this.userAccountTxtBox.TabIndex = 6;
             // 
-            // userBalanceTxtBox
+            // messagePurchaseTxt
             // 
-            this.userBalanceTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userBalanceTxtBox.Location = new System.Drawing.Point(538, 264);
-            this.userBalanceTxtBox.Name = "userBalanceTxtBox";
-            this.userBalanceTxtBox.Size = new System.Drawing.Size(534, 38);
-            this.userBalanceTxtBox.TabIndex = 7;
+            this.messagePurchaseTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.messagePurchaseTxt.Location = new System.Drawing.Point(538, 264);
+            this.messagePurchaseTxt.Name = "messagePurchaseTxt";
+            this.messagePurchaseTxt.Size = new System.Drawing.Size(534, 38);
+            this.messagePurchaseTxt.TabIndex = 7;
             // 
             // processPurchaseBtn
             // 
@@ -98,14 +98,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.processPurchaseBtn);
-            this.Controls.Add(this.userBalanceTxtBox);
+            this.Controls.Add(this.messagePurchaseTxt);
             this.Controls.Add(this.userAccountTxtBox);
-            this.Controls.Add(this.userBalanceLbl);
+            this.Controls.Add(this.purchaseMessageLbl);
             this.Controls.Add(this.userAccountLbl);
             this.Controls.Add(this.processPurchaseLbl);
             this.Name = "PurchaseMethodControl";
             this.Size = new System.Drawing.Size(1300, 960);
-            this.Load += new System.EventHandler(this.PurchaseMethodControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,9 +114,9 @@
 
         private System.Windows.Forms.Label processPurchaseLbl;
         private System.Windows.Forms.Label userAccountLbl;
-        private System.Windows.Forms.Label userBalanceLbl;
+        private System.Windows.Forms.Label purchaseMessageLbl;
         private System.Windows.Forms.TextBox userAccountTxtBox;
-        private System.Windows.Forms.TextBox userBalanceTxtBox;
+        private System.Windows.Forms.TextBox messagePurchaseTxt;
         private System.Windows.Forms.Button processPurchaseBtn;
     }
 }

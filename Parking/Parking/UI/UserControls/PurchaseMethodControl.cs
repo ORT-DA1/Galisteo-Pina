@@ -22,14 +22,12 @@ namespace UI.UserControls
             this.parkingSystem = system;
         }
 
-        private void PurchaseMethodControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void ProcessPurchaseBtn_Click(object sender, EventArgs e)
         {
-
+            Notification status;
+            string userPhoneNumber = this.userAccountTxtBox.Text;
+            string message = this.messagePurchaseTxt.Text;
+            status = parkingSystem.AddPurchase(userPhoneNumber, message);
         }
     }
 }
