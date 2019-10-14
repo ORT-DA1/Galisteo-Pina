@@ -101,7 +101,6 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "RegisterAccountControl";
             this.Size = new System.Drawing.Size(650, 499);
-            this.Load += new System.EventHandler(this.RegisterAccountControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

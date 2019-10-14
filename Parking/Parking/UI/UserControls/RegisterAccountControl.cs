@@ -39,10 +39,5 @@ namespace UI.UserControls
                 this.outputErrorLbl.ForeColor = Color.Green;
             }
         }
-
-        private void RegisterAccountControl_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

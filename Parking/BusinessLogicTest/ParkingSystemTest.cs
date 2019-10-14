@@ -8,6 +8,7 @@ namespace BusinessLogicTest
     [TestClass]
     public class ParkingSystemTest
     {
+        /*
         [TestMethod]
         public void AddAccountTest()
         {
@@ -108,6 +109,7 @@ namespace BusinessLogicTest
             Account userAccount = new Account("098960505", 0);
             Assert.IsFalse(system.AccountAlreadyExist(userAccount));
         }
+    */
     }
 }
 

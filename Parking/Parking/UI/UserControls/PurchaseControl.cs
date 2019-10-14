@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLogic;
 
 namespace UI.UserControls
 {
     public partial class PurchaseControl : UserControl
     {
-        public PurchaseControl()
+        private ParkingSystem systemParking;
+        private Action<int, Dictionary<string, int>> doNavigation;
+        public PurchaseControl(Action<int, Dictionary<string, int>> doNavigation, ParkingSystem system)
         {
             InitializeComponent();
+            this.doNavigation = doNavigation;
+            this.systemParking = system;
+            this.outputErrorLbl.Text = "";
         }
     }
 }

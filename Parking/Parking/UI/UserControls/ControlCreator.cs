@@ -20,10 +20,10 @@ namespace UI.UserControls
                     return new RegisterAccountControl(doNavigation, system);
                 case NavigationOptions.ADD_BALANCE:
                     return new AccountBalanceControl(doNavigation, system);
-                //case NavigationOptions.CHECK_PURCHASE:
-                  //  return new CheckPurchaseControl(doNavigation, system);
-                //case NavigationOptions.PURCHASE_METHOD:
-                  //  return new PurchaseMethodControl(doNavigation, system);
+                case NavigationOptions.CHECK_PURCHASE:
+                    return new CheckPurchaseControl(doNavigation, system);
+                case NavigationOptions.PURCHASE_METHOD:
+                    return new PurchaseControl(doNavigation, system);
                 default:
                     return new HomeControl(doNavigation, system);
             }
