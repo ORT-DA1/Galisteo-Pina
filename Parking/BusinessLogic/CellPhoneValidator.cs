@@ -44,6 +44,17 @@ namespace BusinessLogic
             return false;
         }
 
+        public bool PhoneNumberStartWithNine()
+        {
+            var cellPhoneNumber = this.NormalizePhoneNumber(this.CellPhoneNumberToValidate);
+            if (PhoneNumberNotEmpty())
+            {
+                return Regex.IsMatch(cellPhoneNumber, "[9][0-9]{7}");
+            }
+            else
+                return false;
+        }
+
         public string NormalizePhoneNumber(string cellPhoneNumber)
         {
             return cellPhoneNumber.Replace(" ", "");
