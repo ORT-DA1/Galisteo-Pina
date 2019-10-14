@@ -6,38 +6,28 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class BalanceValidator
+    public class BalanceValidator : Validator, IValidation
     {
+        public string AmmountToValidate { get; set; }
 
-        public BalanceValidator()
+        public BalanceValidator(string ammountToValidate)
         {
+            this.AmmountToValidate = ammountToValidate;
         }
 
-        public bool BalanceIsIntegerNumber(string balance)
+        public Notification Validate()
         {
-            int integerNumber;
-            return Int32.TryParse(balance, out integerNumber);
-        }
-
-        public int NormalizedBalance(string balance)
-        {
-            return int.Parse(balance);
-        }
-
-        public bool BalanceIsPositiveNumber(string balance)
-        {
-            int normalizedBalance = this.NormalizedBalance(balance);
-            return (normalizedBalance >= 0) ? true : false;
-        }
-
-        public bool BalanceIsCorrect(string balance)
-        {
-            return BalanceIsIntegerNumber(balance) || BalanceIsPositiveNumber(balance);
+            Notification notification = new Notification();
+            if (!IsAnInteger(this.AmmountToValidate))
+                notification.AddError("Ammount has to be an integer");
+            if (!IsPositive(this.AmmountToValidate))
+                notification.AddError("Ammount has to be a positive number");
+            return notification;
         }
 
         public bool BalanceCorrectFormat(int balance)
         {
-            return(balance >= 0) ? true : false;
+            return (balance >= 0) ? true : false;
         }
     }
 }

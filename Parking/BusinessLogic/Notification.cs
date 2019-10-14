@@ -9,9 +9,10 @@ using System.Threading.Tasks;
     public class Notification
     {
         public List<string> Errors { get; set; }
-
+        public List<string> Success { get; set; }
         public Notification() {
             Errors = new List<string>();
+            Success = new List<string>();
         }
 
         public void AddError(string error)
@@ -19,6 +20,10 @@ using System.Threading.Tasks;
             Errors.Add(error);
         }
 
+        public void AddSuccess(string success)
+        {
+            Success.Add(success);
+        }
         public bool HasErrors()
         {
             return this.Errors.Count() > 0;

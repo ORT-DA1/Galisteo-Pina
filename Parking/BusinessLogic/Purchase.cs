@@ -16,7 +16,6 @@ namespace BusinessLogic
         {
             this.Sms = sms;
             this.Account = account;
-
         }
 
 

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    interface IRequestDevice
+    interface IValidation
     {
-        string InputPlate();
-        string InputMinutes();
-        DateTime InputSartingHour();
+        Notification Validate();
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    interface IRequestDevice
+    public static class ParkingCost
     {
-        string InputPlate();
-        string InputMinutes();
-        DateTime InputSartingHour();
+            public static int CostPerMinute { get; set; }
+
     }
 }
