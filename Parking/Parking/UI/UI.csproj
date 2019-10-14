@@ -64,24 +64,12 @@
     <Compile Include="UserControls\AccountBalanceControl.Designer.cs">
       <DependentUpon>AccountBalanceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CheckPurchaseControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\CheckPurchaseControl.Designer.cs">
-      <DependentUpon>CheckPurchaseControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\ControlCreator.cs" />
     <Compile Include="UserControls\HomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\HomeControl.Designer.cs">
       <DependentUpon>HomeControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\PurchaseMethodControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\PurchaseMethodControl.Designer.cs">
-      <DependentUpon>PurchaseMethodControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\RegisterAccountControl.cs">
       <SubType>UserControl</SubType>
@@ -104,14 +92,8 @@
     <EmbeddedResource Include="UserControls\AccountBalanceControl.resx">
       <DependentUpon>AccountBalanceControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\CheckPurchaseControl.resx">
-      <DependentUpon>CheckPurchaseControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\PurchaseMethodControl.resx">
-      <DependentUpon>PurchaseMethodControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\RegisterAccountControl.resx">
       <DependentUpon>RegisterAccountControl.cs</DependentUpon>
