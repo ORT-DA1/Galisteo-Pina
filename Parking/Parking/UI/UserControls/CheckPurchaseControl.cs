@@ -22,12 +22,7 @@ namespace UI.UserControls
             this.parkingSystem = system;
         }
 
-        private void UserAccountLbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CheckPurchaseControl_Load(object sender, EventArgs e)
+        private void CheckPurchaseBtn_Click(object sender, EventArgs e)
         {
 
         }

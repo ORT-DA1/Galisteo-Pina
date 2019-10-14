@@ -98,7 +98,7 @@
             // parkingValorBtn
             // 
             this.parkingValorBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.parkingValorBtn.Location = new System.Drawing.Point(959, 827);
+            this.parkingValorBtn.Location = new System.Drawing.Point(929, 818);
             this.parkingValorBtn.Name = "parkingValorBtn";
             this.parkingValorBtn.Size = new System.Drawing.Size(263, 61);
             this.parkingValorBtn.TabIndex = 9;

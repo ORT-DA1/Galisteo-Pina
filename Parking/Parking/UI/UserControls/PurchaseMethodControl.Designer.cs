@@ -91,6 +91,7 @@
             this.processPurchaseBtn.TabIndex = 8;
             this.processPurchaseBtn.Text = "Procesar Compra";
             this.processPurchaseBtn.UseVisualStyleBackColor = true;
+            this.processPurchaseBtn.Click += new System.EventHandler(this.ProcessPurchaseBtn_Click);
             // 
             // PurchaseMethodControl
             // 

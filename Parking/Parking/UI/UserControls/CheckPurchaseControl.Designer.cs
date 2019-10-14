@@ -55,7 +55,6 @@
             this.userPlateLbl.Size = new System.Drawing.Size(365, 31);
             this.userPlateLbl.TabIndex = 4;
             this.userPlateLbl.Text = "Ingrese numero de matricula:";
-            this.userPlateLbl.Click += new System.EventHandler(this.UserAccountLbl_Click);
             // 
             // userPlateTxtBox
             // 
@@ -92,6 +91,7 @@
             this.checkPurchaseBtn.TabIndex = 10;
             this.checkPurchaseBtn.Text = "Consultar Compra";
             this.checkPurchaseBtn.UseVisualStyleBackColor = true;
+            this.checkPurchaseBtn.Click += new System.EventHandler(this.CheckPurchaseBtn_Click);
             // 
             // CheckPurchaseControl
             // 
@@ -105,7 +105,6 @@
             this.Controls.Add(this.checkPurchaseLbl);
             this.Name = "CheckPurchaseControl";
             this.Size = new System.Drawing.Size(1300, 960);
-            this.Load += new System.EventHandler(this.CheckPurchaseControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

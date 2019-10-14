@@ -26,5 +26,10 @@ namespace UI.UserControls
         {
 
         }
+
+        private void ProcessPurchaseBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

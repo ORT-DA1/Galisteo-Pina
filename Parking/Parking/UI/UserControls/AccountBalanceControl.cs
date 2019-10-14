@@ -24,7 +24,7 @@ namespace UI.UserControls
 
         private void AddBalanceBtn_Click(object sender, EventArgs e)
         {
-            Notification status = new Notification();
+            Notification status;
             string userPhoneNumber = this.userAccountTxtBox.Text;
             string balanceToAdd = this.userBalanceTxtBox.Text;
             status = parkingSystem.AddAmmountToBalance(userPhoneNumber, balanceToAdd);
@@ -38,6 +38,11 @@ namespace UI.UserControls
                 this.outputErrorLbl.Text = "Saldo agregado a la cuenta: " + userPhoneNumber;
                 this.outputErrorLbl.ForeColor = Color.Green;
             }
+        }
+
+        private void AccountBalanceControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

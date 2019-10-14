@@ -21,8 +21,15 @@ namespace BusinessLogic
 
             if(!notification.HasErrors())
             {
-                AccountsRecord.Add(new Account(cellPhoneNumber));
-                notification.AddSuccess("Account was successfully created.");
+                if (!AccountAlreadyExist(cellPhoneNumber))
+                {
+                    AccountsRecord.Add(new Account(cellPhoneNumber));
+                    notification.AddSuccess("Account was successfully created.");
+                }
+                else
+                {
+                    notification.AddError("La cuenta ya existe en el sistema");
+                }
             }
 
             return notification;
@@ -57,12 +64,24 @@ namespace BusinessLogic
 
         public Account FindAccountByCellPhoneNumber(string cellPhoneNumberToMatch)
         {
-            return AccountsRecord.First(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
+            if (this.ThereAreRecordedAccounts())
+            {
+                return AccountsRecord.First(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public bool ThereAreRecordedAccounts()
         {
             return AccountsRecord.Count > 0;
+        }
+
+        public bool AccountAlreadyExist(string cellPhoneNumberToMatch)
+        {
+            return AccountsRecord.Exists(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
         }
 
     }
