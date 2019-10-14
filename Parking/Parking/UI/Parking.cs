@@ -51,15 +51,5 @@ namespace UI
         {
             DoNavigation(NavigationOptions.CHECK_PURCHASE);
         }
-
-        private void Parking_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ControlPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

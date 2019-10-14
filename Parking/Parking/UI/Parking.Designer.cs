@@ -106,7 +106,6 @@
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Size = new System.Drawing.Size(1361, 1175);
             this.controlPanel.TabIndex = 1;
-            this.controlPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ControlPanel_Paint);
             // 
             // Parking
             // 
@@ -117,7 +116,6 @@
             this.Controls.Add(this.menuPanel);
             this.Name = "Parking";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Parking_Load);
             this.menuPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
