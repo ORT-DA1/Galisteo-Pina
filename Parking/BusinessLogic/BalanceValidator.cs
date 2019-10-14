@@ -25,9 +25,6 @@ namespace BusinessLogic
             return notification;
         }
 
-        public bool BalanceCorrectFormat(int balance)
-        {
-            return (balance >= 0) ? true : false;
-        }
+
     }
 }

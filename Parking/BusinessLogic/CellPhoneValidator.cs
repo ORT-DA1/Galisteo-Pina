@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BusinessLogic
@@ -35,13 +36,12 @@ namespace BusinessLogic
         public bool PhoneNumberCorrectFormat()
         {
             var cellPhoneNumber = this.NormalizePhoneNumber(this.CellPhoneNumberToValidate);
-            bool correctFormat = false;
             if (PhoneNumberNotEmpty())
             {
-                return (PhoneNumberStartWhithZeroNine(cellPhoneNumber) && PhoneNumberLenghtIsCorrect(cellPhoneNumber)) ||
-                       (PhoneNumberStartWhithNine(cellPhoneNumber) && PhoneNumberLenghtIsCorrect(cellPhoneNumber));
+                return Regex.IsMatch(cellPhoneNumber, "[0][9][0-9]{7}")  ||
+                        Regex.IsMatch(cellPhoneNumber, "[9][0-9]{7}");
             }
-            return correctFormat;
+            return false;
         }
 
         public string NormalizePhoneNumber(string cellPhoneNumber)

@@ -22,7 +22,7 @@ namespace BusinessLogic
 
         public bool IsPositive(string isItPositive)
         {
-            return (Convert.ToInt32(isItPositive) > 0);
+            return (Decimal.Parse(isItPositive) > 0);
         }
     }
 }

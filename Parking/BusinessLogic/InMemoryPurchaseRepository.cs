@@ -17,19 +17,19 @@ namespace BusinessLogic
 
         public Notification AddPurchase(Account purchaseAccount, string sms)
         {
-            Purchase purchase;
             Sms purchaseSms = new Sms();
             purchaseSms.Initialize(sms);
             SmsValidator smsValidator = new SmsValidator(purchaseSms);
             Notification notification = smsValidator.Validate();
-            if (!purchaseAccount.AccountBalanceIsPositive())
-            {
-                notification.AddError("Insufficient balance");
-            }
+            Purchase purchase = new Purchase(purchaseSms, purchaseAccount);
+            int costOfMinutesUsed = purchase.CalculateCostForMinutesUsed();
+            AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(purchaseAccount, costOfMinutesUsed);
+            notification.AppendNotificationErrors(accountTransactionValidator.Validate());
+
             if (!notification.HasErrors())
             {
-                purchase = new Purchase(purchaseSms, purchaseAccount);
                 PurchasesRecord.Add(purchase);
+                purchaseAccount.SustractMoneyToBalance(costOfMinutesUsed);
                 notification.AddSuccess("Purchase was successfull");
             }
             return notification;

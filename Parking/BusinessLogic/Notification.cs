@@ -29,6 +29,11 @@ using System.Threading.Tasks;
             return this.Errors.Count() > 0;
         }
 
+        public bool HasSuccess()
+        {
+            return this.Success.Count() > 0;
+        }
+
         public string ErrorMessage()
         {
             string errorMessage = string.Join(".", Errors);

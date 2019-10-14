@@ -10,13 +10,17 @@ namespace BusinessLogic
     {
         protected List<Account> AccountsRecord { get; set; }
 
+        public InMemoryAccountRepository()
+        {
+            AccountsRecord = new List<Account>();
+        }
         public Notification AddAccount(string cellPhoneNumber)
         {
             CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumber);
             Notification notification = cellPhoneValidator.Validate();
 
             if(!notification.HasErrors())
-            { 
+            {
                 AccountsRecord.Add(new Account(cellPhoneNumber));
                 notification.AddSuccess("Account was successfully created.");
             }

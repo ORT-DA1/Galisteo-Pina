@@ -50,15 +50,5 @@ namespace BusinessLogic
             return notification;
         }
 
-        public bool CorrectAccountBalance(Account userAccount)
-        {
-            BalanceValidator accountBalance = new BalanceValidator();
-            return (accountBalance.BalanceCorrectFormat(userAccount.AccountBalance));
-        }
-
-        public bool SustractBalance(Account userAccount, int balanceToSustract)
-        {
-            return SelectAccountFromAccountList(userAccount).SustractMoneyToBalance(balanceToSustract);
-        }
     }
 }
