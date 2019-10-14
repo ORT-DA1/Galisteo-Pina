@@ -26,8 +26,17 @@ namespace UI.UserControls
         {
             Notification status;
             string userPhoneNumber = this.userAccountTxtBox.Text;
+<<<<<<< HEAD
             string message = this.messagePurchaseTxt.Text;
             status = parkingSystem.AddPurchase(userPhoneNumber, message);
+=======
+            string userSms = this.userSmsTxtBox.Text;
+            status = parkingSystem.AddPurchase(userPhoneNumber, userSms);
+            if (status.HasErrors())
+            {
+                this.outputErrorLbl.Text = status.ErrorMessage();
+            }
+>>>>>>> ce6a78cd05691a01fb43f166e548493e0d97dbc1
         }
     }
 }

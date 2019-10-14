@@ -24,7 +24,10 @@ namespace UI.UserControls
 
         private void CheckPurchaseBtn_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ce6a78cd05691a01fb43f166e548493e0d97dbc1
         }
     }
 }
