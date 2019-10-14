@@ -47,6 +47,11 @@ namespace BusinessLogic
 
         public string NormalizePhoneNumber(string cellPhoneNumber)
         {
+            if (this.PhoneNumberNotEmpty(cellPhoneNumber) && this.PhoneNumberStartWhitNine(cellPhoneNumber))
+            {
+                int firstElementPosition = 0;
+                cellPhoneNumber.Insert(firstElementPosition, "0");
+            }
             return cellPhoneNumber.Replace(" ", "");
         }
 
