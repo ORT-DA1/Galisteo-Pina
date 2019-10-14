@@ -10,21 +10,16 @@ using System.Windows.Forms;
 
 namespace UI.UserControls
 {
-    public partial class CheckPurchaseControl : UserControl
+    public partial class HomeControl : UserControl
     {
         private Action<int, Dictionary<string, int>> doNavigation;
-        public CheckPurchaseControl(Action<int, Dictionary<string, int>> doNavigation)
+        public HomeControl(Action<int, Dictionary<string, int>> doNavigation)
         {
             InitializeComponent();
             this.doNavigation = doNavigation;
         }
 
-        private void UserAccountLbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CheckPurchaseControl_Load(object sender, EventArgs e)
+        private void HomeControl_Load(object sender, EventArgs e)
         {
 
         }

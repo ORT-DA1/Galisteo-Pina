@@ -12,9 +12,16 @@ namespace UI.UserControls
 {
     public partial class PurchaseMethodControl : UserControl
     {
-        public PurchaseMethodControl()
+        private Action<int, Dictionary<string, int>> doNavigation;
+        public PurchaseMethodControl(Action<int, Dictionary<string, int>> doNavigation)
         {
             InitializeComponent();
+            this.doNavigation = doNavigation;
+        }
+
+        private void PurchaseMethodControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

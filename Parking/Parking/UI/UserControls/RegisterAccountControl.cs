@@ -12,9 +12,21 @@ namespace UI.UserControls
 {
     public partial class RegisterAccountControl : UserControl
     {
-        public RegisterAccountControl()
+        private Action<int, Dictionary<string, int>> doNavigation;
+        public RegisterAccountControl(Action<int, Dictionary<string, int>> doNavigation)
         {
             InitializeComponent();
+            this.doNavigation = doNavigation;
+        }
+
+        private void AddAccountBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RegisterAccountControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

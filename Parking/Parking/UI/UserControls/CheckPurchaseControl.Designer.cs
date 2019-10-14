@@ -105,6 +105,7 @@
             this.Controls.Add(this.checkPurchaseLbl);
             this.Name = "CheckPurchaseControl";
             this.Size = new System.Drawing.Size(1300, 960);
+            this.Load += new System.EventHandler(this.CheckPurchaseControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

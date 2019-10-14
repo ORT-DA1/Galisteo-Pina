@@ -12,9 +12,11 @@ namespace UI.UserControls
 {
     public partial class AccountBalanceControl : UserControl
     {
-        public AccountBalanceControl()
+        private Action<int, Dictionary<string, int>> doNavigation;
+        public AccountBalanceControl(Action<int, Dictionary<string, int>> doNavigation)
         {
             InitializeComponent();
+            this.doNavigation = doNavigation;
         }
 
         private void AccountRegisterLbl_Click(object sender, EventArgs e)
@@ -23,6 +25,11 @@ namespace UI.UserControls
         }
 
         private void UserBalanceLbl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AccountBalanceControl_Load(object sender, EventArgs e)
         {
 
         }

@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>UI.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NavigationOptions.cs" />
     <Compile Include="Parking.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +69,13 @@
     </Compile>
     <Compile Include="UserControls\CheckPurchaseControl.Designer.cs">
       <DependentUpon>CheckPurchaseControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ControlCreator.cs" />
+    <Compile Include="UserControls\HomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\HomeControl.Designer.cs">
+      <DependentUpon>HomeControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\PurchaseMethodControl.cs">
       <SubType>UserControl</SubType>
@@ -95,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CheckPurchaseControl.resx">
       <DependentUpon>CheckPurchaseControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\HomeControl.resx">
+      <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\PurchaseMethodControl.resx">
       <DependentUpon>PurchaseMethodControl.cs</DependentUpon>

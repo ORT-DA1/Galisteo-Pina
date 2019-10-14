@@ -32,7 +32,6 @@
             this.userAccountLbl = new System.Windows.Forms.Label();
             this.userAccountTxtBox = new System.Windows.Forms.TextBox();
             this.addAccountBtn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // accountRegisterLbl
@@ -72,26 +71,19 @@
             this.addAccountBtn.TabIndex = 3;
             this.addAccountBtn.Text = "Registrar Cuenta";
             this.addAccountBtn.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(186, 376);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(886, 469);
-            this.textBox1.TabIndex = 8;
+            this.addAccountBtn.Click += new System.EventHandler(this.AddAccountBtn_Click);
             // 
             // RegisterAccountControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.addAccountBtn);
             this.Controls.Add(this.userAccountTxtBox);
             this.Controls.Add(this.userAccountLbl);
             this.Controls.Add(this.accountRegisterLbl);
             this.Name = "RegisterAccountControl";
             this.Size = new System.Drawing.Size(1300, 960);
+            this.Load += new System.EventHandler(this.RegisterAccountControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,6 +95,5 @@
         private System.Windows.Forms.Label userAccountLbl;
         private System.Windows.Forms.TextBox userAccountTxtBox;
         private System.Windows.Forms.Button addAccountBtn;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }
