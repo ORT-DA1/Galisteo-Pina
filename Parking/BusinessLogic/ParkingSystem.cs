@@ -50,10 +50,5 @@ namespace BusinessLogic
             return notification;
         }
 
-        public bool AccountAlreadyExist(Account userAccount)
-        {
-            return this.AccountList.Exists(x => x.AccountCellPhoneNumber == userAccount.AccountCellPhoneNumber);
-        }
-
     }
 }

@@ -20,11 +20,24 @@ namespace UI.UserControls
             InitializeComponent();
             this.doNavigation = doNavigation;
             this.systemParking = system;
+            this.outputErrorLbl.Text = "";
         }
 
         private void AddAccountBtn_Click(object sender, EventArgs e)
         {
-
+            Notification status = new Notification();
+            string cellPhoneNumber = this.userAccountTxtBox.Text;
+            status = this.systemParking.AddAccount(cellPhoneNumber);
+            if (status.HasErrors())
+            {
+                this.outputErrorLbl.Text = "Error: " + status.ErrorMessage();
+                this.outputErrorLbl.ForeColor = Color.Red;
+            }
+            else if(status.HasSuccess())
+            {
+                this.outputErrorLbl.Text = "Usuario "+cellPhoneNumber+" ingresado correctamente.";
+                this.outputErrorLbl.ForeColor = Color.Green;
+            }
         }
 
         private void RegisterAccountControl_Load(object sender, EventArgs e)

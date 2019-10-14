@@ -24,7 +24,7 @@ namespace UI
         public void DoNavigation(int userControlCode, Dictionary<string,int> additionalParameters = null)
         {
             this.controlPanel.Controls.Clear();
-            UserControl currenUserControl = ControlCreator.CreateUserControl(userControlCode, additionalParameters, this.DoNavigation);
+            UserControl currenUserControl = ControlCreator.CreateUserControl(userControlCode, additionalParameters, this.DoNavigation, parkingSystem);
             this.controlPanel.Controls.Add(currenUserControl);
         }
         private void HomeBtn_Click(object sender, EventArgs e)
