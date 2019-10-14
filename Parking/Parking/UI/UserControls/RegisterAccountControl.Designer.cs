@@ -32,6 +32,7 @@
             this.userAccountLbl = new System.Windows.Forms.Label();
             this.userAccountTxtBox = new System.Windows.Forms.TextBox();
             this.addAccountBtn = new System.Windows.Forms.Button();
+            this.outputErrorLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // accountRegisterLbl
@@ -57,7 +58,7 @@
             // userAccountTxtBox
             // 
             this.userAccountTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userAccountTxtBox.Location = new System.Drawing.Point(538, 193);
+            this.userAccountTxtBox.Location = new System.Drawing.Point(538, 195);
             this.userAccountTxtBox.Name = "userAccountTxtBox";
             this.userAccountTxtBox.Size = new System.Drawing.Size(534, 38);
             this.userAccountTxtBox.TabIndex = 2;
@@ -73,10 +74,21 @@
             this.addAccountBtn.UseVisualStyleBackColor = true;
             this.addAccountBtn.Click += new System.EventHandler(this.AddAccountBtn_Click);
             // 
+            // outputErrorLbl
+            // 
+            this.outputErrorLbl.AutoSize = true;
+            this.outputErrorLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outputErrorLbl.Location = new System.Drawing.Point(186, 374);
+            this.outputErrorLbl.Name = "outputErrorLbl";
+            this.outputErrorLbl.Size = new System.Drawing.Size(171, 31);
+            this.outputErrorLbl.TabIndex = 4;
+            this.outputErrorLbl.Text = "Output Error:";
+            // 
             // RegisterAccountControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.outputErrorLbl);
             this.Controls.Add(this.addAccountBtn);
             this.Controls.Add(this.userAccountTxtBox);
             this.Controls.Add(this.userAccountLbl);
@@ -95,5 +107,6 @@
         private System.Windows.Forms.Label userAccountLbl;
         private System.Windows.Forms.TextBox userAccountTxtBox;
         private System.Windows.Forms.Button addAccountBtn;
+        private System.Windows.Forms.Label outputErrorLbl;
     }
 }

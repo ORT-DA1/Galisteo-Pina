@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLogic;
 
 namespace UI.UserControls
 {
     public partial class HomeControl : UserControl
     {
         private Action<int, Dictionary<string, int>> doNavigation;
-        public HomeControl(Action<int, Dictionary<string, int>> doNavigation)
+        ParkingSystem parkingSystem;
+        public HomeControl(Action<int, Dictionary<string, int>> doNavigation, ParkingSystem system)
         {
             InitializeComponent();
             this.doNavigation = doNavigation;
+            this.parkingSystem = system;
         }
 
         private void HomeControl_Load(object sender, EventArgs e)

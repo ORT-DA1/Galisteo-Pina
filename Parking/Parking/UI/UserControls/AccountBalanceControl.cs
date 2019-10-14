@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLogic;
 
 namespace UI.UserControls
 {
     public partial class AccountBalanceControl : UserControl
     {
         private Action<int, Dictionary<string, int>> doNavigation;
-        public AccountBalanceControl(Action<int, Dictionary<string, int>> doNavigation)
+        ParkingSystem parkingSystem;
+        public AccountBalanceControl(Action<int, Dictionary<string, int>> doNavigation, ParkingSystem system)
         {
             InitializeComponent();
             this.doNavigation = doNavigation;
+            this.parkingSystem = system;
         }
 
         private void AccountRegisterLbl_Click(object sender, EventArgs e)

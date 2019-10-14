@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +14,12 @@ namespace UI
 {
     public partial class Parking : Form
     {
+        ParkingSystem parkingSystem;
         public Parking()
         {
             InitializeComponent();
             DoNavigation(NavigationOptions.MAIN_MENU);
+            parkingSystem = new ParkingSystem();
         }
         public void DoNavigation(int userControlCode, Dictionary<string,int> additionalParameters = null)
         {
@@ -47,6 +50,16 @@ namespace UI
         private void CheckPurchase_Click(object sender, EventArgs e)
         {
             DoNavigation(NavigationOptions.CHECK_PURCHASE);
+        }
+
+        private void Parking_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ControlPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
