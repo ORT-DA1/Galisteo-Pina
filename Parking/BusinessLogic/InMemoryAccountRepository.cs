@@ -18,6 +18,7 @@ namespace BusinessLogic
         {
             CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumber);
             Notification notification = cellPhoneValidator.Validate();
+            cellPhoneNumber = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumber);
 
             if(!notification.HasErrors())
             {

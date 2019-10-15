@@ -55,11 +55,17 @@ namespace BusinessLogic
 
         public string NormalizePhoneNumber(string cellPhoneNumber)
         {
+            return cellPhoneNumber.Replace(" ", "");
+        }
+
+        public string StandarPhoneNumber(string cellPhoneNumber)
+        {
+            cellPhoneNumber = NormalizePhoneNumber(cellPhoneNumber);
             if (PhoneNumberStartWithNine())
             {
                 cellPhoneNumber = $"{0}{cellPhoneNumber}";
             }
-            return cellPhoneNumber.Replace(" ", "");
+            return cellPhoneNumber;
         }
         
     }
