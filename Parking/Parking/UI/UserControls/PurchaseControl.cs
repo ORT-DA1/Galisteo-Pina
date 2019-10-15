@@ -22,5 +22,31 @@ namespace UI.UserControls
             this.systemParking = system;
             this.outputErrorLbl.Text = "";
         }
+
+        private void PurchaseMethodBtn_Click(object sender, EventArgs e)
+        {
+            Notification status;
+            string userPhoneNumber = this.userAccountTxtBox.Text;
+            string userSms = this.smsTxtBox.Text;
+            try
+            {
+                status = systemParking.AddPurchase(userPhoneNumber, userSms);
+                if (status.HasErrors())
+                {
+                    this.outputErrorLbl.Text = "Error: " + status.ErrorMessage();
+                    this.outputErrorLbl.ForeColor = Color.Red;
+                }
+                if (status.HasSuccess())
+                {
+                    this.outputErrorLbl.Text = status.SuccessMessage();
+                    this.outputErrorLbl.ForeColor = Color.Green;
+                }
+            }
+            catch(InvalidOperationException ex)
+            {
+                this.outputErrorLbl.Text = "Error: " + ex.Message;
+                this.outputErrorLbl.ForeColor = Color.Red;
+            }
+        }
     }
 }

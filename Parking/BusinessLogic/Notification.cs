@@ -36,8 +36,14 @@ using System.Threading.Tasks;
 
         public string ErrorMessage()
         {
-            string errorMessage = string.Join(".", Errors);
+            string errorMessage = string.Join(".\n", Errors);
             return errorMessage;
+        }
+
+        public string SuccessMessage()
+        {
+            string successMessage = string.Join(".\n", Success);
+            return successMessage;
         }
 
         public void AppendNotificationErrors(Notification notification)

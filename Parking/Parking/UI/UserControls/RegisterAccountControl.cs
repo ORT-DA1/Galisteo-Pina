@@ -35,7 +35,7 @@ namespace UI.UserControls
             }
             else if(status.HasSuccess())
             {
-                this.outputErrorLbl.Text = "Usuario "+cellPhoneNumber+" ingresado correctamente.";
+                this.outputErrorLbl.Text = this.outputErrorLbl.Text = status.SuccessMessage();
                 this.outputErrorLbl.ForeColor = Color.Green;
             }
         }

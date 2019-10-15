@@ -66,7 +66,7 @@ namespace BusinessLogic
         {
             if (this.ThereAreRecordedAccounts())
             {
-                return AccountsRecord.First(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
+                return AccountsRecord.FirstOrDefault(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
             }
             else
             {

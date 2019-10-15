@@ -64,7 +64,7 @@ namespace BusinessLogicTest
             string error2 = "And i am error number 2";
             notification.AddError(error1);
             notification.AddError(error2);
-            Assert.AreEqual(notification.ErrorMessage(), $"{error1}.{error2}");
+            Assert.AreEqual(notification.ErrorMessage(), $"{error1}.\n{error2}");
         }
     }
 }

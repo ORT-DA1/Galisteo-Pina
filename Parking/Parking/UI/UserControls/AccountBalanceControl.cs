@@ -20,6 +20,7 @@ namespace UI.UserControls
             InitializeComponent();
             this.doNavigation = doNavigation;
             this.parkingSystem = system;
+            this.outputErrorLbl.Text = "";
         }
 
         private void AddBalanceBtn_Click(object sender, EventArgs e)
@@ -35,7 +36,7 @@ namespace UI.UserControls
             }
             else if (status.HasSuccess())
             {
-                this.outputErrorLbl.Text = "Saldo agregado a la cuenta: " + userPhoneNumber;
+                this.outputErrorLbl.Text = status.SuccessMessage();
                 this.outputErrorLbl.ForeColor = Color.Green;
             }
         }

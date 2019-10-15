@@ -22,5 +22,23 @@ namespace UI.UserControls
             this.systemParking = system;
             this.outputErrorLbl.Text = "";
         }
+
+        private void CheckPurchaseBtn_Click(object sender, EventArgs e)
+        {
+            Notification status;
+            string userPlate = this.userPlateTxtBox.Text;
+            string hourToCheck = this.dateTimePicker.Value.ToString();
+            status = systemParking.AnyPurchaseMatchesPlateAndHour(userPlate, hourToCheck);
+            if (status.HasErrors())
+            {
+                this.outputErrorLbl.Text = "Error: " + status.ErrorMessage();
+                this.outputErrorLbl.ForeColor = Color.Red;
+            }
+            else if (status.HasSuccess())
+            {
+                this.outputErrorLbl.Text = status.SuccessMessage();
+                this.outputErrorLbl.ForeColor = Color.Green;
+            }
+        }
     }
 }
