@@ -25,7 +25,8 @@ namespace BusinessLogicTest
         public void ValidateCorrectTest()
         {
             Notification notification;
-            string message = "ABC 1234 120 16:00";
+            DateTime hourForTest = DateTime.Now.AddMinutes(1);
+            string message = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
             sms.Initialize(message);
             smsValidator = new SmsValidator(sms);
             notification = smsValidator.Validate();
@@ -131,8 +132,8 @@ namespace BusinessLogicTest
         public void StartingHourIsForTodayTrueTest()
         {
 
-            string startingHour = "12:00";
-            sms.StartingHour = DateTime.Parse(startingHour);
+            DateTime startingHour = DateTime.Now;
+            sms.StartingHour = startingHour;
             smsValidator = new SmsValidator(sms);
             Assert.IsTrue(smsValidator.IsHourForToday());
 

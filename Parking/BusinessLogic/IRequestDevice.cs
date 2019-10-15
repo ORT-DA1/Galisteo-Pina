@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    interface IRequestDevice
+    public interface IRequestDevice
     {
-        string InputPlate();
-        string InputMinutes();
-        DateTime InputSartingHour();
+        string Plates { get; set; }
+        string Minutes { get; set; }
+  
+        DateTime StartingHour { get; set; }
+
+        DateTime EndingHour { get; set; }
+
+        DateTime LowerHourLimit { get; set; }
+
+        DateTime UpperHourLimit { get; set; }
     }
 }

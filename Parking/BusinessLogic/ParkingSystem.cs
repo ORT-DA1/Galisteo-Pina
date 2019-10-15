@@ -52,7 +52,7 @@ namespace BusinessLogic
             return notification;
         }
 
-        public Notification AdjustParkingCostPerMinute(int newCostPerMinute) //Validar
+        public Notification AdjustParkingCostPerMinute(int newCostPerMinute)
         {
             ParkingCost.CostPerMinute = newCostPerMinute;
             Notification notification = new Notification();

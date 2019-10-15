@@ -12,6 +12,10 @@ namespace BusinessLogic
     {
        public string CellPhoneNumberToValidate { get; set; }
 
+        public CellPhoneValidator()
+        {
+        }
+
         public CellPhoneValidator(string cellPhoneNumber)
         {
             this.CellPhoneNumberToValidate = cellPhoneNumber;

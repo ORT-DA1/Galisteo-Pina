@@ -19,13 +19,14 @@ namespace BusinessLogic
             this.Sms = sms;
             this.Account = account;
         }
-
         public int CalculateCostForMinutesUsed()
         {
             TimeSpan parkingTimeUsed = Sms.EndingHour.Subtract(Sms.StartingHour);
             int minutesUsed = Convert.ToInt32(parkingTimeUsed.TotalMinutes);
             return minutesUsed;
         }
+
+
 
 
     }

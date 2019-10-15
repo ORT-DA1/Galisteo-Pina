@@ -24,7 +24,8 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AddPurchaseTrueTest()
         {
-            string sms = "ABC 1234 120 16:00";
+            DateTime hourForTest = DateTime.Now.AddMinutes(1);
+            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
             Account account = new Account("098 712 712", 200);
             purchases.AddPurchase(account, sms);
             Assert.IsTrue(purchases.PurchasesRecord.Count == 1);
@@ -42,7 +43,8 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ThereAreRecordedPurchasesTrueTest()
         {
-            string sms = "ABC 1234 120 16:00";
+            DateTime hourForTest = DateTime.Now.AddMinutes(1);
+            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
             Account account = new Account("098 712 712", 200);
             purchases.AddPurchase(account, sms);
             Assert.IsTrue(purchases.ThereAreRecordedPurchases());
@@ -58,7 +60,8 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AnyPurchaseMatchesAndHourPlateTrueTest()
         {
-            string sms = "ABC 1234 120 16:00";
+            DateTime hourForTest = DateTime.Now.AddMinutes(1);
+            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
             Account account = new Account("098 712 712", 200);
             purchases.AddPurchase(account, sms);
             Assert.IsTrue(purchases.AnyPurchaseMatchesPlateAndDateTime("ABC1234", "17:00"));
