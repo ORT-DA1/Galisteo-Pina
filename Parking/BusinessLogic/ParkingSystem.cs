@@ -42,6 +42,16 @@ namespace BusinessLogic
             return notification;
         }
 
+        public Notification AnyPurchaseMatchesPlateAndHour(string plates, string dateToCompare)
+        {
+            Notification notification = new Notification();
+            if (PurchaseRepository.AnyPurchaseMatchesPlateAndDateTime(plates, dateToCompare))
+                notification.AddSuccess("There is an existing parking purchase for that plate and hour");
+            else
+                notification.AddError("No result found");
+            return notification;
+        }
+
         public Notification AdjustParkingCostPerMinute(int newCostPerMinute) //Validar
         {
             ParkingCost.CostPerMinute = newCostPerMinute;

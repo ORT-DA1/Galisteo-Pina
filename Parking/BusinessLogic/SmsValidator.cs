@@ -42,7 +42,7 @@ namespace BusinessLogic
 
         public bool ValidateMinutes()
         {
-            return IsAnInteger() && IsPositive() && IsMultipleOf30();
+            return IsItAnInteger() && IsPositive() && IsMultipleOf30();
         }
 
         public bool IsMultipleOf30()
@@ -50,9 +50,9 @@ namespace BusinessLogic
             return (Convert.ToInt32(SmsToValidate.Minutes) % 30 == 0);
         }
 
-        public bool IsAnInteger()
+        public bool IsItAnInteger()
         {
-            return !(SmsToValidate.Minutes.Contains("."));
+            return IsAnInteger(SmsToValidate.Minutes);
         }
 
         public bool IsPositive()
@@ -79,10 +79,7 @@ namespace BusinessLogic
             return DateTime.Now <= SmsToValidate.StartingHour;
         }
 
-        public DateTime AdjustTimeToAccountForTransactionTime(DateTime toAdjust)
-        {
-            return toAdjust.AddSeconds(-10);
-        }
+
 
     }
 }

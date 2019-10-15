@@ -73,7 +73,16 @@ namespace BusinessLogic
 
         public string Extract(string[] splitMessage, string regexPattern)
         {
-            return splitMessage.FirstOrDefault(s => Regex.IsMatch(s, regexPattern));
+            string extractedText = "";
+            try
+            {
+                extractedText = splitMessage.First(s => Regex.IsMatch(s, regexPattern));
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw ex;
+            }
+            return extractedText;
         }
 
         public string ExtractPlates(string[] splitMessage)

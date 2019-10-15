@@ -43,7 +43,8 @@ namespace BusinessLogic
         public bool AnyPurchaseMatchesPlateAndDateTime(string plates, string dateToCompare)
         {
             DateTime date = DateTime.Parse(dateToCompare);
-            return PurchasesRecord.Any(purchase => purchase.Sms.Plates == plates && (purchase.Sms.StartingHour <= date && purchase.Sms.EndingHour >= date));
+            return PurchasesRecord.Any(purchase => purchase.Sms.Plates == plates && 
+                    (purchase.Sms.StartingHour <= date && purchase.Sms.EndingHour >= date));
         }
 
 

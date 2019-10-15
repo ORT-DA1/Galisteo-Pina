@@ -56,8 +56,9 @@
     <Compile Include="CellPhoneNumberValidatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BalanceValidatorTest.cs" />
-    <Compile Include="AccountValidatorTest.cs" />
+    <Compile Include="AccountTransactionValidatorTest.cs" />
     <Compile Include="ParkingSystemTest.cs" />
+    <Compile Include="SmsValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
