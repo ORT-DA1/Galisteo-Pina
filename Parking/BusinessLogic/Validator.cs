@@ -22,7 +22,8 @@ namespace BusinessLogic
 
         public bool IsPositive(string isItPositive)
         {
-            return (Decimal.Parse(isItPositive) > 0);
+            Decimal decimalNumber;
+            return (Decimal.TryParse(isItPositive, out decimalNumber) && decimalNumber > 0);
         }
     }
 }

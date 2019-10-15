@@ -1,64 +1,42 @@
-﻿//using System;
-//using BusinessLogic;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using BusinessLogic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-//namespace BusinessLogicTest
-//{
-//    [TestClass]
-//    public class AccountValidatorTest
-//    {
-//        [TestMethod]
-//        public void AccountCellPhoneNumberIsNotEmptyTest()
-//        {
-//            Account userAccount = new Account("098960505", 0);
-//            Assert.IsTrue(userAccount.AccountCellPhoneNumberIsEmpty());
-//        }
+namespace BusinessLogicTest
+{
+    [TestClass]
+    public class AccountTransactionValidatorTest
+    {
+        [TestMethod]
+        public void AccountHasBalanceForTransactionTrueTest()
+        {
+            Account userAccount = new Account("098960505", 150);
+            AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(userAccount, 100);
+            Assert.IsTrue(accountTransactionValidator.AccountHasBalanceForTransaction());
+        }
+        
+        [TestMethod]
+        public void AccountHasBalanceForTransactionFalseTest()
+        {
+            Account userAccount = new Account("098960505", 150);
+            AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(userAccount, 250);
+            Assert.IsFalse(accountTransactionValidator.AccountHasBalanceForTransaction());
+        }
 
-//        [TestMethod]
-//        public void AccountCellPhoneNumberIsEmptyTest()
-//        {
-//            Account userAccount = new Account("", 0);
-//            Assert.IsFalse(userAccount.AccountCellPhoneNumberIsEmpty());
-//        }
+        [TestMethod]
+        public void ValidateNoErrorsTest()
+        {
+            Account userAccount = new Account("098960505", 350);
+            AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(userAccount, 250);
+            Assert.IsFalse(accountTransactionValidator.Validate().HasErrors());
+        }
 
-//        [TestMethod]
-//        public void AccountCellPhoneNumberFormatIsCorrectTest()
-//        {
-//            Account userAccount = new Account("098960505", 0);
-//            Assert.IsTrue(userAccount.AccountCellPhoneNumberFormatIsCorrect());
-//        }
-
-//        [TestMethod]
-//        public void AccountCellPhoneNumberFormatIsIncorrectTest()
-//        {
-//            Account userAccount = new Account("0928960505", 0);
-//            Assert.IsFalse(userAccount.AccountCellPhoneNumberFormatIsCorrect());
-//        }
-
-//        [TestMethod]
-//        public void AccountBalanceIsPositiveTest()
-//        {
-//            Account userAccount = new Account("098960505", 0);
-//            Assert.IsTrue(userAccount.AccountBalanceIsPositive());
-//        }
-
-//        [TestMethod]
-//        public void AccountBalanceAddMoneyTest()
-//        {
-//            int moneyToAdd = 10;
-//            Account userAccount = new Account("098960505", 0);
-//            userAccount.AddMoneyToBalance(moneyToAdd);
-//            Assert.AreEqual(moneyToAdd, userAccount.AccountBalance);
-//        }
-
-//        [TestMethod]
-//        public void AccountBalanceSustractMoneyTest()
-//        {
-//            int moneyToSustract = 10;
-//            Account userAccount = new Account("098960505", 0);
-//            userAccount.AccountBalance = 10;
-//            Assert.IsTrue(userAccount.SustractMoneyToBalance(moneyToSustract));
-//            Assert.AreEqual(0, userAccount.AccountBalance);
-//        }
-//    }
-//}
+        [TestMethod]
+        public void ValidateNoErrorsFalseTest()
+        {
+            Account userAccount = new Account("098960505", 150);
+            AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(userAccount, 300 );
+            Assert.IsTrue(accountTransactionValidator.Validate().HasErrors());
+        }
+    }
+}

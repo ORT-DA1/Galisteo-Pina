@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    class AccountTransactionValidator:Validator, IValidation
+    public class AccountTransactionValidator:Validator, IValidation
     {
         public Account AccountToValidate { get; set; }
         public int TransactionSum { get; set; }
@@ -30,4 +30,5 @@ namespace BusinessLogic
             return AccountToValidate.AccountBalance - TransactionSum >= 0;
         }
     }
+
 }
