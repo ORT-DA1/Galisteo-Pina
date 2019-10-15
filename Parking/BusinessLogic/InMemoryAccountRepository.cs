@@ -39,6 +39,9 @@ namespace BusinessLogic
         public Notification AddBalanceToAccount(string cellPhoneNumber, string ammount)
         {
             Notification notification = new Notification();
+            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumber);
+            notification = cellPhoneValidator.Validate();
+            cellPhoneNumber = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumber);
             Account account = FindAccountByCellPhoneNumber(cellPhoneNumber);
             if (account == null)
             {
@@ -65,6 +68,8 @@ namespace BusinessLogic
 
         public Account FindAccountByCellPhoneNumber(string cellPhoneNumberToMatch)
         {
+            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumberToMatch);
+            cellPhoneNumberToMatch = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumberToMatch);
             if (this.ThereAreRecordedAccounts())
             {
                 return AccountsRecord.FirstOrDefault(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
@@ -82,6 +87,8 @@ namespace BusinessLogic
 
         public bool AccountAlreadyExist(string cellPhoneNumberToMatch)
         {
+            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumberToMatch);
+            cellPhoneNumberToMatch = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumberToMatch);
             return AccountsRecord.Exists(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
         }
 
