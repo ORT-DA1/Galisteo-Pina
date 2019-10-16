@@ -29,17 +29,39 @@ namespace BusinessLogic
             return notification;
         }
 
-        public Notification AddPurchase(string cellPhoneNumber, string sms)
+        public Notification AddPurchase(Purchase purchase)
         {
-            Account account = AccountRepository.FindAccountByCellPhoneNumber(cellPhoneNumber);
             Notification notification = new Notification();
-            if (account == null)
-            {
-                notification.AddError("The account does not exist");
-                return notification;
-            }
-                notification = PurchaseRepository.AddPurchase(account, sms);
+  
+            notification = PurchaseRepository.AddPurchase(purchase);
             return notification;
+        }
+
+        public Notification IsRegisteredNumber(string cellPhoneNumber)
+        {
+            Notification notification = new Notification();
+            if (!AccountRepository.AccountAlreadyExists(cellPhoneNumber))
+                notification.AddError("Móvil no registrado");
+            return notification;
+
+        }
+
+        public Account GetAccountByPhoneNumber(string cellPhoneNumber)
+        {
+            return AccountRepository.FindAccountByCellPhoneNumber(cellPhoneNumber);
+        }
+
+        public Sms FormatSmsForPurchase(string sms)
+        {
+            Sms purchaseSms = new Sms();
+            purchaseSms.Initialize(sms);
+            return purchaseSms;
+        }
+
+        public Notification ValidateSms(Sms smsToValidate)
+        {
+            SmsValidator smsValidator = new SmsValidator(smsToValidate);
+            return smsValidator.Validate();
         }
 
         public Notification AnyPurchaseMatchesPlateAndHour(string plates, string dateToCompare)

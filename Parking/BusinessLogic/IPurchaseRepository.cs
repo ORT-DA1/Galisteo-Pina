@@ -8,7 +8,7 @@ namespace BusinessLogic
 {
     public interface IPurchaseRepository
     {
-        Notification AddPurchase(Account account, string purchaseMessage);
+        Notification AddPurchase(Purchase purchase);
         bool ThereAreRecordedPurchases();
         bool AnyPurchaseMatchesPlateAndDateTime(string plateToMatch, string dateToMatch);
 

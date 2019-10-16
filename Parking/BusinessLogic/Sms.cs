@@ -136,9 +136,21 @@ namespace BusinessLogic
             return this.StartingHour;
         }
 
+        public override bool Equals(object obj)
+        {
+            var sms = obj as Sms;
+            if (sms == null)
+                return false;
+            return this.Plates == sms.Plates && this.Minutes == sms.Minutes && this.StartingHour == sms.StartingHour;
+        }
 
-
-
+        public override int GetHashCode()
+        {
+            var hash = 11;
+            hash = (hash * 11) + this.Plates.GetHashCode();
+            hash = (hash * 11) + this.Minutes.GetHashCode();
+            return hash;
+        }
 
     }
 }

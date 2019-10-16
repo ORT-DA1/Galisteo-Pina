@@ -9,6 +9,5 @@ namespace BusinessLogic
     public static class ParkingCost
     {
             public static int CostPerMinute { get; set; }
-
     }
 }

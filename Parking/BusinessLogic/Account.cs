@@ -28,7 +28,7 @@ namespace BusinessLogic
         }
 
 
-        public bool SustractMoneyToBalance(int moneyToSustract)
+        public bool SubstractMoneyFromBalance(int moneyToSustract)
         {
             bool success = false;
             if(this.AccountBalance - moneyToSustract >= 0)

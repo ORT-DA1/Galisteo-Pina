@@ -50,6 +50,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountTest.cs" />
     <Compile Include="NotificationTest.cs" />
     <Compile Include="InMemoryPurchaseRepositoryTest.cs" />
     <Compile Include="SmsTest.cs" />
@@ -59,6 +60,8 @@
     <Compile Include="AccountTransactionValidatorTest.cs" />
     <Compile Include="ParkingSystemTest.cs" />
     <Compile Include="SmsValidatorTest.cs" />
+    <Compile Include="PurchaseTest.cs" />
+    <Compile Include="InMemoryAccountRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

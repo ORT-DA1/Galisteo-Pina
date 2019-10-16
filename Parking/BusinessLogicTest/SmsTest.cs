@@ -19,7 +19,6 @@ namespace BusinessLogicTest
             DateTime lowerLimit = DateTime.Parse("10:00");
             DateTime upperLimit = DateTime.Parse("18:00");
             sms = new Sms(lowerLimit, upperLimit);
-
         }
 
 

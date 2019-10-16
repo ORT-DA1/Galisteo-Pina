@@ -26,21 +26,23 @@ namespace UI.UserControls
         private void PurchaseMethodBtn_Click(object sender, EventArgs e)
         {
             Notification status;
+            Sms purchaseSms;
             string userPhoneNumber = this.userAccountTxtBox.Text;
             string userSms = this.smsTxtBox.Text;
             try
             {
-                status = systemParking.AddPurchase(userPhoneNumber, userSms);
-                if (status.HasErrors())
+                purchaseSms = systemParking.FormatSmsForPurchase(userSms);
+                status = systemParking.ValidateSms(purchaseSms);
+                status.AppendNotificationErrors(systemParking.IsRegisteredNumber(userPhoneNumber));
+
+                if (!status.HasErrors())
                 {
-                    this.outputErrorLbl.Text = "Error: " + status.ErrorMessage();
-                    this.outputErrorLbl.ForeColor = Color.Red;
+                    Account purchaseAccount = systemParking.GetAccountByPhoneNumber(userPhoneNumber);
+                    status = systemParking.AddPurchase(new Purchase(purchaseSms, purchaseAccount));
                 }
-                if (status.HasSuccess())
-                {
-                    this.outputErrorLbl.Text = status.SuccessMessage();
-                    this.outputErrorLbl.ForeColor = Color.Green;
-                }
+                this.outputErrorLbl.Text = status.HasErrors()?$"Error: {status.Message()}":status.Message();
+                this.outputErrorLbl.ForeColor = status.HasErrors()? Color.Red:Color.Green;
+
             }
             catch(InvalidOperationException ex)
             {

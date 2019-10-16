@@ -16,8 +16,8 @@ namespace BusinessLogicTest
         [TestInitialize]
         public void TestInitialize()
         {
-            DateTime lowerLimit = DateTime.Parse("10:00");
-            DateTime upperLimit = DateTime.Parse("18:00");
+            DateTime lowerLimit = DateTime.Now;
+            DateTime upperLimit = lowerLimit.AddHours(8);
             sms = new Sms(lowerLimit, upperLimit);
         }
 
@@ -25,7 +25,7 @@ namespace BusinessLogicTest
         public void ValidateCorrectTest()
         {
             Notification notification;
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
+            DateTime hourForTest = DateTime.Now.AddMinutes(5);
             string message = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
             sms.Initialize(message);
             smsValidator = new SmsValidator(sms);
@@ -113,8 +113,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void IsWithinRangeOfHoursTrueTest()
         {
-            string startingHour = "10:30";
-            sms.StartingHour = DateTime.Parse(startingHour);
+            sms.StartingHour = DateTime.Now.AddMinutes(5);
             smsValidator = new SmsValidator(sms);
             Assert.IsTrue(smsValidator.IsWithinRangeOfHours());
         }
@@ -122,8 +121,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void IsWithinRangeOfHoursFalseTest()
         {
-            string startingHour = "09:30";
-            sms.StartingHour = DateTime.Parse(startingHour);
+            sms.StartingHour = DateTime.Now.AddMinutes(-5);
             smsValidator = new SmsValidator(sms);
             Assert.IsFalse(smsValidator.IsWithinRangeOfHours());
         }
@@ -142,7 +140,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void StartingHourIsForTodayFalseTest()
         {
-            TimeSpan timeSpan = new TimeSpan(0,5, 0);
+            TimeSpan timeSpan = new TimeSpan(0,5,0);
             DateTime startingHour = DateTime.Now.Subtract(timeSpan);
             sms.StartingHour = startingHour;
             smsValidator = new SmsValidator(sms);

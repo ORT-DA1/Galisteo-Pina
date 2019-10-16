@@ -8,19 +8,35 @@ namespace BusinessLogicTest
     [TestClass]
     public class ParkingSystemTest
     {
-
+        ParkingSystem system;
         Notification notification;
+        Purchase purchase;
+        Sms sms;
+        Account account;
+        DateTime hourForTest;
+        DateTime lowerLimit;
+        DateTime upperLimit;
 
         [TestInitialize]
         public void Initialize()
         {
+            system = new ParkingSystem();
             notification = new Notification();
+            lowerLimit = DateTime.Now;
+            upperLimit = lowerLimit.AddHours(8);
+            sms = new Sms(lowerLimit, upperLimit);
+            account = new Account("098960505");
+            account.AddMoneyToBalance("200");
+            hourForTest = DateTime.Now.AddMinutes(5);
+            string smsMessage = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
+            sms.Initialize(smsMessage);
+            purchase = new Purchase(sms, account);
+               
         }
 
         [TestMethod]
         public void AddAccountTest()
         {
-            ParkingSystem system = new ParkingSystem();
             system.AddAccount("099270471");
             Assert.IsTrue(system.AccountRepository.ThereAreRecordedAccounts());
         }
@@ -28,7 +44,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AddAccountFalseWrongCellphoneFormatTest()
         {
-            ParkingSystem system = new ParkingSystem();
             system.AddAccount("9270471");
             Assert.IsFalse(system.AccountRepository.ThereAreRecordedAccounts());
         }
@@ -37,7 +52,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void SystemAddBalanceTest()
         {
-            ParkingSystem system = new ParkingSystem();
             system.AddAccount("098960505");
             system.AddAmmountToBalance("098960505", "100");
             Account account = system.AccountRepository.FindAccountByCellPhoneNumber("098960505");
@@ -47,7 +61,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void SystemAddBalanceZeroTest()
         {
-            ParkingSystem system = new ParkingSystem();
             system.AddAccount("098960505");
             system.AddAmmountToBalance("098960505", "");
             Account account = system.AccountRepository.FindAccountByCellPhoneNumber("098960505");
@@ -57,7 +70,6 @@ namespace BusinessLogicTest
         [TestMethod]
         public void SystemAddBalanceNegativeTest()
         {
-            ParkingSystem system = new ParkingSystem();
             system.AddAccount("098960505");
             system.AddAmmountToBalance("098960505", "-100");
             Account account = system.AccountRepository.FindAccountByCellPhoneNumber("098960505");
@@ -68,60 +80,93 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AddPurchaseTrueTest()
         {
-            ParkingSystem system = new ParkingSystem();
-            system.AddAccount("098960505");
-            system.AddAmmountToBalance("098960505", "200");
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            system.AddPurchase("098960505", sms);
+            system.AddPurchase(purchase);
             Assert.IsTrue(system.PurchaseRepository.ThereAreRecordedPurchases());
         }
 
         [TestMethod]
         public void AddPurchaseNoStartingHourTrueTest()
         {
-            ParkingSystem system = new ParkingSystem();
-            system.AddAccount("098960505");
-            system.AddAmmountToBalance("098960505", "200");
-            system.AddPurchase("098960505", "ABC 1234 120");
+            string smsMessage = "ABC 1234 120";
+            sms.Initialize(smsMessage);
+            purchase = new Purchase(sms, account);
+            system.AddPurchase(purchase);
             Assert.IsTrue(system.PurchaseRepository.ThereAreRecordedPurchases());
-
         }
 
         [TestMethod]
         public void AddPurchaseNoBalanceFalseTest()
         {
-            ParkingSystem system = new ParkingSystem();
-            system.AddAccount("098960505");
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            system.AddPurchase("098960505", sms);
+            account = new Account("098960505");
+            string smsMessage = "ABC 1234 120";
+            sms.Initialize(smsMessage);
+            purchase = new Purchase(sms, account);
+            system.AddPurchase(purchase);
             Assert.IsFalse(system.PurchaseRepository.ThereAreRecordedPurchases());
 
         }
 
         [TestMethod]
-        public void AddPurchaseWrongHourFalseTest()
+        public void FormatSmsForPurchase()
         {
-            ParkingSystem system = new ParkingSystem();
-            system.AddAccount("098960505");
-            system.AddAmmountToBalance("098960505", "200");
-            DateTime hourForTest = DateTime.Now.AddMinutes(-1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            system.AddPurchase("098960505", sms);
-            Assert.IsFalse(system.PurchaseRepository.ThereAreRecordedPurchases());
-
+            string smsMessage = $"ABC 1234 120 14:00";
+            Sms sms = system.FormatSmsForPurchase(smsMessage);
+            Sms smsToCompare = new Sms();
+            smsToCompare.Plates = "ABC1234";
+            smsToCompare.Minutes = "120";
+            smsToCompare.StartingHour = DateTime.Parse("14:00");
+            smsToCompare.EndingHour = DateTime.Parse("16:00");
+            Assert.AreEqual(sms, smsToCompare);
         }
+
+        [TestMethod]
+        public void ValidateSmsTest()
+        {
+            Assert.IsFalse(system.ValidateSms(sms).HasErrors());
+        }
+
+        [TestMethod]
+        public void IsRegisteredNumberTrueTest()
+        {
+            system.AddAccount("098125342");
+            notification = system.IsRegisteredNumber("098125342");
+            Assert.IsTrue(!notification.HasErrors());
+        }
+
+        [TestMethod]
+        public void IsRegisteredNumberFalseTest()
+        {
+            system.AddAccount("098125342");
+            notification = system.IsRegisteredNumber("098888888");
+            Assert.IsTrue(notification.HasErrors());
+        }
+
+        [TestMethod]
+        public void IsRegisteredNumberNoAccountsInSystemFalseTest()
+        {
+            notification = system.IsRegisteredNumber("098888888");
+            Assert.IsTrue(notification.HasErrors());
+        }
+
+        [TestMethod]
+        public void GetAccountByPhoneNumberTrueTest()
+        {
+            system.AddAccount("098125342");
+            Assert.IsTrue(system.GetAccountByPhoneNumber("098125342").AccountCellPhoneNumber == "098125342");
+        }
+
+        [TestMethod]
+        public void GetAccountByPhoneNumberTest()
+        {
+            system.AddAccount("098125342");
+            Assert.IsTrue(system.GetAccountByPhoneNumber("098111222") == null);
+        }
+
 
         [TestMethod]
         public void AnyPurchaseMatchesPlatesAndHourTrueTest()
         {
-            ParkingSystem system = new ParkingSystem();
-            system.AddAccount("098960505");
-            system.AddAmmountToBalance("098960505", "200");
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            system.AddPurchase("098960505", sms);
+            system.AddPurchase(purchase);
             Assert.IsTrue(system.AnyPurchaseMatchesPlateAndHour("ABC1234", hourForTest.ToString("HH:mm")).HasSuccess());
 
         }
@@ -129,25 +174,15 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AnyPurchaseMatchesPlatesAndHourWrongPlateFalseTest()
         {
-            ParkingSystem system = new ParkingSystem();
-            system.AddAccount("098960505");
-            system.AddAmmountToBalance("098960505", "200");
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            system.AddPurchase("098960505", sms);
-            Assert.IsFalse(system.AnyPurchaseMatchesPlateAndHour("JVC1234", hourForTest.ToString("HH:mm")).HasSuccess());
+            system.AddPurchase(purchase);
+            Assert.IsFalse(system.AnyPurchaseMatchesPlateAndHour("JVC5432", hourForTest.ToString("HH:mm")).HasSuccess());
 
         }
 
         [TestMethod]
         public void AnyPurchaseMatchesEmptyPlatesFalseTest()
         {
-            ParkingSystem system = new ParkingSystem();
-            system.AddAccount("098960505");
-            system.AddAmmountToBalance("098960505", "200");
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            system.AddPurchase("098960505", sms);
+            system.AddPurchase(purchase);
             Assert.IsFalse(system.AnyPurchaseMatchesPlateAndHour("", hourForTest.ToString("HH:mm")).HasSuccess());
 
         }
@@ -155,14 +190,16 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AnyPurchaseMatchesEmptyHourFalseTest()
         {
-            ParkingSystem system = new ParkingSystem();
-            system.AddAccount("098960505");
-            system.AddAmmountToBalance("098960505", "200");
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            system.AddPurchase("098960505", sms);
+            system.AddPurchase(purchase);
             Assert.ThrowsException<FormatException>(() => system.AnyPurchaseMatchesPlateAndHour("ABC1234", "").HasSuccess());
-     
+
+        }
+
+        [TestMethod]
+        public void AdjustParkingCostPerMinuteTest()
+        {
+            system.AdjustParkingCostPerMinute(2);
+            Assert.AreEqual(ParkingCost.CostPerMinute, 2);
         }
     }
 }

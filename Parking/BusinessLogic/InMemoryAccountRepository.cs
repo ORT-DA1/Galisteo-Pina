@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class InMemoryAccountRepository:IAccountRepository
+    public class InMemoryAccountRepository : IAccountRepository
     {
         protected List<Account> AccountsRecord { get; set; }
 
@@ -14,18 +14,19 @@ namespace BusinessLogic
         {
             AccountsRecord = new List<Account>();
         }
+
         public Notification AddAccount(string cellPhoneNumber)
         {
             CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumber);
             Notification notification = cellPhoneValidator.Validate();
             cellPhoneNumber = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumber);
 
-            if(!notification.HasErrors())
+            if (!notification.HasErrors())
             {
-                if (!AccountAlreadyExist(cellPhoneNumber))
+                if (!AccountAlreadyExists(cellPhoneNumber))
                 {
                     AccountsRecord.Add(new Account(cellPhoneNumber));
-                    notification.AddSuccess("Account was successfully created.");
+                    notification.AddSuccess("Cuenta creada con éxito");
                 }
                 else
                 {
@@ -70,14 +71,7 @@ namespace BusinessLogic
         {
             CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumberToMatch);
             cellPhoneNumberToMatch = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumberToMatch);
-            if (this.ThereAreRecordedAccounts())
-            {
-                return AccountsRecord.FirstOrDefault(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
-            }
-            else
-            {
-                return null;
-            }
+            return AccountsRecord.FirstOrDefault(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
         }
 
         public bool ThereAreRecordedAccounts()
@@ -85,7 +79,7 @@ namespace BusinessLogic
             return AccountsRecord.Count > 0;
         }
 
-        public bool AccountAlreadyExist(string cellPhoneNumberToMatch)
+        public bool AccountAlreadyExists(string cellPhoneNumberToMatch)
         {
             CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumberToMatch);
             cellPhoneNumberToMatch = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumberToMatch);

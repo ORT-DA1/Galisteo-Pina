@@ -15,21 +15,17 @@ namespace BusinessLogic
             PurchasesRecord = new List<Purchase>();
         }
 
-        public Notification AddPurchase(Account purchaseAccount, string sms)
+        public Notification AddPurchase(Purchase purchase)
         {
-            Sms purchaseSms = new Sms();
-            purchaseSms.Initialize(sms);
-            SmsValidator smsValidator = new SmsValidator(purchaseSms);
-            Notification notification = smsValidator.Validate();
-            Purchase purchase = new Purchase(purchaseSms, purchaseAccount);
+            Notification notification;
             int costOfMinutesUsed = purchase.CalculateCostForMinutesUsed();
-            AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(purchaseAccount, costOfMinutesUsed);
-            notification.AppendNotificationErrors(accountTransactionValidator.Validate());
+            AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(purchase.Account, costOfMinutesUsed);
+            notification = accountTransactionValidator.Validate();
 
             if (!notification.HasErrors())
             {
                 PurchasesRecord.Add(purchase);
-                purchaseAccount.SustractMoneyToBalance(costOfMinutesUsed);
+                purchase.SubstractMoneyFromAccount(costOfMinutesUsed);
                 notification.AddSuccess("Purchase was successfull");
             }
             return notification;

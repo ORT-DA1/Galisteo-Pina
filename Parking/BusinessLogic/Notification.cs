@@ -34,6 +34,10 @@ using System.Threading.Tasks;
             return this.Success.Count() > 0;
         }
 
+        public string Message()
+        {
+            return HasErrors() ? ErrorMessage() : SuccessMessage();
+        }
         public string ErrorMessage()
         {
             string errorMessage = string.Join(".\n", Errors);

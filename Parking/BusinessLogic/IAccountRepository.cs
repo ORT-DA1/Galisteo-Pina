@@ -12,6 +12,6 @@ namespace BusinessLogic
         Notification AddBalanceToAccount(string cellPhoneNumber, string ammount);
         bool ThereAreRecordedAccounts();
         Account FindAccountByCellPhoneNumber(string plateToMatch);
-  
+        bool AccountAlreadyExists(string cellPhoneNumber);
     }
 }

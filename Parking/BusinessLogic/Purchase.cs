@@ -25,8 +25,11 @@ namespace BusinessLogic
             int minutesUsed = Convert.ToInt32(parkingTimeUsed.TotalMinutes);
             return minutesUsed;
         }
-
-
+          
+        public bool SubstractMoneyFromAccount(int moneyToSubstract)
+        {
+            return this.Account.SubstractMoneyFromBalance(moneyToSubstract);
+        }
 
 
     }

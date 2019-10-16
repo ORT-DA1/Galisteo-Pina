@@ -11,48 +11,47 @@ namespace BusinessLogicTest
     public class InMemoryPurchaseRepositoryTest
     {
         InMemoryPurchaseRepository purchases;
+        Purchase purchase;
         Sms sms;
+        Account account;
+        DateTime hourForTest;
+        DateTime lowerLimit;
+        DateTime upperLimit;
 
         [TestInitialize]
-        public void TestInitialize()
+        public void Initialize()
         {
             purchases = new InMemoryPurchaseRepository();
-            sms = new Sms();
+            lowerLimit = DateTime.Now;
+            upperLimit = lowerLimit.AddHours(8);
+            sms = new Sms(lowerLimit, upperLimit);
+            account = new Account("098960505");
+            account.AddMoneyToBalance("200");
+            hourForTest = DateTime.Now.AddMinutes(5);
+            string smsMessage = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
+            sms.Initialize(smsMessage);
+            purchase = new Purchase(sms, account);
         }
-
 
         [TestMethod]
         public void AddPurchaseTrueTest()
         {
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            Account account = new Account("098 712 712", 200);
-            purchases.AddPurchase(account, sms);
+            purchases.AddPurchase(purchase);
             Assert.IsTrue(purchases.PurchasesRecord.Count == 1);
         }
 
-        [TestMethod]
-        public void AddPurchaseFalseNoBalanceTest()
-        {
-            string sms = "ABC 1234 120 16:00";
-            Account account = new Account("098 712 712");
-            purchases.AddPurchase(account, sms);
-            Assert.IsFalse(purchases.PurchasesRecord.Count == 1);
-        }
 
         [TestMethod]
         public void ThereAreRecordedPurchasesTrueTest()
         {
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            Account account = new Account("098 712 712", 200);
-            purchases.AddPurchase(account, sms);
+            purchases.AddPurchase(purchase);
             Assert.IsTrue(purchases.ThereAreRecordedPurchases());
         }
 
         [TestMethod]
         public void ThereAreRecordedPurchasesFalseTest()
         {
+            purchases = new InMemoryPurchaseRepository();
             Assert.IsFalse(purchases.ThereAreRecordedPurchases());
         }
 
@@ -60,30 +59,37 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AnyPurchaseMatchesAndHourPlateTrueTest()
         {
-            DateTime hourForTest = DateTime.Now.AddMinutes(1);
-            string sms = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            Account account = new Account("098 712 712", 200);
-            purchases.AddPurchase(account, sms);
-            Assert.IsTrue(purchases.AnyPurchaseMatchesPlateAndDateTime("ABC1234", "17:00"));
+            purchases.AddPurchase(purchase);
+            Assert.IsTrue(purchases.AnyPurchaseMatchesPlateAndDateTime("ABC1234", hourForTest.ToString("HH:mm")));
         }
 
         [TestMethod]
         public void AnyPurchaseMatchesPlateFalseTest()
         {
-            string sms = "ABC 1234 120 16:00";
-            Account account = new Account("098 712 712", 200);
-            purchases.AddPurchase(account, sms);
-            Assert.IsFalse(purchases.AnyPurchaseMatchesPlateAndDateTime("JCV1234", "17:00"));
+            purchases.AddPurchase(purchase);
+            Assert.IsFalse(purchases.AnyPurchaseMatchesPlateAndDateTime("JCV1515", hourForTest.ToString("HH:mm")));
         }
 
 
         [TestMethod]
         public void AnyPurchaseMatchesHourFalseTest()
         {
-            string sms = "ABC 1234 120 15:00";
-            Account account = new Account("098 712 712", 200);
-            purchases.AddPurchase(account, sms);
-            Assert.IsFalse(purchases.AnyPurchaseMatchesPlateAndDateTime("ABC1234", "18:00"));
+            purchases.AddPurchase(purchase);
+            Assert.IsFalse(purchases.AnyPurchaseMatchesPlateAndDateTime("ABC1234", lowerLimit.AddMinutes(-10).ToString("HH:mm")));
+        }
+
+        [TestMethod]
+        public void AnyPurchaseMatchesEmptyPlatesTest()
+        {
+            purchases.AddPurchase(purchase);
+            Assert.IsFalse(purchases.AnyPurchaseMatchesPlateAndDateTime("", lowerLimit.AddMinutes(-10).ToString("HH:mm")));
+        }
+
+        [TestMethod]
+        public void AnyPurchaseMatchesEmptyHourTest()
+        {
+            purchases.AddPurchase(purchase);
+            Assert.ThrowsException<FormatException>(() => purchases.AnyPurchaseMatchesPlateAndDateTime("", ""));
         }
     }
 }
