@@ -73,6 +73,16 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
+        public void AppendNotificationMessagesTest()
+        {
+            Notification notification2 = new Notification();
+            notification2.AddError("nay");
+            notification2.AddSuccess("yay");
+            notification.AppendNotificationMessages(notification2);
+            Assert.IsTrue(notification2.ErrorMessage() == "nay" && notification2.SuccessMessage() == "yay");
+        }
+
+        [TestMethod]
         public void MessageReturnSuccessMessagesTest()
         {
             string success = "I am a success";
