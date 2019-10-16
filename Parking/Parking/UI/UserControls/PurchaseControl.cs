@@ -31,9 +31,10 @@ namespace UI.UserControls
             string userSms = this.smsTxtBox.Text;
             try
             {
+                userPhoneNumber = systemParking.FormatPhoneNumber(userPhoneNumber);
                 purchaseSms = systemParking.FormatSmsForPurchase(userSms);
                 status = systemParking.ValidateSms(purchaseSms);
-                status.AppendNotificationErrors(systemParking.IsRegisteredNumber(userPhoneNumber));
+                status.AppendNotificationMessages(systemParking.ValidateExistingAccountForAccountTransaction(userPhoneNumber));
 
                 if (!status.HasErrors())
                 {

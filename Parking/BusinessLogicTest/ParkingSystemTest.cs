@@ -31,7 +31,7 @@ namespace BusinessLogicTest
             string smsMessage = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
             sms.Initialize(smsMessage);
             purchase = new Purchase(sms, account);
-               
+
         }
 
         [TestMethod]
@@ -40,14 +40,6 @@ namespace BusinessLogicTest
             system.AddAccount("099270471");
             Assert.IsTrue(system.AccountRepository.ThereAreRecordedAccounts());
         }
-
-        [TestMethod]
-        public void AddAccountFalseWrongCellphoneFormatTest()
-        {
-            system.AddAccount("9270471");
-            Assert.IsFalse(system.AccountRepository.ThereAreRecordedAccounts());
-        }
-
 
         [TestMethod]
         public void SystemAddBalanceTest()
@@ -107,7 +99,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        public void FormatSmsForPurchase()
+        public void FormatSmsForPurchaseTest()
         {
             string smsMessage = $"ABC 1234 120 14:00";
             Sms sms = system.FormatSmsForPurchase(smsMessage);
@@ -120,32 +112,70 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
+        public void FormatPhoneNumberTest()
+        {
+            string phoneNumberToFormat = "98125342";
+            Assert.AreEqual(system.FormatPhoneNumber(phoneNumberToFormat), "098125342");
+        }
+
+        [TestMethod]
+        public void FormatPhoneNumberNoChangesTest()
+        {
+            string phoneNumberToFormat = "098125342";
+            Assert.AreEqual(system.FormatPhoneNumber(phoneNumberToFormat), "098125342");
+        }
+
+        [TestMethod]
         public void ValidateSmsTest()
         {
             Assert.IsFalse(system.ValidateSms(sms).HasErrors());
         }
 
         [TestMethod]
-        public void IsRegisteredNumberTrueTest()
+        public void ValidatePhoneNumberTest()
         {
-            system.AddAccount("098125342");
-            notification = system.IsRegisteredNumber("098125342");
-            Assert.IsTrue(!notification.HasErrors());
+            string phoneNumber = "098960505";
+            Assert.IsTrue(!system.ValidatePhoneNumber(phoneNumber).HasErrors());
         }
 
         [TestMethod]
-        public void IsRegisteredNumberFalseTest()
+        public void ValidatePhoneNumberEmptyTest()
         {
-            system.AddAccount("098125342");
-            notification = system.IsRegisteredNumber("098888888");
-            Assert.IsTrue(notification.HasErrors());
+            string phoneNumber = "";
+            Assert.IsTrue(system.ValidatePhoneNumber(phoneNumber).HasErrors());
         }
 
         [TestMethod]
-        public void IsRegisteredNumberNoAccountsInSystemFalseTest()
+        public void ValidatePhoneNumberWrongFormatTest()
         {
-            notification = system.IsRegisteredNumber("098888888");
-            Assert.IsTrue(notification.HasErrors());
+            string phoneNumber = "989605";
+            Assert.IsTrue(system.ValidatePhoneNumber(phoneNumber).HasErrors());
+        }
+
+        [TestMethod]
+        public void ValidateExistingAccountForTransactionAccountAlreadyExistsTest()
+        {
+            system.AddAccount("0989605");
+            Assert.IsTrue(!system.ValidateExistingAccountForAccountTransaction("0989605").HasErrors());
+        }
+
+        [TestMethod]
+        public void ValidateExistingAccountForTransactionDoesNotExistTest()
+        {
+            Assert.IsTrue(system.ValidateExistingAccountForAccountTransaction("0989605").HasErrors());
+        }
+
+        [TestMethod]
+        public void ValidateExistingAccountForAddingAccountDoesNotExistTest()
+        {
+            Assert.IsTrue(!system.ValidateExistingAccountForAddingAccount("0989605").HasErrors());
+        }
+
+        [TestMethod]
+        public void ValidateExistingAccountForAddingAccountAlreadyExistsTest()
+        {
+            system.AddAccount("0989605");
+            Assert.IsTrue(system.ValidateExistingAccountForAddingAccount("0989605").HasErrors());
         }
 
         [TestMethod]
@@ -156,7 +186,7 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        public void GetAccountByPhoneNumberTest()
+        public void GetAccountByPhoneNumberNotExistsTest()
         {
             system.AddAccount("098125342");
             Assert.IsTrue(system.GetAccountByPhoneNumber("098111222") == null);

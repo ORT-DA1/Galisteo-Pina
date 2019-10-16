@@ -25,9 +25,9 @@ namespace BusinessLogic
         {
             Notification notification = new Notification();
             if (!PhoneNumberNotEmpty())
-                notification.AddError("Phone number is empty");
+                notification.AddError("No se ha indicado un número de celular");
             if (!PhoneNumberCorrectFormat())
-                notification.AddError("Phone number does not have the correct format");
+                notification.AddError("Formato de celular incorrecto");
             return notification;
         }
 

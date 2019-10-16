@@ -125,7 +125,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AccountBalanceControl";
             this.Size = new System.Drawing.Size(1300, 960);
-            this.Load += new System.EventHandler(this.AccountBalanceControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

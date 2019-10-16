@@ -17,52 +17,22 @@ namespace BusinessLogic
 
         public Notification AddAccount(string cellPhoneNumber)
         {
-            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumber);
-            Notification notification = cellPhoneValidator.Validate();
-            cellPhoneNumber = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumber);
-
-            if (!notification.HasErrors())
-            {
-                if (!AccountAlreadyExists(cellPhoneNumber))
-                {
-                    AccountsRecord.Add(new Account(cellPhoneNumber));
-                    notification.AddSuccess("Cuenta creada con éxito");
-                }
-                else
-                {
-                    notification.AddError("La cuenta ya existe en el sistema");
-                }
-            }
-
+            Notification notification = new Notification();
+            AccountsRecord.Add(new Account(cellPhoneNumber));
+            notification.AddSuccess("Cuenta creada con éxito");
             return notification;
         }
 
         public Notification AddBalanceToAccount(string cellPhoneNumber, string ammount)
         {
             Notification notification = new Notification();
-            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumber);
-            notification = cellPhoneValidator.Validate();
-            cellPhoneNumber = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumber);
             Account account = FindAccountByCellPhoneNumber(cellPhoneNumber);
-            if (account == null)
-            {
-                notification.AddError("Account not found");
-                return notification;
-            }
-            return AddBalanceToExistingAccount(account, ammount);
-        }
-
-        public Notification AddBalanceToExistingAccount(Account existingAccount, string ammount)
-        {
-            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(existingAccount.AccountCellPhoneNumber);
             BalanceValidator balanceValidator = new BalanceValidator(ammount);
-            Notification notification = cellPhoneValidator.Validate();
-            notification.AppendNotificationErrors(balanceValidator.Validate());
-
-            if (!notification.HasErrors())
+            notification = balanceValidator.Validate();
+            if (account != null && !notification.HasErrors())
             {
-                existingAccount.AddMoneyToBalance(ammount);
-                notification.AddSuccess("Balance successfully added");
+                account.AddMoneyToBalance(ammount);
+                notification.AddSuccess("Saldo agregado con éxito");
             }
             return notification;
         }

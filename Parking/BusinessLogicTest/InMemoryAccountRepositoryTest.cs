@@ -22,10 +22,28 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        public void AddAccountAlreadyExistsTest()
+        public void AddBalanceToAccountTest()
         {
             accountRepository.AddAccount("099222111");
-            Assert.IsTrue(accountRepository.AddAccount("099222111").HasErrors());
+            accountRepository.AddBalanceToAccount("099222111", "200");
+            Assert.IsTrue(accountRepository.FindAccountByCellPhoneNumber("099222111").AccountBalance == 200);
+        }
+
+        [TestMethod]
+        public void AddBalanceToAccountNegativeBalanceFalseTest()
+        {
+            accountRepository.AddAccount("099222111");
+            accountRepository.AddBalanceToAccount("099222111", "-200");
+            Assert.IsTrue(accountRepository.FindAccountByCellPhoneNumber("099222111").AccountBalance == 0);
+        }
+
+        [TestMethod]
+        public void AddBalanceToAccountNotExistingAccountTest()
+        {
+            Notification notification;
+            accountRepository.AddAccount("099222111");
+            notification = accountRepository.AddBalanceToAccount("099222333", "200");
+            Assert.IsTrue(accountRepository.FindAccountByCellPhoneNumber("099222111").AccountBalance == 0);
         }
 
         [TestMethod]

@@ -27,17 +27,15 @@ namespace UI.UserControls
         {
             Notification status;
             string cellPhoneNumber = this.userAccountTxtBox.Text;
-            status = this.systemParking.AddAccount(cellPhoneNumber);
-            if (status.HasErrors())
+            cellPhoneNumber = systemParking.FormatPhoneNumber(cellPhoneNumber);
+            status = systemParking.ValidateExistingAccountForAddingAccount(cellPhoneNumber);
+            if (!status.HasErrors())
             {
-                this.outputErrorLbl.Text = "Error: " + status.ErrorMessage();
-                this.outputErrorLbl.ForeColor = Color.Red;
+                status.AppendNotificationMessages(systemParking.AddAccount(cellPhoneNumber));
             }
-            else if(status.HasSuccess())
-            {
-                this.outputErrorLbl.Text = this.outputErrorLbl.Text = status.SuccessMessage();
-                this.outputErrorLbl.ForeColor = Color.Green;
-            }
+
+            this.outputErrorLbl.Text = status.HasErrors() ? $"Error: {status.Message()}" : status.Message();
+            this.outputErrorLbl.ForeColor = status.HasErrors() ? Color.Red : Color.Green;
         }
     }
 }

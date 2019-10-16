@@ -121,21 +121,6 @@ namespace BusinessLogic
             return endingHour;
         }
 
-        public string InputPlate()
-        {
-            return this.Plates;
-        }
-
-        public string InputMinutes()
-        {
-            return this.Minutes;
-        }
-
-        public DateTime InputSartingHour()
-        {
-            return this.StartingHour;
-        }
-
         public override bool Equals(object obj)
         {
             var sms = obj as Sms;

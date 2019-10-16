@@ -19,19 +19,11 @@ namespace BusinessLogic
         public Notification Validate()
         {
             Notification notification = new Notification();
-
-            if (MissingInput(SmsToValidate.Plates))
-                notification.AddError("Number Plate is missing");
-            if (MissingInput(SmsToValidate.Minutes))
-                notification.AddError("Ammount of minutes is missing");
-            if (!ValidateMinutes())
-                notification.AddError("Ammount of minutes has to be a positive number and a multiple of 30");
-            if (!IsValidHourFormat())
-                notification.AddError("Invalid date format. Should be: HH:mm");
-            if (!IsWithinRangeOfHours())
-                notification.AddError("Invalid range of hours. Should be between 10:00 and 18:00");
-            if (!IsHourForToday())
-                notification.AddError("It is only possible to buy parking hours for the current day");
+            bool validSms = !MissingInput(SmsToValidate.Plates) &&
+                !MissingInput(SmsToValidate.Minutes)
+                && ValidateMinutes() && IsValidHourFormat()
+                && IsValidHourFormat() && IsHourForToday();
+            if (!validSms) notification.AddError("Mensaje incorrecto.Ej: ABC 1234 60 10:00");
             return notification;
         }
 

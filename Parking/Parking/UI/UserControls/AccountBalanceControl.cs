@@ -27,23 +27,20 @@ namespace UI.UserControls
         {
             Notification status;
             string userPhoneNumber = this.userAccountTxtBox.Text;
+            userPhoneNumber = parkingSystem.FormatPhoneNumber(userPhoneNumber);
             string balanceToAdd = this.userBalanceTxtBox.Text;
-            status = parkingSystem.AddAmmountToBalance(userPhoneNumber, balanceToAdd);
-            if (status.HasErrors())
-            {
-                this.outputErrorLbl.Text = "Error: " + status.ErrorMessage();
-                this.outputErrorLbl.ForeColor = Color.Red;
-            }
-            else if (status.HasSuccess())
-            {
-                this.outputErrorLbl.Text = status.SuccessMessage();
-                this.outputErrorLbl.ForeColor = Color.Green;
-            }
-        }
+            status = parkingSystem.ValidatePhoneNumber(userPhoneNumber);
+            status.AppendNotificationMessages(parkingSystem.ValidateExistingAccountForAccountTransaction(userPhoneNumber));
 
-        private void AccountBalanceControl_Load(object sender, EventArgs e)
-        {
+            if (!status.HasErrors())
+            {
+                status.AppendNotificationMessages(parkingSystem.AddAmmountToBalance(userPhoneNumber, balanceToAdd));
 
-        }
-    }
+            }
+            this.outputErrorLbl.Text = status.HasErrors()?$"Error: { status.Message()}":status.Message();
+            this.outputErrorLbl.ForeColor = status.HasErrors()?Color.Red: Color.Green;
+            }
+        } 
+
+    
 }

@@ -29,16 +29,8 @@ namespace UI.UserControls
             string userPlate = this.userPlateTxtBox.Text;
             string hourToCheck = this.dateTimePicker.Value.ToString();
             status = systemParking.AnyPurchaseMatchesPlateAndHour(userPlate, hourToCheck);
-            if (status.HasErrors())
-            {
-                this.outputErrorLbl.Text = "Error: " + status.ErrorMessage();
-                this.outputErrorLbl.ForeColor = Color.Red;
-            }
-            else if (status.HasSuccess())
-            {
-                this.outputErrorLbl.Text = status.SuccessMessage();
-                this.outputErrorLbl.ForeColor = Color.Green;
-            }
+            this.outputErrorLbl.Text = status.HasErrors() ? $"Error: {status.Message()}" : status.Message();
+            this.outputErrorLbl.ForeColor = status.HasErrors() ? Color.Red : Color.Green;
         }
     }
 }
