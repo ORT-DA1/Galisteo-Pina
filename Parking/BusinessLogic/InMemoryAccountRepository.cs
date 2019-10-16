@@ -27,10 +27,11 @@ namespace BusinessLogic
         {
             Notification notification = new Notification();
             BalanceValidator balanceValidator = new BalanceValidator(ammount);
+            Account account = FindAccountByCellPhoneNumber(cellPhoneNumber);
             notification = balanceValidator.Validate();
             if (account != null && !notification.HasErrors())
             {
-                existingAccount.AddMoneyToBalance(ammount);
+                account.AddMoneyToBalance(ammount);
                 notification.AddSuccess("Saldo agregado con exito");
             }
             return notification;
