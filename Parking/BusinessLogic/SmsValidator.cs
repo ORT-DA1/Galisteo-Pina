@@ -23,7 +23,7 @@ namespace BusinessLogic
             bool validSms = !MissingInput(SmsToValidate.Plates) &&
                 !MissingInput(SmsToValidate.Minutes)
                 && ValidateMinutes() && IsValidHourFormat()
-                && IsValidHourFormat() && IsHourForToday();
+                && IsValidHourFormat() && IsHourForToday() && IsWithinRangeOfHours();
             if (!validSms) notification.AddError("Mensaje incorrecto.Ej: ABC 1234 60 10:00");
 
             return notification;
@@ -70,7 +70,7 @@ namespace BusinessLogic
 
         public bool IsHourForToday()
         {
-            return DateTime.Now <= SmsToValidate.StartingHour;
+            return DateTime.Now <= SmsToValidate.StartingHour.AddMinutes(1);
         }
 
 

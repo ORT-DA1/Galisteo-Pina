@@ -28,7 +28,8 @@ namespace UI.UserControls
             Notification status;
             string cellPhoneNumber = this.userAccountTxtBox.Text;
             cellPhoneNumber = systemParking.FormatPhoneNumber(cellPhoneNumber);
-            status = systemParking.ValidateExistingAccountForAddingAccount(cellPhoneNumber);
+            status = systemParking.ValidatePhoneNumber(cellPhoneNumber);
+            status.AppendNotificationMessages(systemParking.ValidateExistingAccountForAddingAccount(cellPhoneNumber));
             if (!status.HasErrors())
             {
                 status.AppendNotificationMessages(systemParking.AddAccount(cellPhoneNumber));

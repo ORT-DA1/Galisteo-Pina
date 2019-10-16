@@ -13,6 +13,7 @@ namespace BusinessLogic
 
         public ParkingSystem()
         {
+            AdjustParkingCostPerMinute(1);
             AccountRepository = new InMemoryAccountRepository();
             PurchaseRepository = new InMemoryPurchaseRepository();
         }

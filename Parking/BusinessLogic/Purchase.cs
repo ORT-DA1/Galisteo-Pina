@@ -23,7 +23,7 @@ namespace BusinessLogic
         {
             TimeSpan parkingTimeUsed = Sms.EndingHour.Subtract(Sms.StartingHour);
             int minutesUsed = Convert.ToInt32(parkingTimeUsed.TotalMinutes);
-            return minutesUsed;
+            return minutesUsed * ParkingCost.CostPerMinute;
         }
           
         public bool SubstractMoneyFromAccount(int moneyToSubstract)

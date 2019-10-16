@@ -155,14 +155,14 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ValidateExistingAccountForTransactionAccountAlreadyExistsTest()
         {
-            system.AddAccount("0989605");
-            Assert.IsTrue(!system.ValidateExistingAccountForAccountTransaction("0989605").HasErrors());
+            system.AddAccount("098960505");
+            Assert.IsTrue(!system.ValidateExistingAccountForAccountTransaction("098960505").HasErrors());
         }
 
         [TestMethod]
         public void ValidateExistingAccountForTransactionDoesNotExistTest()
         {
-            Assert.IsTrue(system.ValidateExistingAccountForAccountTransaction("0989605").HasErrors());
+            Assert.IsTrue(system.ValidateExistingAccountForAccountTransaction("098960505").HasErrors());
         }
 
         [TestMethod]
@@ -174,8 +174,8 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ValidateExistingAccountForAddingAccountAlreadyExistsTest()
         {
-            system.AddAccount("0989605");
-            Assert.IsTrue(system.ValidateExistingAccountForAddingAccount("0989605").HasErrors());
+            system.AddAccount("098960505");
+            Assert.IsTrue(system.ValidateExistingAccountForAddingAccount("098960505").HasErrors());
         }
 
         [TestMethod]

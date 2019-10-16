@@ -17,9 +17,14 @@ namespace BusinessLogic
 
         public Notification AddAccount(string cellPhoneNumber)
         {
-            Notification notification = new Notification();
-            AccountsRecord.Add(new Account(cellPhoneNumber));
-            notification.AddSuccess("Cuenta creada con éxito");
+            Notification notification;
+            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumber);
+            notification = cellPhoneValidator.Validate();
+            if (!notification.HasErrors())
+            {
+                AccountsRecord.Add(new Account(cellPhoneNumber));
+                notification.AddSuccess("Cuenta creada con éxito");
+            }
             return notification;
         }
 
