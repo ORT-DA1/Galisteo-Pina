@@ -82,6 +82,7 @@ namespace BusinessLogic
                 notification.AddSuccess("Existe una compra de estacionamiento vigente para esa matrícula y hora");
             else
                 notification.AddError("Ningún resultado encontrado para la consulta");
+
             return notification;
         }
         public Notification AdjustParkingCostPerMinute(int newCostPerMinute)
@@ -89,6 +90,7 @@ namespace BusinessLogic
             ParkingCost.CostPerMinute = newCostPerMinute;
             Notification notification = new Notification();
             notification.AddSuccess("Costo del estacionamiento cambiado con éxito");
+
             return notification;
         }
 

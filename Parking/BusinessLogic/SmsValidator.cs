@@ -19,11 +19,13 @@ namespace BusinessLogic
         public Notification Validate()
         {
             Notification notification = new Notification();
+
             bool validSms = !MissingInput(SmsToValidate.Plates) &&
                 !MissingInput(SmsToValidate.Minutes)
                 && ValidateMinutes() && IsValidHourFormat()
                 && IsValidHourFormat() && IsHourForToday();
             if (!validSms) notification.AddError("Mensaje incorrecto.Ej: ABC 1234 60 10:00");
+
             return notification;
         }
 

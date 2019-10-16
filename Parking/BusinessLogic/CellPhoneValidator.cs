@@ -28,6 +28,7 @@ namespace BusinessLogic
                 notification.AddError("No se ha indicado un número de celular");
             if (!PhoneNumberCorrectFormat())
                 notification.AddError("Formato de celular incorrecto");
+
             return notification;
         }
 

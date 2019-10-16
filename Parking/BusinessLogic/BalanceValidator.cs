@@ -22,6 +22,7 @@ namespace BusinessLogic
                 notification.AddError("El monto debe ser un entero");
             if (!IsPositive(this.AmmountToValidate))
                 notification.AddError("El monto debe ser un número positivo");
+
             return notification;
         }
 

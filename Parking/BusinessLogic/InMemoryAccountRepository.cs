@@ -26,13 +26,12 @@ namespace BusinessLogic
         public Notification AddBalanceToAccount(string cellPhoneNumber, string ammount)
         {
             Notification notification = new Notification();
-            Account account = FindAccountByCellPhoneNumber(cellPhoneNumber);
             BalanceValidator balanceValidator = new BalanceValidator(ammount);
             notification = balanceValidator.Validate();
             if (account != null && !notification.HasErrors())
             {
-                account.AddMoneyToBalance(ammount);
-                notification.AddSuccess("Saldo agregado con éxito");
+                existingAccount.AddMoneyToBalance(ammount);
+                notification.AddSuccess("Saldo agregado con exito");
             }
             return notification;
         }
