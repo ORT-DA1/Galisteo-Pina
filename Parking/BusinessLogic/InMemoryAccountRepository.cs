@@ -46,7 +46,7 @@ namespace BusinessLogic
             Account account = FindAccountByCellPhoneNumber(cellPhoneNumber);
             if (account == null)
             {
-                notification.AddError("Account not found");
+                notification.AddError("Cuenta no encontrada");
                 return notification;
             }
             return AddBalanceToExistingAccount(account, ammount);
@@ -62,7 +62,7 @@ namespace BusinessLogic
             if (!notification.HasErrors())
             {
                 existingAccount.AddMoneyToBalance(ammount);
-                notification.AddSuccess("Balance successfully added");
+                notification.AddSuccess("Saldo agregado con exito");
             }
             return notification;
         }

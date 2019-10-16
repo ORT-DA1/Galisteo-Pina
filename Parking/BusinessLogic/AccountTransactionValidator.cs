@@ -21,7 +21,7 @@ namespace BusinessLogic
         {
             Notification notification = new Notification();
             if (!AccountHasBalanceForTransaction())
-                notification.AddError("Insufficcient balance");
+                notification.AddError("Saldo Insuficiente");
             return notification;
         }
 

@@ -18,8 +18,8 @@ namespace UI
         public Parking()
         {
             InitializeComponent();
-            DoNavigation(NavigationOptions.MAIN_MENU);
             parkingSystem = new ParkingSystem();
+            DoNavigation(NavigationOptions.MAIN_MENU);
         }
         public void DoNavigation(int userControlCode, Dictionary<string,int> additionalParameters = null)
         {

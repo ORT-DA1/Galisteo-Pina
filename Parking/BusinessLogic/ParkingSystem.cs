@@ -68,9 +68,9 @@ namespace BusinessLogic
         {
             Notification notification = new Notification();
             if (PurchaseRepository.AnyPurchaseMatchesPlateAndDateTime(plates, dateToCompare))
-                notification.AddSuccess("There is an existing parking purchase for that plate and hour");
+                notification.AddSuccess("Existe una reserva de parking para la correspondiente matricula y hora");
             else
-                notification.AddError("No result found");
+                notification.AddError("No hay resultados coincidentes");
             return notification;
         }
 
@@ -78,7 +78,7 @@ namespace BusinessLogic
         {
             ParkingCost.CostPerMinute = newCostPerMinute;
             Notification notification = new Notification();
-            notification.AddSuccess("Parking cost was changed successfully ");
+            notification.AddSuccess("El valor del parking fue modificado con exito ");
             return notification;
         }
 

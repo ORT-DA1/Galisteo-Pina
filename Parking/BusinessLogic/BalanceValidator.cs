@@ -19,9 +19,9 @@ namespace BusinessLogic
         {
             Notification notification = new Notification();
             if (!IsAnInteger(this.AmmountToValidate))
-                notification.AddError("Ammount has to be an integer");
+                notification.AddError("El monto debe ser un numero entero");
             if (!IsPositive(this.AmmountToValidate))
-                notification.AddError("Ammount has to be a positive number");
+                notification.AddError("El monto debe ser un numero positivo");
             return notification;
         }
 

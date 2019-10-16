@@ -35,6 +35,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.parkingValorTxt = new System.Windows.Forms.TextBox();
             this.parkingValorBtn = new System.Windows.Forms.Button();
+            this.outPutLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -104,11 +105,22 @@
             this.parkingValorBtn.TabIndex = 9;
             this.parkingValorBtn.Text = "Cambiar Valor";
             this.parkingValorBtn.UseVisualStyleBackColor = true;
+            this.parkingValorBtn.Click += new System.EventHandler(this.ParkingValorBtn_Click);
+            // 
+            // outPutLbl
+            // 
+            this.outPutLbl.AutoSize = true;
+            this.outPutLbl.Location = new System.Drawing.Point(94, 894);
+            this.outPutLbl.Name = "outPutLbl";
+            this.outPutLbl.Size = new System.Drawing.Size(70, 25);
+            this.outPutLbl.TabIndex = 10;
+            this.outPutLbl.Text = "label6";
             // 
             // HomeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.outPutLbl);
             this.Controls.Add(this.parkingValorBtn);
             this.Controls.Add(this.parkingValorTxt);
             this.Controls.Add(this.label5);
@@ -118,7 +130,6 @@
             this.Controls.Add(this.label1);
             this.Name = "HomeControl";
             this.Size = new System.Drawing.Size(1300, 960);
-            this.Load += new System.EventHandler(this.HomeControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,5 +144,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox parkingValorTxt;
         private System.Windows.Forms.Button parkingValorBtn;
+        private System.Windows.Forms.Label outPutLbl;
     }
 }

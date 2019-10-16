@@ -25,9 +25,9 @@ namespace BusinessLogic
         {
             Notification notification = new Notification();
             if (!PhoneNumberNotEmpty())
-                notification.AddError("Phone number is empty");
+                notification.AddError("El numero de telefono es vacio");
             if (!PhoneNumberCorrectFormat())
-                notification.AddError("Phone number does not have the correct format");
+                notification.AddError("El numero de telefono no tiene el formato correcto");
             return notification;
         }
 

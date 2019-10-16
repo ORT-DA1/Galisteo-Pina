@@ -26,7 +26,7 @@ namespace BusinessLogic
             {
                 PurchasesRecord.Add(purchase);
                 purchase.SubstractMoneyFromAccount(costOfMinutesUsed);
-                notification.AddSuccess("Purchase was successfull");
+                notification.AddSuccess("La compra fue realizada con exito");
             }
             return notification;
         }

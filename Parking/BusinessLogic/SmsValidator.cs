@@ -21,17 +21,17 @@ namespace BusinessLogic
             Notification notification = new Notification();
 
             if (MissingInput(SmsToValidate.Plates))
-                notification.AddError("Number Plate is missing");
+                notification.AddError("Matricula no ingresada");
             if (MissingInput(SmsToValidate.Minutes))
-                notification.AddError("Ammount of minutes is missing");
+                notification.AddError("Minutos no ingresados");
             if (!ValidateMinutes())
-                notification.AddError("Ammount of minutes has to be a positive number and a multiple of 30");
+                notification.AddError("Los minutos deben ser un numero positivo y multiplo de 30");
             if (!IsValidHourFormat())
-                notification.AddError("Invalid date format. Should be: HH:mm");
+                notification.AddError("Formato de hora invalido. Debe ser: HH:mm");
             if (!IsWithinRangeOfHours())
-                notification.AddError("Invalid range of hours. Should be between 10:00 and 18:00");
+                notification.AddError("Rango invalido de horas. Debe ser entre 10:00 y 18:00");
             if (!IsHourForToday())
-                notification.AddError("It is only possible to buy parking hours for the current day");
+                notification.AddError("Solo es posible comprar horas de parking para el dia corriente");
             return notification;
         }
 
