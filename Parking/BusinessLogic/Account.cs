@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,12 @@ namespace BusinessLogic
 {
     public class Account
     {
+        [ForeignKey("Purchase")]
+        public int AccountId { get; set; }
         public string AccountCellPhoneNumber { get; set; }
         public int AccountBalance { get; set; }
+
+        public virtual Purchase Purchase { get; set; }
 
         public Account(string mobileNumber, int balance = 0)
         {

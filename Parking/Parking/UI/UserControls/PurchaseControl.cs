@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogic;
+using Entities;
 
 namespace UI.UserControls
 {
@@ -30,6 +30,7 @@ namespace UI.UserControls
             string userPhoneNumber = this.userAccountTxtBox.Text;
             string userSms = this.smsTxtBox.Text;
             try
+
             {
                 userPhoneNumber = systemParking.FormatPhoneNumber(userPhoneNumber);
                 purchaseSms = systemParking.FormatSmsForPurchase(userSms);

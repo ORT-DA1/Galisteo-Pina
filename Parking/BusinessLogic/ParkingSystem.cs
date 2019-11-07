@@ -1,42 +1,63 @@
-﻿using System;
+﻿using Entities.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data;
 
-namespace BusinessLogic
+namespace Entities
 {
     public class ParkingSystem
     {
-        public IAccountRepository AccountRepository { get; set; }
-        public IPurchaseRepository PurchaseRepository { get; set; }
+        public IUnitOfWork UnitOfWork { get; set; }
 
         public ParkingSystem()
         {
             AdjustParkingCostPerMinute(1);
-            AccountRepository = new InMemoryAccountRepository();
-            PurchaseRepository = new InMemoryPurchaseRepository();
+            UnitOfWork = new UnitOfWork();
         }
 
         public Notification AddAccount(string cellPhoneNumber)
         {
-            Notification notification = AccountRepository.AddAccount(cellPhoneNumber);
+            Account account = new Account(cellPhoneNumber);
+           
+            Notification notification = UnitOfWork.Accounts.AddAccount(account);
+            if (!notification.HasErrors())
+            {
+                UnitOfWork.Save();
+            }
             return notification;
         }
+
         public Notification AddAmmountToBalance(string cellPhoneNumber, string ammountToAdd)
         {
-            Notification notification = AccountRepository.AddBalanceToAccount(cellPhoneNumber, ammountToAdd);
+            BalanceValidator balanceValidator = new BalanceValidator(ammountToAdd);
+            Notification notification = balanceValidator.Validate();
+            Account account = UnitOfWork.Accounts.FindAccountByCellPhoneNumber(cellPhoneNumber);
+
+            if (account != null && !notification.HasErrors())
+                {
+                    account.AddMoneyToBalance(ammountToAdd);
+                UnitOfWork.Save();
+                notification.AddSuccess("Saldo agregado con exito");
+                }
+
             return notification;
         }
+
         public Notification AddPurchase(Purchase purchase)
         {
-            Notification notification = new Notification();
-            notification = PurchaseRepository.AddPurchase(purchase);
+            Notification notification = UnitOfWork.Purchases.AddPurchase(purchase);
+            if (!notification.HasErrors())
+            {
+                UnitOfWork.Save();
+            }
             return notification;
         }
         public Account GetAccountByPhoneNumber(string cellPhoneNumber)
         {
-            return AccountRepository.FindAccountByCellPhoneNumber(cellPhoneNumber);
+            return UnitOfWork.Accounts.FindAccountByCellPhoneNumber(cellPhoneNumber);
         }
         public Sms FormatSmsForPurchase(string sms)
         {
@@ -63,7 +84,8 @@ namespace BusinessLogic
         public Notification ValidateExistingAccountForAddingAccount(string cellPhoneNumber)
         {
             Notification notification = new Notification();
-            if (AccountRepository.AccountAlreadyExists(cellPhoneNumber))
+            Account account = new Account(cellPhoneNumber);
+            if (UnitOfWork.Accounts.AccountAlreadyExists(account))
                 notification.AddError("La cuenta ya existe en el sistema");
             return notification;
 
@@ -71,7 +93,8 @@ namespace BusinessLogic
         public Notification ValidateExistingAccountForAccountTransaction(string cellPhoneNumber)
         {
             Notification notification = new Notification();
-            if (!AccountRepository.AccountAlreadyExists(cellPhoneNumber))
+            Account account = new Account(cellPhoneNumber);
+            if (!UnitOfWork.Accounts.AccountAlreadyExists(account))
                 notification.AddError("Móvil no registrado");
             return notification;
 
@@ -79,7 +102,7 @@ namespace BusinessLogic
         public Notification AnyPurchaseMatchesPlateAndHour(string plates, string dateToCompare)
         {
             Notification notification = new Notification();
-            if (PurchaseRepository.AnyPurchaseMatchesPlateAndDateTime(plates, dateToCompare))
+            if (UnitOfWork.Purchases.AnyPurchaseMatchesPlateAndDateTime(plates, dateToCompare))
                 notification.AddSuccess("Existe una compra de estacionamiento vigente para esa matrícula y hora");
             else
                 notification.AddError("Ningún resultado encontrado para la consulta");

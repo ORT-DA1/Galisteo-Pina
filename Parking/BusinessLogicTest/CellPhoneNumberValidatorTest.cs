@@ -1,5 +1,5 @@
 ﻿using System;
-using BusinessLogic;
+using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessLogicTest

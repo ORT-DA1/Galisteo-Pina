@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,10 @@ namespace BusinessLogic
 {
     public class Purchase
     {
-        public Sms Sms { get; set; }
-
+        [Key]
+        public int PurchaseId { get; set; }
         public int PurchaseCost { get; set; }
+        public Sms Sms { get; set; }
         public Account Account { get; set; }
 
         public Purchase() { }
@@ -30,6 +32,7 @@ namespace BusinessLogic
         {
             return this.Account.SubstractMoneyFromBalance(moneyToSubstract);
         }
+
 
 
     }

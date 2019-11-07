@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Sms:IRequestDevice
+    public class Sms
     {
-
+        [ForeignKey("Purchase")]
+        public int SmsId { get; set; }
         public string Plates { get; set; }
 
         public string Minutes { get; set; }
@@ -21,6 +24,8 @@ namespace BusinessLogic
         public DateTime LowerHourLimit { get; set; }
 
         public DateTime UpperHourLimit { get; set; }
+
+        public virtual Purchase Purchase { get; set; }
 
         public Sms()
         {
