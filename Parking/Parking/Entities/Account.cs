@@ -13,6 +13,7 @@ namespace Entities
         public int AccountId { get; set; }
         public string AccountCellPhoneNumber { get; set; }
         public int AccountBalance { get; set; }
+        public Country AccountCountry { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
 
         public Account()
@@ -22,6 +23,13 @@ namespace Entities
         public Account(string mobileNumber, int balance = 0)
         {
             this.AccountCellPhoneNumber = mobileNumber;
+            this.AccountBalance = balance;
+        }
+
+        public Account(string mobileNumber, Country country, int balance = 0)
+        {
+            this.AccountCellPhoneNumber = mobileNumber;
+            this.AccountCountry = country;
             this.AccountBalance = balance;
         }
 

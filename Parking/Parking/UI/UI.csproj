@@ -82,6 +82,12 @@
       <DependentUpon>CheckPurchaseControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ControlCreator.cs" />
+    <Compile Include="UserControls\CountryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CountryControl.Designer.cs">
+      <DependentUpon>CountryControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\HomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     <EmbeddedResource Include="UserControls\CheckPurchaseControl.resx">
       <DependentUpon>CheckPurchaseControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CountryControl.resx">
+      <DependentUpon>CountryControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,6 +160,9 @@
       <Project>{73fa699e-474f-488d-b54d-587980bfa397}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

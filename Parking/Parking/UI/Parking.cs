@@ -1,5 +1,7 @@
-﻿using Entities;
+﻿using BusinessLogic;
+using Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +21,9 @@ namespace UI
         {
             InitializeComponent();
             parkingSystem = new ParkingSystem();
+            PopulateComboBox(this.comboBox1, parkingSystem.CountriesInMemory);
             DoNavigation(NavigationOptions.MAIN_MENU);
+
         }
         public void DoNavigation(int userControlCode, Dictionary<string,int> additionalParameters = null)
         {
@@ -50,6 +54,19 @@ namespace UI
         private void CheckPurchase_Click(object sender, EventArgs e)
         {
             DoNavigation(NavigationOptions.CHECK_PURCHASE);
+        }
+
+        private void PopulateComboBox<T>(ComboBox comboBox, IEnumerable<T> dataSource) 
+        {
+            comboBox.DisplayMember = "Name";
+            comboBox.ValueMember = "Name";
+            comboBox.DataSource = dataSource as List<Country>;
+
+        }
+
+        private void ComboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            parkingSystem.CurrentCountry = comboBox1.SelectedItem as Country;
         }
     }
 }

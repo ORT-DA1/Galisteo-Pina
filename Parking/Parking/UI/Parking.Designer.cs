@@ -35,26 +35,32 @@
             this.addUserBtn = new System.Windows.Forms.Button();
             this.homeBtn = new System.Windows.Forms.Button();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.menuPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPanel
             // 
+            this.menuPanel.Controls.Add(this.comboBox1);
+            this.menuPanel.Controls.Add(this.label1);
             this.menuPanel.Controls.Add(this.checkPurchase);
             this.menuPanel.Controls.Add(this.purchaseMethodBtn);
             this.menuPanel.Controls.Add(this.addBalanceBtn);
             this.menuPanel.Controls.Add(this.addUserBtn);
             this.menuPanel.Controls.Add(this.homeBtn);
-            this.menuPanel.Location = new System.Drawing.Point(12, 12);
+            this.menuPanel.Location = new System.Drawing.Point(6, 6);
+            this.menuPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.menuPanel.Name = "menuPanel";
-            this.menuPanel.Size = new System.Drawing.Size(449, 1178);
+            this.menuPanel.Size = new System.Drawing.Size(224, 613);
             this.menuPanel.TabIndex = 0;
             // 
             // checkPurchase
             // 
-            this.checkPurchase.Location = new System.Drawing.Point(3, 551);
+            this.checkPurchase.Location = new System.Drawing.Point(2, 287);
+            this.checkPurchase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkPurchase.Name = "checkPurchase";
-            this.checkPurchase.Size = new System.Drawing.Size(443, 131);
+            this.checkPurchase.Size = new System.Drawing.Size(222, 68);
             this.checkPurchase.TabIndex = 4;
             this.checkPurchase.Text = "CONSULTAR COMPRA";
             this.checkPurchase.UseVisualStyleBackColor = true;
@@ -62,9 +68,10 @@
             // 
             // purchaseMethodBtn
             // 
-            this.purchaseMethodBtn.Location = new System.Drawing.Point(3, 414);
+            this.purchaseMethodBtn.Location = new System.Drawing.Point(2, 215);
+            this.purchaseMethodBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.purchaseMethodBtn.Name = "purchaseMethodBtn";
-            this.purchaseMethodBtn.Size = new System.Drawing.Size(443, 131);
+            this.purchaseMethodBtn.Size = new System.Drawing.Size(222, 68);
             this.purchaseMethodBtn.TabIndex = 3;
             this.purchaseMethodBtn.Text = "PROCESAR COMPRA";
             this.purchaseMethodBtn.UseVisualStyleBackColor = true;
@@ -72,9 +79,10 @@
             // 
             // addBalanceBtn
             // 
-            this.addBalanceBtn.Location = new System.Drawing.Point(3, 277);
+            this.addBalanceBtn.Location = new System.Drawing.Point(2, 144);
+            this.addBalanceBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addBalanceBtn.Name = "addBalanceBtn";
-            this.addBalanceBtn.Size = new System.Drawing.Size(443, 131);
+            this.addBalanceBtn.Size = new System.Drawing.Size(222, 68);
             this.addBalanceBtn.TabIndex = 2;
             this.addBalanceBtn.Text = "AGREGAR SALDO";
             this.addBalanceBtn.UseVisualStyleBackColor = true;
@@ -82,9 +90,10 @@
             // 
             // addUserBtn
             // 
-            this.addUserBtn.Location = new System.Drawing.Point(3, 140);
+            this.addUserBtn.Location = new System.Drawing.Point(2, 73);
+            this.addUserBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addUserBtn.Name = "addUserBtn";
-            this.addUserBtn.Size = new System.Drawing.Size(443, 131);
+            this.addUserBtn.Size = new System.Drawing.Size(222, 68);
             this.addUserBtn.TabIndex = 1;
             this.addUserBtn.Text = "REGISTRO USUARIO";
             this.addUserBtn.UseVisualStyleBackColor = true;
@@ -92,9 +101,10 @@
             // 
             // homeBtn
             // 
-            this.homeBtn.Location = new System.Drawing.Point(3, 3);
+            this.homeBtn.Location = new System.Drawing.Point(2, 2);
+            this.homeBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.homeBtn.Name = "homeBtn";
-            this.homeBtn.Size = new System.Drawing.Size(443, 131);
+            this.homeBtn.Size = new System.Drawing.Size(222, 68);
             this.homeBtn.TabIndex = 0;
             this.homeBtn.Text = "HOME";
             this.homeBtn.UseVisualStyleBackColor = true;
@@ -102,21 +112,43 @@
             // 
             // controlPanel
             // 
-            this.controlPanel.Location = new System.Drawing.Point(465, 15);
+            this.controlPanel.Location = new System.Drawing.Point(232, 8);
+            this.controlPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(1361, 1175);
+            this.controlPanel.Size = new System.Drawing.Size(680, 611);
             this.controlPanel.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label1.Location = new System.Drawing.Point(3, 369);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(126, 17);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "País seleccionado:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(3, 389);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(215, 21);
+            this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.ComboBox1_SelectionChangeCommitted);
             // 
             // Parking
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1838, 1202);
+            this.ClientSize = new System.Drawing.Size(919, 552);
             this.Controls.Add(this.controlPanel);
             this.Controls.Add(this.menuPanel);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Parking";
             this.Text = "Form1";
             this.menuPanel.ResumeLayout(false);
+            this.menuPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -130,6 +162,8 @@
         private System.Windows.Forms.Button addUserBtn;
         private System.Windows.Forms.Button homeBtn;
         private System.Windows.Forms.Panel controlPanel;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

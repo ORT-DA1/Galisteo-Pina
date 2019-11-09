@@ -43,6 +43,11 @@ namespace Data
             Context.Set<T>().Add(entity);
         }
 
+        public void AddRange(IEnumerable<T> entities)
+        {
+            Context.Set<T>().AddRange(entities);
+        }
+
         public bool ThereAreSavedItems()
         {
             return GetAll().Count() == 0;

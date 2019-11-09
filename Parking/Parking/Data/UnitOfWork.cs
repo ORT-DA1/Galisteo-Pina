@@ -13,6 +13,7 @@ namespace Data
     {
         private ParkingContext context = new ParkingContext(new DropCreateDatabaseIfModelChanges<ParkingContext>());
         private IAccountRepository accountRepository;
+        private ICountryRepository countryRepository;
         private IPurchaseRepository purchaseRepository;
 
         public IAccountRepository Accounts
@@ -25,6 +26,19 @@ namespace Data
                     this.accountRepository = new OrmAccountRepository(context);
                 }
                 return accountRepository;
+            }
+        }
+
+        public ICountryRepository Countries
+        {
+            get
+            {
+
+                if (this.countryRepository == null)
+                {
+                    this.countryRepository = new OrmCountryRepository(context);
+                }
+                return countryRepository;
             }
         }
 

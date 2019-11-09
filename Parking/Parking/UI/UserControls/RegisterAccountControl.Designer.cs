@@ -61,7 +61,7 @@
             // 
             this.userAccountTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userAccountTxtBox.Location = new System.Drawing.Point(280, 99);
-            this.userAccountTxtBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.userAccountTxtBox.Margin = new System.Windows.Forms.Padding(2);
             this.userAccountTxtBox.Name = "userAccountTxtBox";
             this.userAccountTxtBox.Size = new System.Drawing.Size(269, 23);
             this.userAccountTxtBox.TabIndex = 2;
@@ -70,7 +70,7 @@
             // 
             this.addAccountBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addAccountBtn.Location = new System.Drawing.Point(262, 147);
-            this.addAccountBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addAccountBtn.Margin = new System.Windows.Forms.Padding(2);
             this.addAccountBtn.Name = "addAccountBtn";
             this.addAccountBtn.Size = new System.Drawing.Size(132, 32);
             this.addAccountBtn.TabIndex = 3;
@@ -98,9 +98,9 @@
             this.Controls.Add(this.userAccountTxtBox);
             this.Controls.Add(this.userAccountLbl);
             this.Controls.Add(this.accountRegisterLbl);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "RegisterAccountControl";
-            this.Size = new System.Drawing.Size(650, 499);
+            this.Size = new System.Drawing.Size(500, 499);
             this.ResumeLayout(false);
             this.PerformLayout();
 

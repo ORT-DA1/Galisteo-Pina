@@ -5,23 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data;
+using Entities;
 
-namespace Entities
+namespace BusinessLogic
 {
     public class ParkingSystem
     {
         public IUnitOfWork UnitOfWork { get; set; }
+        public Country CurrentCountry { get; set; } 
+        public List<Country> CountriesInMemory { get; set; }
 
         public ParkingSystem()
         {
             AdjustParkingCostPerMinute(1);
             UnitOfWork = new UnitOfWork();
+            InitializeCountriesInSystem();
+            LoadCountriesInMemory();
+            SetInitialCountry();
         }
 
         public Notification AddAccount(string cellPhoneNumber)
         {
-            Account account = new Account(cellPhoneNumber);
-           
+            Account account = new Account(cellPhoneNumber, CurrentCountry);
             Notification notification = UnitOfWork.Accounts.AddAccount(account);
             if (!notification.HasErrors())
             {
@@ -116,6 +121,26 @@ namespace Entities
             notification.AddSuccess("Costo del estacionamiento cambiado con éxito");
 
             return notification;
+        }
+
+        public void InitializeCountriesInSystem()
+        {
+            UnitOfWork.Countries.AddCountries(Country.GetCountriesInSystem());
+            UnitOfWork.Save();
+        }
+
+        public void LoadCountriesInMemory()
+        {
+            this.CountriesInMemory = GetCountries() as List<Country>;
+        }
+
+        public void SetInitialCountry()
+        {
+            this.CurrentCountry = this.CountriesInMemory.First(c => c.Name == Country.CountriesInSystem.URUGUAY.ToString());
+        }
+        public IEnumerable<Country> GetCountries()
+        {
+            return UnitOfWork.Countries.GetCountries();
         }
 
     }

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OrmAccountRepository.cs" />
+    <Compile Include="OrmCountryRepository.cs" />
     <Compile Include="OrmPurchaseRepository.cs" />
     <Compile Include="ParkingContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

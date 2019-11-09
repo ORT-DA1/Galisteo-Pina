@@ -20,5 +20,6 @@ namespace Data
         public virtual DbSet<Account> Accounts { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Sms> Sms { get; set; }
-    }  
+        public DbSet<Country> Countries { get; set; }
+    } 
 }

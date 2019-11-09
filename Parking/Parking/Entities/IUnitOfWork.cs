@@ -11,6 +11,7 @@ namespace Entities
     {
         IAccountRepository Accounts { get; }
         IPurchaseRepository Purchases { get; }
+        ICountryRepository Countries { get; }
         int Save();
     }
 }

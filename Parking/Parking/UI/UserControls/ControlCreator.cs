@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using BusinessLogic;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace UI.UserControls
                     return new CheckPurchaseControl(doNavigation, system);
                 case NavigationOptions.PURCHASE_METHOD:
                     return new PurchaseControl(doNavigation, system);
+                case NavigationOptions.SELECT_COUNTRY:
+                    return new CountryControl(doNavigation, system);
                 default:
                     return new HomeControl(doNavigation, system);
             }
