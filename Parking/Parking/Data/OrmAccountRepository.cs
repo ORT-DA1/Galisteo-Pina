@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using Entities.Repositories;
+using Entities.Validation;
 
 namespace Data
 {
@@ -22,8 +23,8 @@ namespace Data
         public Notification AddAccount(Account account)
         {
             Notification notification;
-            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(account.AccountCellPhoneNumber);
-            notification = cellPhoneValidator.Validate();
+            ICellPhoneValidator cellPhoneValidator = Account.GetCellPhoneValidator(account.AccountCountry);
+            notification = cellPhoneValidator.ValidateCellPhone(account.AccountCellPhoneNumber);
             if (!notification.HasErrors())
             {
                 Add(account);
@@ -36,16 +37,16 @@ namespace Data
 
         public Account FindAccountByCellPhoneNumber(string cellPhoneNumberToMatch)
         {
-            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneNumberToMatch);
-            cellPhoneNumberToMatch = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumberToMatch);
+            //ICellPhoneValidator cellPhoneValidator = Account.GetCellPhoneValidator(account.AccountCountry);
+            //cellPhoneNumberToMatch = cellPhoneValidator.StandarPhoneNumber(cellPhoneNumberToMatch);
             return ParkingContext.Accounts.FirstOrDefault(account => account.AccountCellPhoneNumber == cellPhoneNumberToMatch);
         }
 
         public bool AccountAlreadyExists(Account account)
         {
-            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator();
-            string cellPhoneNumber = cellPhoneValidator.StandarPhoneNumber(account.AccountCellPhoneNumber);
-            return ParkingContext.Accounts.Any(a => a.AccountCellPhoneNumber == cellPhoneNumber);
+            //ICellPhoneValidator cellPhoneValidator = Account.GetCellPhoneValidator(account.AccountCountry);
+            //string cellPhoneNumber = cellPhoneValidator.StandarPhoneNumber(account.AccountCellPhoneNumber);
+            return ParkingContext.Accounts.Any(a => a.AccountCellPhoneNumber == account.AccountCellPhoneNumber);
         }
     }
 }

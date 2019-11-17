@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class OrmPurchaseRepository: Repository<Purchase>, IPurchaseRepository
+    public class OrmPurchaseRepository : Repository<Purchase>, IPurchaseRepository
     {
         public ParkingContext ParkingContext
         {
@@ -48,5 +48,6 @@ namespace Data
                 throw ex;
             }
         }
+
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Entities;
+using Entities.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace BusinessLogicTest
 {
@@ -7,6 +9,28 @@ namespace BusinessLogicTest
     [TestClass]
     public class AccountTest
     {
+        [TestMethod]
+        public void InitializeCellPhoneValidators()
+        {
+            Account account = new Account();
+            List<ICellPhoneValidator> cellPhoneValidators = Account.InitializeCellPhoneValidators();
+            List<ICellPhoneValidator> compareCellPhoneValidators = new List<ICellPhoneValidator>
+            {
+                new UyCellPhoneValidator(),
+                new ArgCellPhoneValidator(),
+            };
+
+            Assert.AreEqual(cellPhoneValidators.Count, compareCellPhoneValidators.Count);
+        }
+
+
+        [TestMethod]
+        public void GetCellPhoneValidatorTest()
+        {
+            ICellPhoneValidator cellPhoneValidator = Account.GetCellPhoneValidator(new Country("URUGUAY"));
+            Assert.AreEqual(new UyCellPhoneValidator().CellPhoneValidatorCountry, cellPhoneValidator.CellPhoneValidatorCountry);
+
+        }
 
         [TestMethod]
         public void AccountBalanceIsPositiveTrueTest()

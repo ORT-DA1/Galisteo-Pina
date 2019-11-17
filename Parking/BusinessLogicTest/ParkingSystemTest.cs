@@ -39,7 +39,8 @@
 //        public void AddAccountTest()
 //        {
 //            system.AddAccount("099270471");
-//            Assert.IsTrue(system.UnitOfWork.Accounts.ThereAreRecordedAccounts());
+//            account = new Account("099270471");
+//            Assert.IsTrue(system.UnitOfWork.Accounts.AccountAlreadyExists(account));
 //        }
 
 //        [TestMethod]
@@ -70,34 +71,34 @@
 //        }
 
 
-//        [TestMethod]
-//        public void AddPurchaseTrueTest()
-//        {
-//            system.AddPurchase(purchase);
-//            Assert.IsTrue(system.UnitOfWork.Purchases.ThereAreRecordedPurchases());
-//        }
+//        //[TestMethod]
+//        //public void AddPurchaseTrueTest()
+//        //{
+//        //    system.AddPurchase(purchase);
+//        //    Assert.IsTrue(system.UnitOfWork.Purchases.ThereAreRecordedPurchases());
+//        //}
 
-//        [TestMethod]
-//        public void AddPurchaseNoStartingHourTrueTest()
-//        {
-//            string smsMessage = "ABC 1234 120";
-//            sms.Initialize(smsMessage);
-//            purchase = new Purchase(sms, account);
-//            system.AddPurchase(purchase);
-//            Assert.IsTrue(system.UnitOfWork.Purchases.ThereAreRecordedPurchases());
-//        }
+//        //[TestMethod]
+//        //public void AddPurchaseNoStartingHourTrueTest()
+//        //{
+//        //    string smsMessage = "ABC 1234 120";
+//        //    sms.Initialize(smsMessage);
+//        //    purchase = new Purchase(sms, account);
+//        //    system.AddPurchase(purchase);
+//        //    Assert.IsTrue(system.UnitOfWork.Purchases.ThereAreRecordedPurchases());
+//        //}
 
-//        [TestMethod]
-//        public void AddPurchaseNoBalanceFalseTest()
-//        {
-//            account = new Account("098960505");
-//            string smsMessage = "ABC 1234 120";
-//            sms.Initialize(smsMessage);
-//            purchase = new Purchase(sms, account);
-//            system.AddPurchase(purchase);
-//            Assert.IsFalse(system.UnitOfWork.Purchases.ThereAreRecordedPurchases());
+//        //[TestMethod]
+//        //public void AddPurchaseNoBalanceFalseTest()
+//        //{
+//        //    account = new Account("098960505");
+//        //    string smsMessage = "ABC 1234 120";
+//        //    sms.Initialize(smsMessage);
+//        //    purchase = new Purchase(sms, account);
+//        //    system.AddPurchase(purchase);
+//        //    Assert.IsFalse(system.UnitOfWork.Purchases.ThereAreRecordedPurchases());
 
-//        }
+//        //}
 
 //        [TestMethod]
 //        public void FormatSmsForPurchaseTest()
@@ -161,7 +162,7 @@
 //        }
 
 //        [TestMethod]
-//        public void ValidateExistingAccountForTransactionDoesNotExistTest()
+//         public void ValidateExistingAccountForTransactionDoesNotExistTest()
 //        {
 //            Assert.IsTrue(system.ValidateExistingAccountForAccountTransaction("098960505").HasErrors());
 //        }

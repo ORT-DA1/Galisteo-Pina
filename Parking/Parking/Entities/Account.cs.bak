@@ -1,5 +1,4 @@
-﻿using Entities.Validation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -14,9 +13,7 @@ namespace Entities
         public int AccountId { get; set; }
         public string AccountCellPhoneNumber { get; set; }
         public int AccountBalance { get; set; }
-        public Country AccountCountry { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
-        public static List<ICellPhoneValidator> CellPhoneValidators { get; set; } = InitializeCellPhoneValidators();
 
         public Account()
         {
@@ -26,26 +23,6 @@ namespace Entities
         {
             this.AccountCellPhoneNumber = mobileNumber;
             this.AccountBalance = balance;
-        }
-
-        public Account(string mobileNumber, Country country, int balance = 0)
-        {
-            this.AccountCellPhoneNumber = mobileNumber;
-            this.AccountCountry = country;
-            this.AccountBalance = balance;
-        }
-
-        public static List<ICellPhoneValidator> InitializeCellPhoneValidators()
-        {
-            List<ICellPhoneValidator> cellPhoneValidators = new List<ICellPhoneValidator>();
-            cellPhoneValidators.Add(new UyCellPhoneValidator());
-            cellPhoneValidators.Add(new ArgCellPhoneValidator());
-            return cellPhoneValidators;
-        }
-
-        public static ICellPhoneValidator GetCellPhoneValidator(Country country)
-        {
-            return CellPhoneValidators.Find(cv => cv.CellPhoneValidatorCountry.ToString() == country.Name);
         }
 
         public bool AccountBalanceIsPositive()

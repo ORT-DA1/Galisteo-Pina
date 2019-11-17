@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class AccountTransactionValidator:Validator, IValidation
+    public class AccountTransactionValidator:Validator, IGenericValidator
     {
         public Account AccountToValidate { get; set; }
         public int TransactionSum { get; set; }

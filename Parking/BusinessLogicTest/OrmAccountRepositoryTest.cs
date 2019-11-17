@@ -17,8 +17,9 @@ namespace BusinessLogicTest
         [TestInitialize]
         public void Initialize()
         {
-            TestAccount = new Account("099730280");
-            ParkingContext = new ParkingContext(new DropCreateDatabaseAlways<ParkingContext>());
+            Country country = new Country("URUGUAY");
+            TestAccount = new Account("099730280", country);
+            ParkingContext = new ParkingContext("ParkingContextTest", new DropCreateDatabaseAlways<ParkingContext>());
             ormAccountRepository = new OrmAccountRepository(ParkingContext);
             
         }

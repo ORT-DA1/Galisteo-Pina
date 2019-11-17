@@ -18,6 +18,8 @@ namespace Entities
 
         [Key]
         public string Name { get; set; }
+
+        public int CostPerMinut { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
 
         public Country()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class BalanceValidator : Validator, IValidation
+    public class BalanceValidator : Validator
     {
         public string AmmountToValidate { get; set; }
 

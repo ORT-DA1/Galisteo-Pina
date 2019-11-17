@@ -12,7 +12,7 @@ namespace Data
 
     public class ParkingContext: DbContext
     {
-        public ParkingContext(IDatabaseInitializer<ParkingContext> initializer = null) : base("name=ParkingContext")
+        public ParkingContext(string ConnectionName, IDatabaseInitializer<ParkingContext> initializer = null) : base($"name={ConnectionName}")
         {
             Database.SetInitializer<ParkingContext>(initializer);
 

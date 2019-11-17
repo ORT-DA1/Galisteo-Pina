@@ -22,16 +22,15 @@ namespace BusinessLogicTest
         public void Initialize()
         {
             TestPurchase = new Purchase();
-            ParkingContext = new ParkingContext(new DropCreateDatabaseAlways<ParkingContext>());
+            ParkingContext = new ParkingContext("ParkingContextTest", new DropCreateDatabaseAlways<ParkingContext>());
             ormPurchaseRepository = new OrmPurchaseRepository(ParkingContext);
-            lowerLimit = DateTime.Now;
-            upperLimit = lowerLimit.AddHours(8);
-            sms = new Sms(lowerLimit, upperLimit);
-            account = new Account("098960505");
-            account.AddMoneyToBalance("200");
             hourForTest = DateTime.Now.AddMinutes(5);
             string smsMessage = $"ABC 1234 120 {hourForTest.ToString("HH:mm")}";
-            sms.Initialize(smsMessage);
+            sms = new UySmsValidator().GetInitializedSms(smsMessage);
+            sms.LowerHourLimit = DateTime.Now;
+            sms.UpperHourLimit = sms.LowerHourLimit.AddHours(8);
+            account = new Account("098960505");
+            account.AddMoneyToBalance("200");
             TestPurchase = new Purchase(sms, account);
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    interface IValidation
+    public interface IGenericValidator
     {
         Notification Validate();
     }

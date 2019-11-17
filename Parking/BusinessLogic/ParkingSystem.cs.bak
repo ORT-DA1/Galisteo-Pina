@@ -5,37 +5,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data;
-using Entities;
-using Entities.Validation;
 
-namespace BusinessLogic
+namespace Entities
 {
     public class ParkingSystem
     {
         public IUnitOfWork UnitOfWork { get; set; }
-        public Country CurrentCountry { get; set; } 
-        public List<Country> CountriesInMemory { get; set; }
 
         public ParkingSystem()
         {
             AdjustParkingCostPerMinute(1);
             UnitOfWork = new UnitOfWork();
-            InitializeCountriesInSystem();
-            LoadCountriesInMemory();
-            SetInitialCountry();
         }
 
         public Notification AddAccount(string cellPhoneNumber)
         {
-            Account account = new Account(cellPhoneNumber, CurrentCountry);
+            Account account = new Account(cellPhoneNumber);
+           
             Notification notification = UnitOfWork.Accounts.AddAccount(account);
             if (!notification.HasErrors())
             {
                 UnitOfWork.Save();
             }
-            ICellPhoneValidator val = new UyCellPhoneValidator();
             return notification;
-
         }
 
         public Notification AddAmmountToBalance(string cellPhoneNumber, string ammountToAdd)
@@ -69,29 +61,26 @@ namespace BusinessLogic
         }
         public Sms FormatSmsForPurchase(string sms)
         {
-            ISmsValidator smsValidator = Sms.GetSmsValidator(CurrentCountry);
-            return smsValidator.GetInitializedSms(sms);
+            Sms purchaseSms = new Sms();
+            purchaseSms.Initialize(sms);
+            return purchaseSms;
         }
-
         public string FormatPhoneNumber(string cellPhoneToFormat)
         {
-            //CellPhoneValidator cellPhoneValidator = new CellPhoneValidator();
-            //return cellPhoneValidator.StandarPhoneNumber(cellPhoneToFormat);
-            return "";
+            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator();
+            return cellPhoneValidator.StandarPhoneNumber(cellPhoneToFormat);
         }
         public Notification ValidateSms(Sms smsToValidate)
         {
-            ISmsValidator smsValidator = Sms.GetSmsValidator(CurrentCountry);
-            return smsValidator.ValidateSms(smsToValidate);
+            SmsValidator smsValidator = new SmsValidator(smsToValidate);
+            return smsValidator.Validate();
         }
-
         public Notification ValidatePhoneNumber(string cellPhoneToValidate)
         {
-            ICellPhoneValidator cellPhoneValidator = Account.GetCellPhoneValidator(CurrentCountry);
-            Notification notification = cellPhoneValidator.ValidateCellPhone(cellPhoneToValidate);
+            CellPhoneValidator cellPhoneValidator = new CellPhoneValidator(cellPhoneToValidate);
+            Notification notification = cellPhoneValidator.Validate();
             return notification;
         }
-
         public Notification ValidateExistingAccountForAddingAccount(string cellPhoneNumber)
         {
             Notification notification = new Notification();
@@ -127,27 +116,6 @@ namespace BusinessLogic
             notification.AddSuccess("Costo del estacionamiento cambiado con éxito");
 
             return notification;
-        }
-
-        public void InitializeCountriesInSystem()
-        {
-            UnitOfWork.Countries.AddCountries(Country.GetCountriesInSystem());
-            UnitOfWork.Save();
-        }
-
-        public void LoadCountriesInMemory()
-        {
-            this.CountriesInMemory = GetCountries() as List<Country>;
-        }
-
-        public void SetInitialCountry()
-        {
-            this.CurrentCountry = this.CountriesInMemory.First(c => c.Name == Country.CountriesInSystem.URUGUAY.ToString());
-        }
-
-        public IEnumerable<Country> GetCountries()
-        {
-            return UnitOfWork.Countries.GetCountries();
         }
 
     }

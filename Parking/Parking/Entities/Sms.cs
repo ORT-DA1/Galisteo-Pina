@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,8 +25,10 @@ namespace Entities
         public DateTime LowerHourLimit { get; set; }
 
         public DateTime UpperHourLimit { get; set; }
-
+        public static List<ISmsValidator> SmsValidators { get; set; } = InitializeSmsValidators();
         public virtual Purchase Purchase { get; set; }
+
+
 
         public Sms()
         {
@@ -47,83 +50,31 @@ namespace Entities
             this.UpperHourLimit = UpperHourLimit;
         }
 
-
-        public void Initialize(string smsMessageText)
+        public static List<ISmsValidator> InitializeCellPhoneValidators()
         {
-            string smsMessageTextNormalized = NormalizeMessagePlate(smsMessageText);
-            string[] splitSmsMessage = TrimAndSplitMessage(smsMessageTextNormalized);
-            this.Plates = ExtractPlates(splitSmsMessage);
-            this.Minutes = ExtractMinutes(splitSmsMessage);
-            this.StartingHour = SetStartingHour(splitSmsMessage);
-            this.EndingHour = SetEndingHour();
+            List<ISmsValidator> smsValidators = new List<ISmsValidator>();
+            smsValidators.Add(new UySmsValidator());
+            smsValidators.Add(new ArgSmsValidator());
+            return smsValidators;
         }
 
-
-        public string NormalizeMessagePlate(string messageWithPlateToNormalize)
+        public static List<ISmsValidator> InitializeSmsValidators()
         {
-
-            return Regex.Replace(messageWithPlateToNormalize, @"(?<=[A-Za-z])\s", "");
-
+            List<ISmsValidator> smsValidators = new List<ISmsValidator>();
+            smsValidators.Add(new UySmsValidator());
+            smsValidators.Add(new ArgSmsValidator());
+            return smsValidators;
         }
 
-        public string[] TrimAndSplitMessage(string messageToSplit)
+        public static ISmsValidator GetSmsValidator(Country country)
         {
-            return Regex.Split(messageToSplit.Trim(), @"\s+");
+            return SmsValidators.Find(s => s.SmsValidatorCountry.ToString() == country.Name);
         }
 
-        public bool SmsHasStartingHour(string[] splitSmsMessage)
+        public void SetHourBounds(DateTime lowerBound, DateTime upperBound)
         {
-            return splitSmsMessage.Length > 2;
-        }
-
-        public string Extract(string[] splitMessage, string regexPattern)
-        {
-            string extractedText = "";
-            try
-            {
-                extractedText = splitMessage.First(s => Regex.IsMatch(s, regexPattern));
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw ex;
-            }
-            return extractedText;
-        }
-
-        public string ExtractPlates(string[] splitMessage)
-        {
-            return Extract(splitMessage, "[A-Za-z]{3}[0-9]{4}");
-        }
-
-        public string ExtractMinutes(string[] splitMessage)
-        {
-            return Extract(splitMessage, @"^(\d{3}|\d{2})$");
-        }
-
-        public DateTime SetStartingHour(string[] splitSmsMessage)
-        {
-            if (SmsHasStartingHour(splitSmsMessage))
-                return ExtractStartingHour(splitSmsMessage);
-            return DateTime.Now;
-        }
-
-        public DateTime ExtractStartingHour(string[] splitMessage)
-        {
-            DateTime parseResult;
-             DateTime.TryParse(Extract(splitMessage, "[:]"), out parseResult);
-            return parseResult;
-        }
-
-        public DateTime SetEndingHour()
-        {
-            DateTime endingHour = DateTime.MinValue;
-            if(this.Minutes != null)
-            {
-                var startingHourPlusMinutes = this.StartingHour.AddMinutes(Double.Parse(this.Minutes));
-                var maxEndingHour = this.UpperHourLimit;
-                endingHour = startingHourPlusMinutes > maxEndingHour ? maxEndingHour : startingHourPlusMinutes;
-            }
-            return endingHour;
+            this.LowerHourLimit = lowerBound;
+            this.UpperHourLimit = upperBound;
         }
 
         public override bool Equals(object obj)
@@ -141,6 +92,9 @@ namespace Entities
             hash = (hash * 11) + this.Minutes.GetHashCode();
             return hash;
         }
+
+
+
 
     }
 }

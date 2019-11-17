@@ -75,21 +75,26 @@
     <Compile Include="NotificationTest.cs" />
     <Compile Include="RepositoryTest.cs" />
     <Compile Include="SmsTest.cs" />
-    <Compile Include="CellPhoneNumberValidatorTest.cs" />
+    <Compile Include="UyCellPhoneValidatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BalanceValidatorTest.cs" />
     <Compile Include="AccountTransactionValidatorTest.cs" />
     <Compile Include="ParkingSystemTest.cs" />
-    <Compile Include="SmsValidatorTest.cs" />
+    <Compile Include="UySmsValidatorTest.cs" />
     <Compile Include="PurchaseTest.cs" />
     <Compile Include="OrmAccountRepositoryTest.cs" />
     <Compile Include="OrmPurchaseRepositoryTest.cs" />
+    <Compile Include="OrmCountryRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{56c511cc-555f-4e77-888e-a7e0c743e3eb}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parking\Data\Data.csproj">
       <Project>{b65545e6-384c-42fa-848f-105ff889a28a}</Project>
       <Name>Data</Name>
