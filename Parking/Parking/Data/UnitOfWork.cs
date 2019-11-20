@@ -11,10 +11,15 @@ namespace Data
 {
     public class UnitOfWork: IUnitOfWork
     {
-        private ParkingContext context = new ParkingContext("ParkingContext", new DropCreateDatabaseIfModelChanges<ParkingContext>());
+        private ParkingContext context;
         private IAccountRepository accountRepository;
         private ICountryRepository countryRepository;
         private IPurchaseRepository purchaseRepository;
+
+        public UnitOfWork(ParkingContext parkingContext)
+        {
+            context = parkingContext;
+        }
 
         public IAccountRepository Accounts
         {

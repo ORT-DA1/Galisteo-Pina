@@ -49,5 +49,15 @@ namespace Data
             }
         }
 
+        public IEnumerable<Purchase> GetPurchasesMatchDateAndCountry(DateTime startingDate, DateTime endingDate, string plates, Country purchaseCountry = null)
+        {
+            var matchingPurchases = this.GetAll();
+            matchingPurchases = matchingPurchases.Where(p => p.Sms.StartingHour >= startingDate && p.Sms.EndingHour <= endingDate);
+            if(plates != string.Empty)
+                matchingPurchases = matchingPurchases.Where(p => p.Sms.Plates == plates);
+            if (purchaseCountry != null)
+                matchingPurchases = matchingPurchases.Where(p => p.Account.AccountCountry.Name == purchaseCountry.Name);
+            return matchingPurchases as IEnumerable<Purchase>;
+        }
     }
 }

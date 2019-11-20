@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountTest.cs" />
+    <Compile Include="ArgCellPhoneValidatorTest.cs" />
     <Compile Include="NotificationTest.cs" />
     <Compile Include="RepositoryTest.cs" />
     <Compile Include="SmsTest.cs" />

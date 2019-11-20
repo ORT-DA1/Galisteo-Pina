@@ -34,6 +34,49 @@ namespace Entities
             return input == string.Empty;
         }
 
+        public string NormalizeMessagePlate(string messageWithPlateToNormalize)
+        {
+
+            return Regex.Replace(messageWithPlateToNormalize, @"(?<=[A-Za-z])\s", "");
+
+        }
+
+        public string[] TrimAndSplitMessage(string messageToSplit)
+        {
+            return Regex.Split(messageToSplit.Trim(), @"\s+");
+        }
+
+        public string Extract(string[] splitMessage, string regexPattern)
+        {
+            string extractedText = "";
+            try
+            {
+                extractedText = splitMessage.First(s => Regex.IsMatch(s, regexPattern));
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw ex;
+            }
+            return extractedText;
+        }
+
+        public string ExtractPlates(string[] splitMessage)
+        {
+            return Extract(splitMessage, "[A-Za-z]{3}[0-9]{4}");
+        }
+
+        public string ExtractMinutes(string[] splitMessage)
+        {
+            return Extract(splitMessage, @"^(\d{3}|\d{2})$");
+        }
+
+        public DateTime ExtractStartingHour(string[] splitMessage)
+        {
+            DateTime parseResult;
+            DateTime.TryParse(Extract(splitMessage, "[:]"), out parseResult);
+            return parseResult;
+        }
+
         public virtual bool ValidateMinutes(Sms smsToValidate)
         {
             return IsItAnInteger(smsToValidate) && IsPositive(smsToValidate);

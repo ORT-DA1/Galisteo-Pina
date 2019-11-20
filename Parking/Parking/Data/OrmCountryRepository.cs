@@ -21,7 +21,7 @@ namespace Data
 
         public void AddCountries(IEnumerable<Country> countriesInSystem)
         {
-            var countriesNotExist = countriesInSystem.Where(x=> !ParkingContext.Countries.Any(c=>c.Name == x.Name)).ToList();
+            var countriesNotExist = countriesInSystem.Where(x => !ParkingContext.Countries.Any(c => c.Name == x.Name)).ToList();
             AddRange(countriesNotExist);
         }
 

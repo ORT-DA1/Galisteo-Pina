@@ -10,6 +10,6 @@ namespace Entities.Repositories
     {
         bool AnyPurchaseMatchesPlateAndDateTime(string plates, string dateToCompare);
         Notification AddPurchase(Purchase purchaseToAdd);
-
+        IEnumerable<Purchase>GetPurchasesMatchDateAndCountry(DateTime startingDate, DateTime endingDate, string plates, Country filterCountry);
     }
 }

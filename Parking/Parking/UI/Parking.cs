@@ -20,7 +20,7 @@ namespace UI
         public Parking()
         {
             InitializeComponent();
-            parkingSystem = new ParkingSystem();
+            parkingSystem = new ParkingSystem(ParkingSystemInitializer.GetUnitOfWorkToInject(Enviroment.DEVELOP));
             PopulateComboBox(this.comboBox1, parkingSystem.CountriesInMemory);
             DoNavigation(NavigationOptions.MAIN_MENU);
 
@@ -55,7 +55,6 @@ namespace UI
         {
             DoNavigation(NavigationOptions.CHECK_PURCHASE);
         }
-
         private void PopulateComboBox<T>(ComboBox comboBox, IEnumerable<T> dataSource) 
         {
             comboBox.DisplayMember = "Name";
@@ -67,6 +66,11 @@ namespace UI
         private void ComboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
             parkingSystem.CurrentCountry = comboBox1.SelectedItem as Country;
+        }
+
+        private void PurchaseGrid_Click(object sender, EventArgs e)
+        {
+            DoNavigation(NavigationOptions.PURCHASE_GRID);
         }
     }
 }

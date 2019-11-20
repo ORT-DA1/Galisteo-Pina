@@ -11,10 +11,17 @@ namespace Entities
 {
     public class ArgSmsValidator : SmsValidator, ISmsValidator
     {
+
         public override CountriesInSystem SmsValidatorCountry { get; set; } = CountriesInSystem.ARGENTINA;
         public override bool IsCorrectFormat(Sms smsToValidate)
         {
             return true;
+        }
+
+
+        public bool CorrectOrder(string[] splitMessage)
+        {
+            return false;
         }
 
         public override bool ValidateMinutes(Sms smsToValidate)
@@ -28,7 +35,7 @@ namespace Entities
 
         public override Sms GetInitializedSms(string smsMessageText)
         {
-            return new Sms();
+            return null;
         }
 
 

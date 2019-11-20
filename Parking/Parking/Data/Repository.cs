@@ -23,9 +23,10 @@ namespace Data
             return Context.Set<T>().Find(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return Context.Set<T>().ToList();
+
+            return Context.Set<T>();
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
