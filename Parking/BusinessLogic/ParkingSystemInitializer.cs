@@ -13,8 +13,6 @@ namespace BusinessLogic
 
     public class ParkingSystemInitializer
     {
-
-
         public static IUnitOfWork GetUnitOfWorkToInject(Enviroment enviroment)
         {
             if (enviroment == Enviroment.TEST)

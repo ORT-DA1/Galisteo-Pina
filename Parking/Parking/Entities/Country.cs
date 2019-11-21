@@ -20,15 +20,18 @@ namespace Entities
         public string Name { get; set; }
 
         public int CostPerMinut { get; set; }
+
+        public const int INITIAL_COST = 1;
         public virtual ICollection<Account> Accounts { get; set; }
 
         public Country()
         {
         }
 
-        public Country(string name)
+        public Country(string name, int costPerMinute = INITIAL_COST)
         {
             Name = name;
+            CostPerMinut = costPerMinute;
         }
         public static List<Country> GetCountriesInSystem()
         {

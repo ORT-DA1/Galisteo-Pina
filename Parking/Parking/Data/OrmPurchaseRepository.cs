@@ -3,8 +3,7 @@ using Entities.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Data
 {
@@ -18,17 +17,18 @@ namespace Data
         {
         }
 
-        public Notification AddPurchase(Purchase purchase)
+        public Notification AddPurchase(Purchase purchase, int costPerMinute)
         {
             Notification notification;
-            int costOfMinutesUsed = purchase.CalculateCostForMinutesUsed();
+            int costOfMinutesUsed = purchase.CalculateCostForMinutesUsed(costPerMinute);
             AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(purchase.Account, costOfMinutesUsed);
             notification = accountTransactionValidator.Validate();
 
             if (!notification.HasErrors())
             {
                 ParkingContext.Purchases.Add(purchase);
-                purchase.SubstractMoneyFromAccount(costOfMinutesUsed);
+                purchase.PurchaseCost = costOfMinutesUsed;
+                purchase.SubstractMoneyFromAccount(purchase.PurchaseCost);
                 notification.AddSuccess("Compra efectuada con éxito");
 
             }

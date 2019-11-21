@@ -37,14 +37,14 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AddPurchaseTestPass()
         {
-            Assert.IsFalse(ormPurchaseRepository.AddPurchase(TestPurchase).HasErrors());
+            Assert.IsFalse(ormPurchaseRepository.AddPurchase(TestPurchase, 1).HasErrors());
 
         }
 
         [TestMethod]
         public void FindAccountByCellPhoneNumberTestPass()
         {
-            ormPurchaseRepository.AddPurchase(TestPurchase);
+            ormPurchaseRepository.AddPurchase(TestPurchase, 1);
             ParkingContext.SaveChanges();
             Assert.IsTrue(ormPurchaseRepository.AnyPurchaseMatchesPlateAndDateTime("ABC1234", hourForTest.ToString("HH:mm")));
         }

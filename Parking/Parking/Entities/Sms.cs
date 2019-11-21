@@ -51,14 +51,6 @@ namespace Entities
             this.UpperHourLimit = UpperHourLimit;
         }
 
-        public static List<ISmsValidator> InitializeCellPhoneValidators()
-        {
-            List<ISmsValidator> smsValidators = new List<ISmsValidator>();
-            smsValidators.Add(new UySmsValidator());
-            smsValidators.Add(new ArgSmsValidator());
-            return smsValidators;
-        }
-
         public static List<ISmsValidator> InitializeSmsValidators()
         {
             List<ISmsValidator> smsValidators = new List<ISmsValidator>();

@@ -19,7 +19,7 @@ namespace BusinessLogic
         public List<Purchase> Purchases { get; set; } 
         public ParkingSystem(IUnitOfWork unitOfWork)
         {
-            AdjustParkingCostPerMinute(1);
+   
             UnitOfWork = unitOfWork;
             InitializeCountriesInSystem();
             LoadCountriesInMemory();
@@ -57,17 +57,19 @@ namespace BusinessLogic
 
         public Notification AddPurchase(Purchase purchase)
         {
-            Notification notification = UnitOfWork.Purchases.AddPurchase(purchase);
+            Notification notification = UnitOfWork.Purchases.AddPurchase(purchase, CurrentCountry.CostPerMinut);
             if (!notification.HasErrors())
             {
                 UnitOfWork.Save();
             }
             return notification;
         }
+
         public Account GetAccountByPhoneNumber(string cellPhoneNumber)
         {
             return UnitOfWork.Accounts.FindAccountByCellPhoneNumber(cellPhoneNumber);
         }
+
         public Sms FormatSmsForPurchase(string sms)
         {
             ISmsValidator smsValidator = Sms.GetSmsValidator(CurrentCountry);
@@ -121,10 +123,10 @@ namespace BusinessLogic
         }
         public Notification AdjustParkingCostPerMinute(int newCostPerMinute)
         {
-            ParkingCost.CostPerMinute = newCostPerMinute;
+            CurrentCountry.CostPerMinut = newCostPerMinute;
             Notification notification = new Notification();
+            UnitOfWork.Save();
             notification.AddSuccess("Costo del estacionamiento cambiado con éxito");
-
             return notification;
         }
         public void InitializeCountriesInSystem()
@@ -136,16 +138,15 @@ namespace BusinessLogic
         {
             this.CountriesInMemory = GetCountries() as List<Country>;
         }
-
+        public IEnumerable<Country> GetCountries()
+        {
+            return UnitOfWork.Countries.GetCountries();
+        }
         public void SetInitialCountry()
         {
             this.CurrentCountry = this.CountriesInMemory.First(c => c.Name == Country.CountriesInSystem.ARGENTINA.ToString());
         }
 
-        public IEnumerable<Country> GetCountries()
-        {
-            return UnitOfWork.Countries.GetCountries();
-        }
 
         public List<Purchase> GetMatchingPurchases(DateTime startinHour, DateTime endingHour, string plates, Country filterCountry = null)
         {

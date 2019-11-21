@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Entities;
 using Entities.Repositories;
 using Entities.Validation;
@@ -47,6 +43,6 @@ namespace Data
             //ICellPhoneValidator cellPhoneValidator = Account.GetCellPhoneValidator(account.AccountCountry);
             //string cellPhoneNumber = cellPhoneValidator.StandarPhoneNumber(account.AccountCellPhoneNumber);
             return ParkingContext.Accounts.Any(a => a.AccountCellPhoneNumber == account.AccountCellPhoneNumber);
-        }
+        } 
     }
 }

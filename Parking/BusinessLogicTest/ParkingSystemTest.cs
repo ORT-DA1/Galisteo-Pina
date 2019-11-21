@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using BusinessLogic;
 using Entities;
 using Entities.Validation;
@@ -24,22 +25,22 @@ namespace BusinessLogicTest
         {
             system = new ParkingSystem(ParkingSystemInitializer.GetUnitOfWorkToInject(Enviroment.TEST));
             unitOfWork = system.UnitOfWork;
+            system.CurrentCountry = system.CountriesInMemory.First(c => c.Name == "URUGUAY");
             notification = new Notification();
             account = new Account("098960505");
-            account.AddMoneyToBalance("200");
+            account.AddMoneyToBalance("10000");
             string smsMessage = $"ABC 1234 120 {DateTime.Now.AddMinutes(10).ToString(("HH:mm"))}";
             smsValidator = new UySmsValidator();
             sms = smsValidator.GetInitializedSms(smsMessage);
             sms.SetHourBounds(DateTime.Now, DateTime.Now.AddHours(8));
             purchase = new Purchase(sms, account);
-
         }
 
         [TestMethod]
         public void AddAccountTest()
         {
-            system.AddAccount("099270471");
-            account = new Account("099270471");
+            system.AddAccount("098960505");
+            account = new Account("098960505");
             Assert.IsTrue(unitOfWork.Accounts.AccountAlreadyExists(account));
         }
 
@@ -74,8 +75,8 @@ namespace BusinessLogicTest
         [TestMethod]
         public void AddPurchaseTrueTest()
         {
-            system.AddPurchase(purchase);
-            Assert.AreEqual(unitOfWork.Purchases.GetAll().ToList().Count, 1);
+            notification = system.AddPurchase(purchase);
+            Assert.IsFalse(notification.HasErrors());
         }
 
         [TestMethod]
@@ -121,6 +122,7 @@ namespace BusinessLogicTest
         [TestMethod]
         public void ValidateSmsTest()
         {
+   
             Assert.IsFalse(system.ValidateSms(sms).HasErrors());
         }
 
@@ -174,14 +176,14 @@ namespace BusinessLogicTest
         [TestMethod]
         public void GetAccountByPhoneNumberTrueTest()
         {
-            system.AddAccount("098125342");
-            Assert.IsTrue(system.GetAccountByPhoneNumber("098125342").AccountCellPhoneNumber == "098125342");
+            notification = system.AddAccount("098122342");
+            Assert.IsTrue(system.GetAccountByPhoneNumber("098122342").AccountCellPhoneNumber == "098122342");
         }
 
         [TestMethod]
         public void GetAccountByPhoneNumberNotExistsTest()
         {
-            system.AddAccount("098125342");
+            system.AddAccount("098124342");
             Assert.IsTrue(system.GetAccountByPhoneNumber("098111222") == null);
         }
 
@@ -215,15 +217,20 @@ namespace BusinessLogicTest
         {
             system.AddPurchase(purchase);
             Assert.ThrowsException<FormatException>(() => system.AnyPurchaseMatchesPlateAndHour("ABC1234", "").HasSuccess());
-
         }
 
-        //        [TestMethod]
-        //        public void AdjustParkingCostPerMinuteTest()
-        //        {
-        //            system.AdjustParkingCostPerMinute(2);
-        //            Assert.AreEqual(ParkingCost.CostPerMinute, 2);
-        //        }
+        [TestMethod]
+        public void GetCountriesTest()
+        {
+            Assert.AreEqual(system.GetCountries().ToList().Count, 2);
+
+        }
+        [TestMethod]
+        public void AdjustParkingCostPerMinuteTest()
+        {
+            system.AdjustParkingCostPerMinute(2);
+            Assert.AreEqual(system.CurrentCountry.CostPerMinut, 2);
+        }
     }
 }
 

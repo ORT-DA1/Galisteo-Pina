@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Entities;
 
@@ -49,7 +47,6 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-
         public void MissingInputTest()
         {
             string input = "";

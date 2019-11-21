@@ -45,33 +45,10 @@ namespace Entities
         }
 
 
-       
-
-        public bool SmsHasStartingHour(string[] splitSmsMessage)
-        {
-            return splitSmsMessage.Length > 2;
-        }
-
-
-        public DateTime GetStartingHour(string[] splitSmsMessage)
-        {
-            if (SmsHasStartingHour(splitSmsMessage))
-                return ExtractStartingHour(splitSmsMessage);
-            return DateTime.Now;
-        }
+      
 
 
 
-        public DateTime GetEndingHour(Sms sms)
-        {
-            DateTime endingHour = DateTime.MinValue;
-            if (sms.Minutes != null)
-            {
-                var startingHourPlusMinutes = sms.StartingHour.AddMinutes(Double.Parse(sms.Minutes));
-                var maxEndingHour = sms.UpperHourLimit;
-                endingHour = startingHourPlusMinutes > maxEndingHour ? maxEndingHour : startingHourPlusMinutes;
-            }
-            return endingHour;
-        }
+
     }
 }

@@ -13,10 +13,9 @@ namespace BusinessLogicTest
             Sms sms = new Sms();
             sms.StartingHour = DateTime.Parse("14:00");
             sms.EndingHour = DateTime.Parse("15:00");
-            ParkingCost.CostPerMinute = 1;
             Purchase purchase = new Purchase();
             purchase.Sms = sms;
-            Assert.IsTrue(purchase.CalculateCostForMinutesUsed() == 60);
+            Assert.IsTrue(purchase.CalculateCostForMinutesUsed(1) == 60);
         }
 
         [TestMethod]

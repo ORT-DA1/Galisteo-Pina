@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
@@ -21,11 +16,11 @@ namespace Entities
             this.Sms = sms;
             this.Account = account;
         }
-        public int CalculateCostForMinutesUsed()
+        public int CalculateCostForMinutesUsed(int costPerMinute)
         {
             TimeSpan parkingTimeUsed = Sms.EndingHour.Subtract(Sms.StartingHour);
             int minutesUsed = Convert.ToInt32(parkingTimeUsed.TotalMinutes);
-            return minutesUsed * ParkingCost.CostPerMinute;
+            return minutesUsed * costPerMinute;
         }
           
         public bool SubstractMoneyFromAccount(int moneyToSubstract)
@@ -33,8 +28,7 @@ namespace Entities
         {
             return this.Account.SubstractMoneyFromBalance(moneyToSubstract);
         }
-
-        public string AccountCellPhone { get { return this.Account.AccountCellPhoneNumber; } }
+                public string AccountCellPhone { get { return this.Account.AccountCellPhoneNumber; } }
 
         public string Plates { get { return this.Sms.Plates; } }
 

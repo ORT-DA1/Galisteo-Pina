@@ -112,7 +112,31 @@ namespace Entities
             return DateTime.Now <= smsToValidate.StartingHour.AddMinutes(1);
         }
 
+        public DateTime GetEndingHour(Sms sms)
+        {
+            DateTime endingHour = DateTime.MinValue;
+            if (sms.Minutes != null)
+            {
+                var startingHourPlusMinutes = sms.StartingHour.AddMinutes(Double.Parse(sms.Minutes));
+                var maxEndingHour = sms.UpperHourLimit;
+                endingHour = startingHourPlusMinutes > maxEndingHour ? maxEndingHour : startingHourPlusMinutes;
+            }
+            return endingHour;
+        }
 
+
+        public bool SmsHasStartingHour(string[] splitSmsMessage)
+        {
+            return splitSmsMessage.Any(s => s.Contains(":"));
+        }
+
+
+        public DateTime GetStartingHour(string[] splitSmsMessage)
+        {
+            if (SmsHasStartingHour(splitSmsMessage))
+                return ExtractStartingHour(splitSmsMessage);
+            return DateTime.Now;
+        }
 
     }
 }
