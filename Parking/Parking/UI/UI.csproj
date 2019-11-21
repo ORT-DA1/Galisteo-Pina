@@ -82,12 +82,6 @@
       <DependentUpon>CheckPurchaseControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ControlCreator.cs" />
-    <Compile Include="UserControls\CountryControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\CountryControl.Designer.cs">
-      <DependentUpon>CountryControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\HomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -99,6 +93,12 @@
     </Compile>
     <Compile Include="UserControls\PurchaseControl.Designer.cs">
       <DependentUpon>PurchaseControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PurchaseGridControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PurchaseGridControl.Designer.cs">
+      <DependentUpon>PurchaseGridControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\RegisterAccountControl.cs">
       <SubType>UserControl</SubType>
@@ -125,19 +125,20 @@
     <EmbeddedResource Include="UserControls\CheckPurchaseControl.resx">
       <DependentUpon>CheckPurchaseControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\CountryControl.resx">
-      <DependentUpon>CountryControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\PurchaseControl.resx">
       <DependentUpon>PurchaseControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PurchaseGridControl.resx">
+      <DependentUpon>PurchaseGridControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\RegisterAccountControl.resx">
       <DependentUpon>RegisterAccountControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\BusinessLogic.ParkingSystem.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

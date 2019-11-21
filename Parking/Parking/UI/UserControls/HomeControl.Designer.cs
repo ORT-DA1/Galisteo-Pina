@@ -42,9 +42,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(360, 130);
+            this.label1.Location = new System.Drawing.Point(180, 68);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(563, 55);
+            this.label1.Size = new System.Drawing.Size(285, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Diseño de Aplicaciones 1";
             // 
@@ -52,9 +53,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(516, 210);
+            this.label2.Location = new System.Drawing.Point(258, 109);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(229, 42);
+            this.label2.Size = new System.Drawing.Size(116, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "Obligatorio 1";
             // 
@@ -62,9 +64,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(476, 518);
+            this.label3.Location = new System.Drawing.Point(238, 269);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(282, 37);
+            this.label3.Size = new System.Drawing.Size(140, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Joel Piña - 228901";
             // 
@@ -72,9 +75,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(476, 566);
+            this.label4.Location = new System.Drawing.Point(238, 294);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(246, 37);
+            this.label4.Size = new System.Drawing.Size(124, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Ignacio Galisteo";
             // 
@@ -82,26 +86,29 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(87, 830);
+            this.label5.Location = new System.Drawing.Point(65, 357);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(505, 37);
+            this.label5.Size = new System.Drawing.Size(356, 20);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Configurar costo estacionamiento:";
+            this.label5.Text = "Configurar costo estacionamiento del país actual:";
             // 
             // parkingValorTxt
             // 
             this.parkingValorTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.parkingValorTxt.Location = new System.Drawing.Point(598, 827);
+            this.parkingValorTxt.Location = new System.Drawing.Point(445, 357);
+            this.parkingValorTxt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.parkingValorTxt.Name = "parkingValorTxt";
-            this.parkingValorTxt.Size = new System.Drawing.Size(325, 44);
+            this.parkingValorTxt.Size = new System.Drawing.Size(164, 26);
             this.parkingValorTxt.TabIndex = 5;
             // 
             // parkingValorBtn
             // 
             this.parkingValorBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.parkingValorBtn.Location = new System.Drawing.Point(929, 818);
+            this.parkingValorBtn.Location = new System.Drawing.Point(477, 398);
+            this.parkingValorBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.parkingValorBtn.Name = "parkingValorBtn";
-            this.parkingValorBtn.Size = new System.Drawing.Size(263, 61);
+            this.parkingValorBtn.Size = new System.Drawing.Size(132, 32);
             this.parkingValorBtn.TabIndex = 9;
             this.parkingValorBtn.Text = "Cambiar Valor";
             this.parkingValorBtn.UseVisualStyleBackColor = true;
@@ -110,15 +117,16 @@
             // outPutLbl
             // 
             this.outPutLbl.AutoSize = true;
-            this.outPutLbl.Location = new System.Drawing.Point(94, 894);
+            this.outPutLbl.Location = new System.Drawing.Point(46, 427);
+            this.outPutLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.outPutLbl.Name = "outPutLbl";
-            this.outPutLbl.Size = new System.Drawing.Size(70, 25);
+            this.outPutLbl.Size = new System.Drawing.Size(35, 13);
             this.outPutLbl.TabIndex = 10;
             this.outPutLbl.Text = "label6";
             // 
             // HomeControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.outPutLbl);
             this.Controls.Add(this.parkingValorBtn);
@@ -128,8 +136,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "HomeControl";
-            this.Size = new System.Drawing.Size(1300, 960);
+            this.Size = new System.Drawing.Size(650, 499);
             this.ResumeLayout(false);
             this.PerformLayout();
 

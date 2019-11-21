@@ -14,34 +14,35 @@ namespace Entities
     {
         public override CountriesInSystem CellPhoneValidatorCountry { get; set; } = CountriesInSystem.ARGENTINA;
 
+        public const int MIN_LENGTH_WITH_HYPHEN = 7;
+
         public override bool PhoneNumberCorrectFormat(string cellPhoneNumberToValidate)
         {
             var cellPhoneNumber = this.NormalizePhoneNumber(cellPhoneNumberToValidate);
             if (PhoneNumberNotEmpty(cellPhoneNumberToValidate))
             {
-                return Regex.IsMatch(cellPhoneNumber, "[0][9][0-9]{7}") ||
-                        Regex.IsMatch(cellPhoneNumber, "[9][0-9]{7}");
+                return Regex.IsMatch(cellPhoneNumber, "^([0-9]{6,8})$");
             }
             return false;
         }
 
-        public bool PhoneNumberStartWithNine(string cellPhoneNumber)
+        public bool NoHyphensOnFirstOrLastCharacter(string cellPhoneNumber)
         {
-            if (PhoneNumberNotEmpty(cellPhoneNumber))
-            {
-                return Regex.IsMatch(cellPhoneNumber, "^([9][0-9]{7})$");
-            }
-            return false;
+            return cellPhoneNumber[0] != '-' && cellPhoneNumber[cellPhoneNumber.Length - 1] != '-';
         }
 
         public string NormalizePhoneNumber(string cellPhoneNumber)
         {
-            return cellPhoneNumber.Replace(" ", "");
+            if (cellPhoneNumber.Length >= MIN_LENGTH_WITH_HYPHEN && NoHyphensOnFirstOrLastCharacter(cellPhoneNumber))
+                cellPhoneNumber = cellPhoneNumber.Replace("-", "");
+            return cellPhoneNumber;
         }
-
-        public string StandarizePhoneNumber(string cellPhoneNumber)
+         
+        public override string StandarizePhoneNumber(string cellPhoneNumber)
         {
-            return "";
+            if (cellPhoneNumber.Length >= MIN_LENGTH_WITH_HYPHEN && NoHyphensOnFirstOrLastCharacter(cellPhoneNumber))
+                cellPhoneNumber = cellPhoneNumber.Replace("-", "");
+            return cellPhoneNumber;
         }
 
     }

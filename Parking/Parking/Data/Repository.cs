@@ -23,19 +23,15 @@ namespace Data
             return Context.Set<T>().Find(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return Context.Set<T>().ToList();
+
+            return Context.Set<T>();
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
             return Context.Set<T>().Where(predicate);
-        }
-
-        public T SingleOrDefault(Expression<Func<T, bool>> predicate)
-        {
-            return Context.Set<T>().SingleOrDefault(predicate);
         }
 
         public void Add(T entity)
@@ -48,9 +44,5 @@ namespace Data
             Context.Set<T>().AddRange(entities);
         }
 
-        public bool ThereAreSavedItems()
-        {
-            return GetAll().Count() == 0;
-        }
     }
 }

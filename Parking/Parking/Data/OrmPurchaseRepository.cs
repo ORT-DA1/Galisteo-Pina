@@ -3,8 +3,7 @@ using Entities.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Data
 {
@@ -18,17 +17,18 @@ namespace Data
         {
         }
 
-        public Notification AddPurchase(Purchase purchase)
+        public Notification AddPurchase(Purchase purchase, int costPerMinute)
         {
             Notification notification;
-            int costOfMinutesUsed = purchase.CalculateCostForMinutesUsed();
+            int costOfMinutesUsed = purchase.CalculateCostForMinutesUsed(costPerMinute);
             AccountTransactionValidator accountTransactionValidator = new AccountTransactionValidator(purchase.Account, costOfMinutesUsed);
             notification = accountTransactionValidator.Validate();
 
             if (!notification.HasErrors())
             {
                 ParkingContext.Purchases.Add(purchase);
-                purchase.SubstractMoneyFromAccount(costOfMinutesUsed);
+                purchase.PurchaseCost = costOfMinutesUsed;
+                purchase.SubstractMoneyFromAccount(purchase.PurchaseCost);
                 notification.AddSuccess("Compra efectuada con éxito");
 
             }
@@ -49,5 +49,15 @@ namespace Data
             }
         }
 
+        public IEnumerable<Purchase> GetPurchasesMatchDateAndCountry(DateTime startingDate, DateTime endingDate, string plates, Country purchaseCountry = null)
+        {
+            var matchingPurchases = this.GetAll();
+            matchingPurchases = matchingPurchases.Where(p => p.Sms.StartingHour >= startingDate && p.Sms.EndingHour <= endingDate);
+            if(plates != string.Empty)
+                matchingPurchases = matchingPurchases.Where(p => p.Sms.Plates == plates);
+            if (purchaseCountry != null)
+                matchingPurchases = matchingPurchases.Where(p => p.Account.AccountCountry.Name == purchaseCountry.Name);
+            return matchingPurchases as IEnumerable<Purchase>;
+        }
     }
 }

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-
     public class ParkingContext: DbContext
     {
         public ParkingContext(string ConnectionName, IDatabaseInitializer<ParkingContext> initializer = null) : base($"name={ConnectionName}")

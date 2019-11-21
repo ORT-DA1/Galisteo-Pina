@@ -25,8 +25,9 @@ namespace Entities
         public DateTime LowerHourLimit { get; set; }
 
         public DateTime UpperHourLimit { get; set; }
-        public static List<ISmsValidator> SmsValidators { get; set; } = InitializeSmsValidators();
         public virtual Purchase Purchase { get; set; }
+        public static List<ISmsValidator> SmsValidators { get; set; } = InitializeSmsValidators();
+
 
 
 
@@ -48,14 +49,6 @@ namespace Entities
             this.EndingHour = DateTime.MinValue;
             this.LowerHourLimit = LowerHourLimit;
             this.UpperHourLimit = UpperHourLimit;
-        }
-
-        public static List<ISmsValidator> InitializeCellPhoneValidators()
-        {
-            List<ISmsValidator> smsValidators = new List<ISmsValidator>();
-            smsValidators.Add(new UySmsValidator());
-            smsValidators.Add(new ArgSmsValidator());
-            return smsValidators;
         }
 
         public static List<ISmsValidator> InitializeSmsValidators()

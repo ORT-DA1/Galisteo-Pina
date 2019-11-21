@@ -72,9 +72,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountTest.cs" />
+    <Compile Include="ArgCellPhoneValidatorTest.cs" />
+    <Compile Include="CountryTest.cs" />
     <Compile Include="NotificationTest.cs" />
     <Compile Include="RepositoryTest.cs" />
     <Compile Include="SmsTest.cs" />
+    <Compile Include="ArgSmsValidatorTest.cs" />
     <Compile Include="UyCellPhoneValidatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BalanceValidatorTest.cs" />

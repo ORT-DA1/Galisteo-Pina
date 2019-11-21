@@ -32,12 +32,6 @@ namespace BusinessLogicTest
             ormCountryRepository = new OrmCountryRepository(ParkingContext);
         }
 
-        [TestMethod]
-        public void GetCountriesNoneSavedYetTestPass()
-        {
-            List<Country> countriesSaved = ormCountryRepository.GetCountries().ToList();
-            Assert.AreEqual(countriesSaved.Count, 0);
-        }
 
         [TestMethod]
         public void AddCountriesTestPass()

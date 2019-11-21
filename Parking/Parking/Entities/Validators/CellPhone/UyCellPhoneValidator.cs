@@ -39,7 +39,7 @@ namespace Entities
             return cellPhoneNumber.Replace(" ", "");
         }
 
-        public string StandarizePhoneNumber(string cellPhoneNumber)
+        public override string StandarizePhoneNumber(string cellPhoneNumber)
         {
             cellPhoneNumber = NormalizePhoneNumber(cellPhoneNumber);
             if (PhoneNumberStartWithNine(cellPhoneNumber))

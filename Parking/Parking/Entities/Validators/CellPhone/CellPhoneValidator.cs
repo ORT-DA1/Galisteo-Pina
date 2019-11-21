@@ -36,6 +36,6 @@ namespace Entities
         }
 
         public abstract bool PhoneNumberCorrectFormat(string cellPhoneNumberToValidate);
-        
+        public abstract string StandarizePhoneNumber(string cellPhoneNumberToStandarize);
     }
 }

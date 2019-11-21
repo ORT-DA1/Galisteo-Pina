@@ -7,5 +7,7 @@ namespace Entities.Validation
         Notification ValidateCellPhone(string cellPhoneToValidate);
         CountriesInSystem CellPhoneValidatorCountry { get; set; }
         bool PhoneNumberCorrectFormat(string cellPhoneNumberToValidate);
+        string StandarizePhoneNumber(string cellPhoneNumberToStandarize);
+        
     }
 }

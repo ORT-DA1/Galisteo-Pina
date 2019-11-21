@@ -1,10 +1,8 @@
 ﻿using Entities;
 using Entities.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Data
 {
@@ -21,7 +19,7 @@ namespace Data
 
         public void AddCountries(IEnumerable<Country> countriesInSystem)
         {
-            var countriesNotExist = countriesInSystem.Where(x=> !ParkingContext.Countries.Any(c=>c.Name == x.Name)).ToList();
+            var countriesNotExist = countriesInSystem.Where(x => !ParkingContext.Countries.Any(c => c.Name == x.Name)).ToList();
             AddRange(countriesNotExist);
         }
 
