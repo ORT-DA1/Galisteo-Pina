@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,69 +9,40 @@ namespace BusinessLogic
 {
     public class Account
     {
-        public string CellPhoneNumber { get; set; }
+        [ForeignKey("Purchase")]
+        public int AccountId { get; set; }
+        public string AccountCellPhoneNumber { get; set; }
+        public int AccountBalance { get; set; }
 
-        public Account()
+        public virtual Purchase Purchase { get; set; }
+
+        public Account(string mobileNumber, int balance = 0)
         {
-            CellPhoneNumber = "";
+            this.AccountCellPhoneNumber = mobileNumber;
+            this.AccountBalance = balance;
         }
 
-        public bool PhoneNumberNotEmpty()
+        public bool AccountBalanceIsPositive()
         {
-            return (this.CellPhoneNumber.Length == 0) ? false : true;
+            return this.AccountBalance >= 0;
         }
 
-        public bool PhoneNumberStartWhitZeroNine()
+        public void AddMoneyToBalance(string moneyToAdd)
         {
-            int stringPositionZero = 0;
-            return (this.CellPhoneNumber.ElementAt(stringPositionZero)== '0') ? true : false;
+            this.AccountBalance += Convert.ToInt32(moneyToAdd);
         }
 
-        public bool PhoneNumberStartWhitNine()
-        {
-            int stringPositionZero = 0;
-            return (this.CellPhoneNumber.ElementAt(stringPositionZero) == '9') ? true : false;
-        }
 
-        public bool PhoneNumberLenghtIsCorrect()
+        public bool SubstractMoneyFromBalance(int moneyToSustract)
         {
-            bool correctLenght = false;
-            if (PhoneNumberStartWhitZeroNine())
+            bool success = false;
+            if(this.AccountBalance - moneyToSustract >= 0)
             {
-                if (this.CellPhoneNumber.Length == 9)
-                    correctLenght = true;
+                this.AccountBalance -= moneyToSustract;
+                success = true;
             }
-            else if (PhoneNumberStartWhitNine())
-            {
-                if (this.CellPhoneNumber.Length == 8)
-                    correctLenght = true;
-            }
-            return correctLenght;
+            return success;
         }
 
-        public void NormalizePhoneNumber()
-        {
-            this.CellPhoneNumber = this.CellPhoneNumber.Replace(" ", "");
-        }
-
-        public bool PhoneNumberCorrectFormat()
-        {
-            this.NormalizePhoneNumber();
-            bool correctFormat = false;
-            if (PhoneNumberNotEmpty())
-            {
-                if (PhoneNumberStartWhitZeroNine() && PhoneNumberLenghtIsCorrect())
-                {
-                    correctFormat = true;
-                }
-                else if(PhoneNumberStartWhitNine() && PhoneNumberLenghtIsCorrect())
-                { 
-                    correctFormat = true;
-                }
-            }
-            return correctFormat;
-        }
-
-        
     }
 }
